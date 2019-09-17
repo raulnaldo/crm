@@ -22,13 +22,13 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
       "Login":"agent176ddi@demo.com",
       "Name":"Raúl",
       "LastName":"Ortega Andrés",
-      "Image" : "./CrmDemoProfile_files/Roa.jpg"
+      "Image" : "./images/Roa.jpg"
     },
     {
       "Login":"agent175ddi@demo.com",
       "Name":"Tatiana",
       "LastName":"Lloret",
-      "Image" : "./CrmDemoProfile_files/Tatiana.png"
+      "Image" : "./images/Tatiana.png"
     }    
     ];
     var SelectedAgent= Agents[Agents.findIndex(x => x.Login === pAgentLogin)];    
@@ -55,7 +55,7 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
       "Province":"Madrid",      
       "Phone":"0034699479614",
       "email":"raul.ortega@odigo.com",
-      "Image" : "./CrmDemoProfile_files/Roa.jpg",
+      "Image" : "./images/Roa.jpg",
       "Comments" : "Cliente dado de alta en Noviembre de 2000.",
       "ContractMonthlyAmmount" :"68€",
       "ContractStartDate" :"25 Agosto 2016",
@@ -95,7 +95,7 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
       "Province":"Madrid",
       "Phone":"686093478",
       "email":"tatiana.lloret-iglesias@odigo.com",
-      "Image" : "./CrmDemoProfile_files/Tatiana.png",
+      "Image" : "./images/Tatiana.png",
       "Comments" : "Uso del movil solo para los fines de semana.",
       "ContractMonthlyAmmount" :"35€",
       "ContractStartDate" :"10 Enero 2015",
@@ -130,7 +130,7 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
       "Province":"Madrid",
       "Phone":"699479615",
       "email":"jose-luis.martinez-rubio@prosodie.com",
-      "Image" : "./CrmDemoProfile_files/JoseLuis.jpg",
+      "Image" : "./images/JoseLuis.jpg",
       "Comments" : "Ultima llamada realizada para pedir la portabilidad del servicio.",
       "ContractMonthlyAmmount" :"68€",
       "ContractStartDate" :"01 Enero 2018",
