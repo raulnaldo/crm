@@ -1,0 +1,122 @@
+{
+  "contacts":
+  [
+    {
+      "Id":"1262",
+      "Name":"Raul",
+      "LastName":"Ortega Andres",      
+      "JobPosition":"Presales engineer",
+      "Address":"Mar Cantabrico 23",
+      "CP":"28860",
+      "City":"Paracuellos de Jarama",
+      "Province":"Madrid",      
+      "Phone":"0034699479614",
+      "email":"raul.ortega@odigo.com",
+      "Image" : "./images/Roa.jpg",
+      "Comments" : "Cliente dado de alta en Noviembre de 2000.",
+      "ContractMonthlyAmmount" :"68€",
+      "ContractStartDate" :"25 Agosto 2016",
+      "ContractDuration" :"Sin permanencia",
+      "ContractRisk" :"Riesgo Bajo",
+      "ContractDetails" :"Contrato residencial de largo plazo",            
+      "Products" : [
+        {"Product":"Linea Fibra 100Mb"},
+        {"Product":"Linea movil 699479614"},
+        {"Product":"Paquete datos 20 Gb"},
+        {"Product":"Series HBO"}
+      ],
+      "Facturas" : [
+        {"Factura":"Julio 68€"},
+        {"Factura":"Agosto 68€"},
+        {"Factura":"Septiembre 105€"},
+        {"Factura":"Octubre 95€"}
+      ],
+      "Promos" : [
+        {"Promo":"HBO 1 año gratis"},
+        {"Promo":"Descuento 25% nueva linea"}
+      ],
+        "Dispositivos" : [
+        {"Dispositivo":"Televisión"},
+        {"Dispositivo":"Móvil"},
+        {"Dispositivo":"Tablet"}
+        ]     
+    },
+    {
+      "Id":"1617",
+      "Name":"Tatiana",
+      "LastName":"Lloret",
+      "JobPosition":"Presales engineer",      
+      "Address":"Calle Avenida de la Pedriza 3",
+      "CP":"28410",
+      "City":" Manzanares el Real España",
+      "Province":"Madrid",
+      "Phone":"686093478",
+      "email":"tatiana.lloret-iglesias@odigo.com",
+      "Image" : "./images/Tatiana.png",
+      "Comments" : "Uso del movil solo para los fines de semana.",
+      "ContractMonthlyAmmount" :"35€",
+      "ContractStartDate" :"10 Enero 2015",
+      "ContractDuration" :"Hasta mayo 2020",
+      "ContractRisk" :"Riesgo Medio",      
+      "ContractDetails" :"Contrato de portabilidad desde la compañia Josefa Telecoming.",
+      "Products" : [
+        {"Product":"Linea Fibra 100Mb"},
+        {"Product":"Linea movil 686093478"},
+        {"Product":"Paquete datos 20 Gb"},
+        {"Product":"Series HBO"}
+      ],
+      "Facturas" : [
+        {"Factura":"Julio 53"},
+        {"Factura":"Agosto 43€"},
+        {"Factura":"Septiembre 68€"},
+        {"Factura":"Octubre 88€"}
+      ],
+      "Promos" : [
+        {"Promo":"HBO 1 año gratis"},
+        {"Promo":"Descuento 25% nueva linea"}
+      ],
+      "Dispositivos" : [
+        {"Dispositivo":"Televisión"},
+        {"Dispositivo":"Móvil"},
+        {"Dispositivo":"Tablet"}
+        ]                  
+    },
+    {
+      "Id":"1301",
+      "Name":"Jose Luis",
+      "LastName":"Martinez Rubio",
+      "JobPosition":"Account Manager",      
+      "Address":"Avda la maliciosa 33",
+      "CP":"28450",
+      "City":"Tres Cantos",
+      "Province":"Madrid",
+      "Phone":"699479615",
+      "email":"jose-luis.martinez-rubio@prosodie.com",
+      "Image" : "./images/JoseLuis.jpg",
+      "Comments" : "Ultima llamada realizada para pedir la portabilidad del servicio.",
+      "ContractMonthlyAmmount" :"68€",
+      "ContractStartDate" :"01 Enero 2018",
+      "ContractDuration" :"Hasta abril 2021",
+      "ContractRisk" :"Riesgo Alto",      
+      "ContractDetails" :"Contrato de linea particular migrada de una linea de empresa desde Jacinto comunications s.l",      
+      "Products" : [
+        {"Product":"Linea Fibra 100Mb"},
+        {"Product":"Linea movil 686093478"},
+        {"Product":"Paquete datos 20 Gb"},
+        {"Product":"Series HBO"}
+      ],
+      "Facturas" : [
+        {"Factura":"Octubre 88€"}
+      ],
+      "Promos" : [
+        {"Promo":"HBO 1 año gratis"},
+        {"Promo":"Descuento 25% nueva linea"}
+      ],
+      "Dispositivos" : [
+        {"Dispositivo":"Televisión"},
+        {"Dispositivo":"Móvil"},
+        {"Dispositivo":"Tablet"}
+        ]
+    }
+  ]
+}

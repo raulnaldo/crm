@@ -1,0 +1,17 @@
+{
+  "agents":
+  [
+      {
+        "Login":"agent176ddi@demo.com",
+        "Name":"Raúl",
+        "LastName":"Ortega Andrés",
+        "Image" : "./images/Roa.jpg"
+      },
+      {
+        "Login":"agent175ddi@demo.com",
+        "Name":"Tatiana",
+        "LastName":"Lloret",
+        "Image" : "./images/Tatiana.png"
+      }    
+  ]
+}

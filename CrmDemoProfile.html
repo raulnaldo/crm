@@ -51,11 +51,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-            <a href="CrmDemoProfile.html#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-phone"></i>
-              <span class="label label-success">0034699479614</span>
-            </a>     
-
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
@@ -64,76 +59,6 @@
               <i class="fa fa-envelope-o"></i>
               <span class="label label-success">4</span>
             </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="CrmDemoProfile.html#">
-                      <div class="pull-left">
-                        <img src="./CrmDemoProfile_files/user2-160x160.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                  <li>
-                    <a href="CrmDemoProfile.html#">
-                      <div class="pull-left">
-                        <img src="./CrmDemoProfile_files/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        AdminLTE Design Team
-                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="CrmDemoProfile.html#">
-                      <div class="pull-left">
-                        <img src="./CrmDemoProfile_files/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Developers
-                        <small><i class="fa fa-clock-o"></i> Today</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="CrmDemoProfile.html#">
-                      <div class="pull-left">
-                        <img src="./CrmDemoProfile_files/user3-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Sales Department
-                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="CrmDemoProfile.html#">
-                      <div class="pull-left">
-                        <img src="./CrmDemoProfile_files/user4-128x128.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Reviewers
-                        <small><i class="fa fa-clock-o"></i> 2 days</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="CrmDemoProfile.html#">See All Messages</a></li>
-            </ul>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
@@ -316,11 +241,11 @@
         </div>
       </div>
       <!-- search form -->
-      <form action="CrmDemoProfile.html#" method="get" class="sidebar-form">
+      <form  class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input ng-model="Odigo.SearchId" type="text" name="q" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                <button ng-click="Odigo.SearchContact();" type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
               </span>
         </div>
@@ -329,19 +254,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu tree" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview">
-          <a href="CrmDemoProfile.html#">
-            <i class="fa fa-dashboard"></i> <span>Productos Contratados</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-blue">{{Odigo.CrmSelectedContact.Products.length}}</small>              
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li ng-repeat="Item in Odigo.CrmSelectedContact.Products">
-              <a href="https://adminlte.io/themes/AdminLTE/index.html"><i class="fa fa-circle-o"></i>{{Item.Product}}</a>
-            </li>
-          </ul>
-        </li>
+        
         <li class="treeview">
           <a href="CrmDemoProfile.html#">
             <i class="fa fa-files-o"></i>
@@ -356,20 +269,18 @@
             </li>
           </ul>
         </li>
-        
+
         <li class="treeview">
           <a href="CrmDemoProfile.html#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Registro de consumo</span>
+            <i class="fa fa-dashboard"></i> <span>Productos Contratados</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <small class="label pull-right bg-blue">{{Odigo.CrmSelectedContact.Products.length}}</small>              
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href=><i class="fa fa-circle-o"></i>Telefono fijo</a></li>
-            <li><a href=><i class="fa fa-circle-o"></i>Telefono Movil</a></li>
-            <li><a href=><i class="fa fa-circle-o"></i>Peliculas a la carta</a></li>
-            <li><a href=><i class="fa fa-circle-o"></i>Series a la carta</a></li>
+            <li ng-repeat="Item in Odigo.CrmSelectedContact.Products">
+              <a href="https://adminlte.io/themes/AdminLTE/index.html"><i class="fa fa-circle-o"></i>{{Item.Product}}</a>
+            </li>
           </ul>
         </li>
 
@@ -402,6 +313,24 @@
             </li>
           </ul>
         </li>
+
+        <li class="treeview">
+          <a href="CrmDemoProfile.html#">
+            <i class="fa fa-pie-chart"></i>
+            <span>Registro de consumo</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href=><i class="fa fa-circle-o"></i>Telefono fijo</a></li>
+            <li><a href=><i class="fa fa-circle-o"></i>Telefono Movil</a></li>
+            <li><a href=><i class="fa fa-circle-o"></i>Peliculas a la carta</a></li>
+            <li><a href=><i class="fa fa-circle-o"></i>Series a la carta</a></li>
+          </ul>
+        </li>
+
+                
         <li class="treeview">
           <a href="CrmDemoProfile.html#">
             <i class="fa fa-edit"></i> <span>Forms</span>

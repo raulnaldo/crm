@@ -15,48 +15,53 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
   console.log('      OdigoApisCtrl.OdigoCallInfo();',OdigoApisCtrl.OdigoCallInfo);
   console.log('  <-- Location SearchData()');
 
+  if (OdigoApisCtrl.OdigoCallInfo.CustomerCode==undefined){
+    OdigoApisCtrl.OdigoCallInfo.CustomerCode="1262";
+  }
+  if (OdigoApisCtrl.OdigoCallInfo.UserLogin==undefined){
+    OdigoApisCtrl.OdigoCallInfo.UserLogin="agent176ddi@demo.com";
+  }
   console.log('  --> OdigoApisService.getAgentProperties()');
-  OdigoApisCtrl.Agent=OdigoApisService.getAgentProperties(OdigoApisCtrl.OdigoCallInfo.UserLogin);
-  console.log('  <-- OdigoApisService.getAgentProperties:',OdigoApisCtrl.Agent);
+  var promiseAgents= OdigoApisService.getAgentsByJson();
+  promiseAgents.then(function (response) {
+      console.log('<<<< Retorno de Agents:',response.data.agents);
+      OdigoApisCtrl.Agent= response.data.agents[response.data.agents.findIndex(x => x.Login === OdigoApisCtrl.OdigoCallInfo.UserLogin)];
+      console.log('  <-- OdigoApisService.getAgentProperties:',OdigoApisCtrl.Agent);      
+    })
+    .catch(function (error) {
+      console.log("Error:",error);      
+  });
+  
 
   console.log("  --> Filling Contacts");
-  OdigoApisCtrl.CrmContacts=OdigoApisService.getContacs();
-  console.log("  <-- Filling Contacts",OdigoApisCtrl.CrmContacts);  
+  var promise= OdigoApisService.getContactsByJson();
+  promise.then(function (response) {
+      console.log('Then:',response.data);      
+      OdigoApisCtrl.CrmContacts=response.data.contacts;
+      console.log("  --> SelectContactById:",OdigoApisCtrl.OdigoCallInfo.CustomerCode);
+      OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactById(OdigoApisCtrl.OdigoCallInfo.CustomerCode,OdigoApisCtrl.CrmContacts);
+      console.log("  <-- SelectContactById:",OdigoApisCtrl.CrmSelectedContact);        
 
-  console.log("  --> SelectContactById:",OdigoApisCtrl.OdigoCallInfo.CustomerCode);
-  OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactById(OdigoApisCtrl.OdigoCallInfo.CustomerCode,OdigoApisCtrl.CrmContacts);
-  console.log("  <-- SelectContactById:",OdigoApisCtrl.CrmSelectedContact);
+    })
+    .catch(function (error) {
+      console.log("Error:",error);      
+  });
+  console.log("  <-- Filling Contacts",OdigoApisCtrl.CrmContacts); 
+
   
-  console.log('--> OdigoApisCtrl.OdigoCallInfo():',OdigoApisCtrl.OdigoCallInfo);
-
-    
-  
-  
-
-//ASIGNACION INICIAL
-
-  OdigoApisCtrl.ReasonsOfConversation={};
-  OdigoApisCtrl.ReasonsOfConversation.freeReasonsOfConversation={};
-  OdigoApisCtrl.ReasonsOfConversation.freeReasonsOfConversation=[
-      {
-        "label" : "Producto",
-        "value" : "Movil Samsung",
-        "order":1
-      },
-      {
-        "label" : "Model",
-        "value" : "Galaxy A80",
-        "order":2
-      },
-      {
-        "label" : "Importe",
-        "value" : "535",
-        "order":3
-      }            
-    ];
-
-OdigoApisCtrl.ReasonsOfConversation.reasonsOfConversation=['Texto libre'];
-  
+//********************************
+//FUNCIONES DE CRM
+//********************************    
+  OdigoApisCtrl.SearchContact = function(){
+    OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactById(OdigoApisCtrl.SearchId,OdigoApisCtrl.CrmContacts);    
+    if (OdigoApisCtrl.CrmSelectedContact==undefined){
+      OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactLastName(OdigoApisCtrl.SearchId,OdigoApisCtrl.CrmContacts);    
+      if (OdigoApisCtrl.CrmSelectedContact==undefined){
+        OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactName(OdigoApisCtrl.SearchId,OdigoApisCtrl.CrmContacts);
+      }
+    }  
+  };
+ 
 
 //********************************
 //ODIGO APIS METHODS
@@ -77,9 +82,9 @@ OdigoApisCtrl.ReasonsOfConversation.reasonsOfConversation=['Texto libre'];
       });                
   };
   
-
+//********************************
 //ODIGO AGENT STATUS
-
+//********************************
   OdigoApisCtrl.OdigoGetAgent = function(Token,Agent){
     console.log("--OdigoApisCtrl.OdigoGetAgent():",Token,Agent);
     OdigoApisCtrl.OpStatus='';
@@ -383,8 +388,6 @@ OdigoApisCtrl.OdigoLoadVideo = function(pVideoRoom){
 };
 
 
-
-OdigoApisCtrl.getTokenFromApi();  
 
 }
 
