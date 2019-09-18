@@ -124,29 +124,23 @@
                 <!-- Post -->
                 <div class="post clearfix">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="./CrmDemoProfile_files/user7-128x128.jpg" alt="User Image">
+                    <img class="img-circle img-bordered-sm" src='{{Odigo.Agent.Image}}' alt="User Image">
                         <span class="username">
-                          <a href="CrmDemoProfile.html#">Sarah Ross</a>
+                          <a href="CrmDemoProfile.html#">{{Odigo.Agent.Name}} {{Odigo.Agent.LastName}}</a>
                           <a href="CrmDemoProfile.html#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description">Sent you a message - 3 days ago</span>
                   </div>
                   <!-- /.user-block -->
                   <p>
-                    Lorem ipsum represents a long-held tradition for designers,
-                    typographers and the like. Some people hate it and argue for
-                    its demise, but others ignore the hate as they create awesome
-                    tools to help create filler text for everyone from bacon lovers
-                    to Charlie Sheen fans.
+                    Buenos días {{Odigo.CrmSelectedContact.Name}}.
+                    En respuesta a su solicitud, le informamos que a través de nuestro servicio de asistencia téncia podremos ponernos en contacto con usted tran pronto sea posible.
                   </p>
 
                   <form class="form-horizontal">
                     <div class="form-group margin-bottom-none">
                       <div class="col-sm-9">
                         <input class="form-control input-sm" placeholder="Response">
-                      </div>
-                      <div class="col-sm-3">
-                        <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send</button>
                       </div>
                     </div>
                   </form>
@@ -156,46 +150,25 @@
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="./CrmDemoProfile_files/user6-128x128.jpg" alt="User Image">
+                    <img class="img-circle img-bordered-sm" src={{Odigo.CrmSelectedContact.Image}} alt="User Image">
                         <span class="username">
-                          <a href="CrmDemoProfile.html#">Adam Jones</a>
+                          <a href="CrmDemoProfile.html#">{{Odigo.CrmSelectedContact.Name}}</a>
                           <a href="CrmDemoProfile.html#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
-                    <span class="description">Posted 5 photos - 5 days ago</span>
+                    <span class="description">Shared publicly - 5 days ago</span>
                   </div>
-                  <!-- /.user-block -->
-                  <div class="row margin-bottom">
-                    <div class="col-sm-6">
-                      <img class="img-responsive" src="./CrmDemoProfile_files/photo1.png" alt="Photo">
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-6">
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <img class="img-responsive" src="./CrmDemoProfile_files/photo2.png" alt="Photo">
-                          <br>
-                          <img class="img-responsive" src="./CrmDemoProfile_files/photo3.jpg" alt="Photo">
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-6">
-                          <img class="img-responsive" src="./CrmDemoProfile_files/photo4.jpg" alt="Photo">
-                          <br>
-                          <img class="img-responsive" src="./CrmDemoProfile_files/photo1.png" alt="Photo">
-                        </div>
-                        <!-- /.col -->
-                      </div>
-                      <!-- /.row -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
+                  <p>                    
+                    Quisiera contactar con vuestro equipo de soporte técnico para resolver una incidencia de mi dispositivo actual.
+                    Muchas gracias.
+                  </p>
+
 
                   <ul class="list-inline">
-                    <li><a href="CrmDemoProfile.html#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-                    <li><a href="CrmDemoProfile.html#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                    <li><a href="" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                    <li><a href="" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
                     </li>
                     <li class="pull-right">
-                      <a href="CrmDemoProfile.html#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                      <a href="" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
                         (5)</a></li>
                   </ul>
 

@@ -75,6 +75,49 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
     return response;
   };  
 
-}
+//*****************************
+//*****************************
+//  -----ODIGO APIS-----
+//*****************************
+//*****************************
+
+//GET THE TOKEN KEY
+//*****************************
+  service.getToken = function () {
+    var MyToken={};
+    var response = $http({
+      method: "POST",
+      headers: {
+         'Content-Type': 'application/json',
+         'Authorization': 'Basic Y29uc29sZV9kZTAxQHByb3NvZGllLmNvbTpBWkVSVFk='
+       },
+       data: {"userUid": userUid,"appUid": appUid},
+      url: (ApiAuthPath)
+    });
+
+    return response;
+  };  
+
+//REASONS OF CONVERSATIONS
+//*****************************
+  service.ReasonsOfConversation = function (Token,Agent,Service,CallId,ReasonsOfConversation) {
+    console.log('--> ReasonsOfConversation()',Service,ReasonsOfConversation);
+    var response = $http({
+      method: "POST",
+      headers: {
+         'Content-Type': 'application/json',
+         'Authorization': 'Basic Y29uc29sZV9kZTAxQHByb3NvZGllLmNvbTpBWkVSVFk=',
+         'X-API-TOKEN' : Token,
+         'X-WS-INSTANCE' : 'DE01'
+       },       
+      url: (CI360ApiPath + '/ci360/v3/'+Service+'/voice-interactions/'+CallId+'/reasonsOfConversation'),
+      data: ReasonsOfConversation
+    });
+    console.log('<-- ReasonsOfConversation()');
+    return response;
+  };  
+
+
+}//FIN SERVICIO
 
 })();
