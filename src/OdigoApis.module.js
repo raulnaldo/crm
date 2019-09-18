@@ -7,7 +7,8 @@ angular.module('OdigoApisModule', ['ui.router'])
 .constant('CI360ApiPath', 'https://paas-de01.prosodie.com:443')
 .constant('userUid', 'agent176ddi@demo.com')
 .constant('appUid', 'fxBYAMsu7Ja9OM3ezAhLAvLPLRsa')
-.constant('DataPath', 'https://localhost:3000/data/')
+.constant('DataPath', 'https://raulnaldo.github.io/crm/data/')
+.constant('DataPathLocal', 'https://localhost:3000/data/')
 
 
 .config(config)
