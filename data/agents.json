@@ -12,6 +12,12 @@
         "Name":"Tatiana",
         "LastName":"Lloret",
         "Image" : "./images/Tatiana.png"
-      }    
+      },
+      {
+        "Login":"agent157ddi@demo.com",
+        "Name":"David",
+        "LastName":"Gomez",
+        "Image" : "./images/David.jpg"
+      }          
   ]
 }

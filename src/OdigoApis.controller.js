@@ -322,12 +322,6 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
 
     //Set the codification
 
-
-
-    
-
-
-               
   };
 
 
@@ -397,7 +391,7 @@ OdigoApisCtrl.OdigoLoadVideo = function(pVideoRoom){
 
 
 
-}
+}//FIN CONTROLER
 
-
-})();
+}//FIN FUNCION INICIAL
+)();

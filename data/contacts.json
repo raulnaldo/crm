@@ -118,6 +118,43 @@
         {"Dispositivo":"Móvil"},
         {"Dispositivo":"Tablet"}
         ]
-    }
+    },
+    {
+      "Id":"816",
+      "Name":"David",
+      "LastName":"Gomez",
+      "JobPosition":"Presales Manager",      
+      "Address":"Avda la maliciosa 33",
+      "CP":"28450",
+      "City":"Tres Cantos",
+      "Province":"Madrid",
+      "Phone":"699479615",
+      "email":"jose-luis.martinez-rubio@prosodie.com",
+      "Image" : "./images/JoseLuis.jpg",
+      "Comments" : "Ultima llamada realizada para pedir la portabilidad del servicio.",
+      "ContractMonthlyAmmount" :"68€",
+      "ContractStartDate" :"01 Enero 2018",
+      "ContractDuration" :"Hasta abril 2021",
+      "ContractRisk" :"Riesgo Alto",      
+      "ContractDetails" :"Contrato de linea particular migrada de una linea de empresa desde Jacinto comunications s.l",      
+      "Products" : [
+        {"Product":"Linea Fibra 200Mb","Serial":"LF200MB","Description":"Linea de fibra simetrica 200MB","Price":35},
+        {"Product":"Linea movil 699479615","Serial":"LM","Description":"Linea de telefono movil","Price":10},
+        {"Product":"Paquete datos ilimitados","Serial":"DATA-ILIMI","Description":"Paquete de datos ilimitados","Price":40},
+        {"Product":"Futbol total","Serial":"FUT","Description":"Paquete de futbol total","Price":18}
+      ],
+      "Facturas" : [
+        {"Factura":"Octubre 88€"}
+      ],
+      "Promos" : [
+        {"Promo":"HBO 1 año gratis"},
+        {"Promo":"Descuento 25% nueva linea"}
+      ],
+      "Dispositivos" : [
+        {"Dispositivo":"Televisión"},
+        {"Dispositivo":"Móvil"},
+        {"Dispositivo":"Tablet"}
+        ]
+    }    
   ]
 }
