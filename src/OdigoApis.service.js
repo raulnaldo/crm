@@ -117,7 +117,44 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
     return response;
   };  
 
+//HANG UP
+//*****************************
+  service.OdigoHangUp = function (Token,Agent) {
+    console.log('--> OdigoHangUp()');
+    var response = $http({
+      method: "POST",
+      headers: {
+         'Content-Type': 'application/json',
+         'X-API-TOKEN' : Token,
+         'X-WS-INSTANCE' : 'de01'
+       },       
+      url: (ApiPath + Agent.replace('@', '%40') + '/commands/hangUpCall')
+    });
+    console.log('<-- OdigoHangUp()');
+    return response;
+  };
+//END WRAPUP
+//*****************************
+  service.OdigoEndWrapUp = function (Token,Agent,CallReasonCreate) {
+    console.log('--> OdigoEndWrapUp()');
+    var response = $http({
+      method: "POST",
+      headers: {
+         'Content-Type': 'application/json',
+         'Authorization': 'Basic Y29uc29sZV9kZTAxQHByb3NvZGllLmNvbTpBWkVSVFk=',
+         'X-API-TOKEN' : Token,
+         'X-WS-INSTANCE' : 'de01'
+       },       
+      url: (ApiPath + Agent.replace('@', '%40') + '/commands/callFreeReason'),
+      data: CallReasonCreate
+    });
+    console.log('<-- OdigoEndWrapUp()');
+    return response;
+  };
 
+
+
+//FIN DE FUNCIONES DE SERVICIO  
 }//FIN SERVICIO
 
 })();
