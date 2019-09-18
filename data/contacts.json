@@ -20,10 +20,10 @@
       "ContractRisk" :"Riesgo Bajo",
       "ContractDetails" :"Contrato residencial de largo plazo",            
       "Products" : [
-        {"Product":"Linea Fibra 100Mb"},
-        {"Product":"Linea movil 699479614"},
-        {"Product":"Paquete datos 20 Gb"},
-        {"Product":"Series HBO"}
+        {"Product":"Linea Fibra 100Mb","Serial":"LF100MB","Description":"Linea de fibra residencial calidad de servicio","Price":15},
+        {"Product":"Linea movil 699479615","Serial":"LM","Description":"Linea de telefono movil","Price":10},
+        {"Product":"Paquete datos 20 Gb","Serial":"DATA20GB","Description":"Paquete de datos mensuales de 20GB","Price":39},
+        {"Product":"Series HBO","Serial":"HB01","Description":"Paquete de series HBO","Price":8}
       ],
       "Facturas" : [
         {"Factura":"Julio 68€"},
@@ -60,10 +60,11 @@
       "ContractRisk" :"Riesgo Medio",      
       "ContractDetails" :"Contrato de portabilidad desde la compañia Josefa Telecoming.",
       "Products" : [
-        {"Product":"Linea Fibra 100Mb"},
-        {"Product":"Linea movil 686093478"},
-        {"Product":"Paquete datos 20 Gb"},
-        {"Product":"Series HBO"}
+        {"Product":"Linea ADSL","Serial":"ADSL","Description":"Linea basica indirecta ADSL","Price":10},
+        {"Product":"Linea movil 699479615","Serial":"LM","Description":"Linea de telefono movil","Price":10},
+        {"Product":"Paquete datos 5 Gb","Serial":"DATA5GB","Description":"Paquete de datos mensuales de 5GB","Price":39},
+        {"Product":"Canal Toros","Serial":"MUU001","Description":"Canal Toros","Price":18},
+        {"Product":"Canal Cocina","Serial":"COC001","Description":"Canal Cocina","Price":7}
       ],
       "Facturas" : [
         {"Factura":"Julio 53"},
@@ -100,10 +101,10 @@
       "ContractRisk" :"Riesgo Alto",      
       "ContractDetails" :"Contrato de linea particular migrada de una linea de empresa desde Jacinto comunications s.l",      
       "Products" : [
-        {"Product":"Linea Fibra 100Mb"},
-        {"Product":"Linea movil 686093478"},
-        {"Product":"Paquete datos 20 Gb"},
-        {"Product":"Series HBO"}
+        {"Product":"Linea Fibra 200Mb","Serial":"LF200MB","Description":"Linea de fibra simetrica 200MB","Price":35},
+        {"Product":"Linea movil 699479615","Serial":"LM","Description":"Linea de telefono movil","Price":10},
+        {"Product":"Paquete datos ilimitados","Serial":"DATA-ILIMI","Description":"Paquete de datos ilimitados","Price":40},
+        {"Product":"Futbol total","Serial":"FUT","Description":"Paquete de futbol total","Price":18}
       ],
       "Facturas" : [
         {"Factura":"Octubre 88€"}

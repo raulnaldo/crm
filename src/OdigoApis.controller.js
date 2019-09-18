@@ -62,6 +62,14 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
     }  
   };
  
+  OdigoApisCtrl.GetTotalPrice = function(){
+    var total = 0;
+    for(var i = 0; i < OdigoApisCtrl.CrmSelectedContact.Products.length; i++){
+        var product = OdigoApisCtrl.CrmSelectedContact.Products[i];
+        total += (product.Price);
+    }
+    return total;
+  }; 
 
 //********************************
 //ODIGO APIS METHODS

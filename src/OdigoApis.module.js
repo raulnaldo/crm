@@ -1,7 +1,7 @@
 (function() {
 "use strict";
 
-angular.module('OdigoApisModule', [])
+angular.module('OdigoApisModule', ['ui.router'])
 .constant('ApiPath', 'https://paas-de01.prosodie.com:443/agent/v1/agents/')
 .constant('ApiAuthPath', 'https://paas-de01.prosodie.com:443/auth/v2/routing_de01/direct-access-claim-sets')
 .constant('CI360ApiPath', 'https://paas-de01.prosodie.com:443')
@@ -10,13 +10,43 @@ angular.module('OdigoApisModule', [])
 .constant('DataPath', 'https://localhost:3000/data/')
 
 
-.config(config);
+.config(config)
+.config(RoutesConfig);
 
 config.$inject = ['$httpProvider'];
 function config($httpProvider) {
   $httpProvider.interceptors.push('loadingHttpInterceptor');
 }
 
+RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+function RoutesConfig($stateProvider, $urlRouterProvider) {
+
+  // Redirect to tab 1 if no other URL matches
+  $urlRouterProvider.otherwise('/profile');
+
+  // Set up UI states
+  $stateProvider
+    .state('profile', {
+      url: '/profile',
+      templateUrl: 'src/templates/profile.html'
+    })
+
+    .state('invoice', {
+      url: '/invoice',
+      templateUrl: 'src/templates/invoice.html'
+    })
+
+    .state('calendar', {
+      url: '/calendar',
+      templateUrl: 'src/templates/calendar.html'
+    })
+
+    .state('codificar', {
+      url: '/codificar',
+      templateUrl: 'src/templates/codificar.html'
+    })
+    ;
+}
 
 
 
