@@ -181,33 +181,30 @@
                 <!-- The timeline -->
                 <ul class="timeline timeline-inverse">
                   <!-- timeline time label -->
-                  <li class="time-label">
-                        <span class="bg-red">
-                          10 Feb. 2014
-                        </span>
-                  </li>
-                  <!-- /.timeline-label -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-envelope bg-blue"></i>
+                  <li class="time-label" ng-repeat="Item in Odigo.CrmSelectedContact.Interactions.interactions">
+                    <span class="bg-red">
+                            {{Odigo.OdigoFormatDate(Item.startDate)}}
+                    </span>
+                    <!-- /.timeline-label -->
+                    <!-- timeline item -->
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                      <span class="time"><i class="fa fa-clock-o"></i>{{Odigo.OdigoFormatDateHour(Item.startDate)}}</span>
 
-                      <h3 class="timeline-header"><a ui-sref="profile">Support Team</a> sent you an email</h3>
+                      <h3 class="timeline-header"><a ui-sref="profile">Canal:{{Item.label}} </a> sent you an email</h3>
 
                       <div class="timeline-body">
-                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                        quora plaxo ideeli hulu weebly balihoo...
+                        CallRef: {{Item.id}}
+                        <br>
+                        Agente:  {{Item.agent}}
+                        <br>
+                        Canal:   {{Item.channelType}}
+                        <br>
+                        Sentido: {{Item.direction}}
                       </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs">Read more</a>
-                        <a class="btn btn-danger btn-xs">Delete</a>
-                      </div>
-                    </div>
+                    </div>                              
                   </li>
+
                   <!-- END timeline item -->
                   <!-- timeline item -->
                   <li>

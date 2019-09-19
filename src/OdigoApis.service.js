@@ -152,7 +152,22 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
     return response;
   };
 
-
+//END WRAPUP
+//*****************************
+  service.OdigoGetInteractionsByCustId = function (Token,Service,CustomerId) {
+    console.log('--> OdigoGetInteractionsByCustId()');
+    var response = $http({
+      method: "GET",
+      headers: {
+         'Content-Type': 'application/json',         
+         'X-API-TOKEN' : Token,
+         'X-WS-INSTANCE' : 'DE01'
+       },       
+      url: (CI360ApiPath + '/ci360/v3/'+Service+'/profiles/'+CustomerId)
+    });
+    console.log('<-- OdigoGetInteractionsByCustId()');
+    return response;
+  };
 
 //FIN DE FUNCIONES DE SERVICIO  
 }//FIN SERVICIO

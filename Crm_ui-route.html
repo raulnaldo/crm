@@ -168,7 +168,7 @@
         <li class="header">MAIN NAVIGATION</li>
         
         <li class="treeview">
-          <a href="CrmDemoProfile.html#">
+          <a href="CrmDemoProfile.html#" ng-if="Odigo.CrmSelectedContact.Id">
             <i class="fa fa-files-o"></i>
             <span>Facturas pendientes</span>
             <span class="pull-right-container">
@@ -183,7 +183,7 @@
         </li>
 
         <li class="treeview">
-          <a href="CrmDemoProfile.html#">
+          <a href="CrmDemoProfile.html#" ng-if="Odigo.CrmSelectedContact.Id">
             <i class="fa fa-dashboard"></i> <span>Productos Contratados</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-blue">{{Odigo.CrmSelectedContact.Products.length}}</small>              
@@ -197,7 +197,7 @@
         </li>
 
         <li class="treeview">
-          <a href="CrmDemoProfile.html#">
+          <a href="CrmDemoProfile.html#" ng-if="Odigo.CrmSelectedContact.Id">
             <i class="fa fa-pie-chart"></i>
             <span>Promociones</span>
             <span class="pull-right-container">
@@ -212,7 +212,7 @@
         </li>
 
         <li class="treeview">
-          <a href="CrmDemoProfile.html#">
+          <a href="CrmDemoProfile.html#" ng-if="Odigo.CrmSelectedContact.Id">
             <i class="fa fa-laptop"></i>
             <span>Dispositivos</span>
             <span class="pull-right-container">
@@ -227,7 +227,7 @@
         </li>
 
         <li class="treeview">
-          <a href="CrmDemoProfile.html#">
+          <a href="CrmDemoProfile.html#" ng-if="Odigo.CrmSelectedContact.Id">
             <i class="fa fa-pie-chart"></i>
             <span>Registro de consumo</span>
             <span class="pull-right-container">
@@ -235,14 +235,14 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href=><i class="fa fa-circle-o"></i>Telefono fijo</a></li>
+            <li><a ui-sref="statistics"><i class="fa fa-circle-o"></i>Telefono fijo</a></li>
             <li><a href=><i class="fa fa-circle-o"></i>Telefono Movil</a></li>
             <li><a href=><i class="fa fa-circle-o"></i>Peliculas a la carta</a></li>
             <li><a href=><i class="fa fa-circle-o"></i>Series a la carta</a></li>
           </ul>
         </li>
         <li>
-          <a ui-sref="calendar">
+          <a ui-sref="calendar" ng-if="Odigo.CrmSelectedContact.Id">
             <i class="fa fa-calendar"></i><span>Agendar cita</span>            
             <span class="pull-right-container">
               <small class="label pull-right bg-red">2</small>
@@ -251,8 +251,8 @@
           </a>
         </li>
         <li>
-          <a href="">
-            <i class="fa fa-envelope"></i> <span>Emails</span>
+          <a href="" ng-if="Odigo.CrmSelectedContact.Id">
+            <i class="fa fa-envelope" ></i> <span>Emails</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-yellow">12</small>
               <small class="label pull-right bg-green">16</small>
@@ -261,7 +261,7 @@
           </a>
         </li>
         <li>
-          <a ui-sref="codificar">
+          <a ui-sref="codificar" ng-if="Odigo.CrmSelectedContact.Id">
             <i class="fa fa-floppy-o"></i> <span>Codificar Interacción</span>
           </a>
         </li>        

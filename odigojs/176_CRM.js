@@ -90,7 +90,7 @@ try {
        Url=BaseUrl + '?UserLogin='+vLOGIN+'&CustomerCode=1262&CallRef='+vCALLREF+'&GateId='+vGATE;
     }  
     else{
-       Url=BaseUrl + '?UserLogin='+odigo.getAgentLogin()+'&CustomerCode=1262&CallRef='+vCALLREF+'&GateId='+vGATE;
+       Url=BaseUrl + '?UserLogin='+odigo.getAgentLogin()+'&CustomerCode='+vOdigoCustomer.id+'&CallRef='+vCALLREF+'&GateId='+vGATE;
     }
    
   }

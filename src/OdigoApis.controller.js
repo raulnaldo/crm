@@ -9,18 +9,71 @@ OdigoApisController.$inject = ['$location','OdigoApisService','userUid','appUid'
 function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $sce,$window,$state) {  
 
   var OdigoApisCtrl = this;
+
+//###########################################################
+//#################       UTILS            ##################
+//###########################################################
+
+  OdigoApisCtrl.OdigoFormatDate = function formatDate(pDate){
+    var date = new Date(pDate);
+    var monthNames = [
+      "Enero", "Febrero", "Marzo",
+      "Abril", "Mayo", "Junio", "Julio",
+      "Augosto", "Septiembre", "Octubre",
+      "Noviembre", "Diciembre"
+    ];
+
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+
+    return day + ' ' + monthNames[monthIndex] + ' ' + year;
+  }
+
+  OdigoApisCtrl.OdigoFormatDateHour = function OdigoFormatDateHour(pDate){
+    var date = new Date(pDate);
+        
+    var currentHours = date.getHours();
+    currentHours = ("0" + currentHours).slice(-2);
+
+    var currentMins = date.getMinutes();
+    currentMins = ("0" + currentMins).slice(-2);
+
+    var currentSecs = date.getSeconds();
+    currentSecs = ("0" + currentSecs).slice(-2);
+
+    return currentHours + ':' + currentMins + ':' + currentSecs;
+  }
+
+  OdigoApisCtrl.IsValidObject = function IsValidObject(pObject){
+    if(typeof pObject !== "undefined") {
+      return true;
+    }
+    else{
+      return false; 
+    }    
+  }
+//###########################################################
+//#################       INIT            ##################
+//###########################################################
+
+  //Obtenemos la informacion proporcionada en la URL queryString
   OdigoApisCtrl.OdigoCallInfo=$location.search();  
   console.log('--> OdigoApisController Init()'); 
   console.log('  --> Location SearchData();',$location.search());
   console.log('      OdigoApisCtrl.OdigoCallInfo();',OdigoApisCtrl.OdigoCallInfo);
   console.log('  <-- Location SearchData()');
 
-  if (OdigoApisCtrl.OdigoCallInfo.CustomerCode==undefined){
-    OdigoApisCtrl.OdigoCallInfo.CustomerCode="1262";
+  //Para pruebas, asignamos por defecto un Id y un nombre de agente.
+  if (!OdigoApisCtrl.IsValidObject(OdigoApisCtrl.OdigoCallInfo.CustomerCode)){
+    //OdigoApisCtrl.OdigoCallInfo.CustomerCode="1262";
+    $state.go('notfound'); 
   }
   if (OdigoApisCtrl.OdigoCallInfo.UserLogin==undefined){
     OdigoApisCtrl.OdigoCallInfo.UserLogin="agent176ddi@demo.com";
   }
+
+  //Obtenemos a través de Ajax  el array de agentes que tenemos definidos.
   console.log('  --> OdigoApisService.getAgentProperties()');
   var promiseAgents= OdigoApisService.getAgentsByJson();
   promiseAgents.then(function (response) {
@@ -32,36 +85,56 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
       console.log("Error:",error);      
   });
   
-
-  console.log("  --> Filling Contacts");
-  var promise= OdigoApisService.getContactsByJson();
-  promise.then(function (response) {
-      console.log('Then:',response.data);      
-      OdigoApisCtrl.CrmContacts=response.data.contacts;
-      console.log("  --> SelectContactById:",OdigoApisCtrl.OdigoCallInfo.CustomerCode);
-      OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactById(OdigoApisCtrl.OdigoCallInfo.CustomerCode,OdigoApisCtrl.CrmContacts);
-      console.log("  <-- SelectContactById:",OdigoApisCtrl.CrmSelectedContact);        
-
-    })
-    .catch(function (error) {
-      console.log("Error:",error);      
-  });
-  console.log("  <-- Filling Contacts",OdigoApisCtrl.CrmContacts); 
-
+ //Obtenemos a través de Ajax  el array de contactos que tenemos definidos.
+ OdigoApisCtrl.StartSearchingContacts = function(){
+    console.log("  --> Filling Contacts");
+    var promise= OdigoApisService.getContactsByJson();
+    promise
+    .then(
+      function (response) {
+        console.log('Then:',response.data);      
+        OdigoApisCtrl.CrmContacts=response.data.contacts;
+        console.log("  --> SelectContactById:",OdigoApisCtrl.OdigoCallInfo.CustomerCode);
+        OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactById(OdigoApisCtrl.OdigoCallInfo.CustomerCode,OdigoApisCtrl.CrmContacts);
+        console.log("  <-- SelectContactById:",OdigoApisCtrl.CrmSelectedContact); 
+        OdigoApisCtrl.OdigoGetInteractionsByCustId(OdigoApisCtrl.CrmSelectedContact.Id);
+      })
+      .catch(
+        function (error) {
+        console.log("Error:",error);      
+    });
+    console.log("  <-- Filling Contacts",OdigoApisCtrl.CrmContacts);   
+  }
+  OdigoApisCtrl.OrganizeInteractions = function(pInteractions){
+      console.log("  --> OrganizeInteractions:",pInteractions);
+      
+      console.log("  <-- OrganizeInteractions");   
+  }  
   
 //********************************
 //FUNCIONES DE CRM
 //********************************    
   OdigoApisCtrl.SearchContact = function(){
+    var EmptyObject={};
+    OdigoApisCtrl.CrmSelectedContact=EmptyObject;
     OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactById(OdigoApisCtrl.SearchId,OdigoApisCtrl.CrmContacts);    
     if (OdigoApisCtrl.CrmSelectedContact==undefined){
       OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactLastName(OdigoApisCtrl.SearchId,OdigoApisCtrl.CrmContacts);    
       if (OdigoApisCtrl.CrmSelectedContact==undefined){
         OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactName(OdigoApisCtrl.SearchId,OdigoApisCtrl.CrmContacts);
       }
-    }  
-  };
+    }     
+    if (OdigoApisCtrl.IsValidObject(OdigoApisCtrl.CrmSelectedContact)){
+      OdigoApisCtrl.LastSearchSearchId=null;
+      $state.go('profile');
+    }
+    else{
+      OdigoApisCtrl.LastSearchSearchId=OdigoApisCtrl.SearchId;
+      $state.go('notfound'); 
+    }
+  }; 
  
+
   OdigoApisCtrl.GetTotalPrice = function(){
     var total = 0;
     for(var i = 0; i < OdigoApisCtrl.CrmSelectedContact.Products.length; i++){
@@ -83,12 +156,35 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
           console.log('Then:',response.data);
           OdigoApisCtrl.OpStatus='200';
           OdigoApisCtrl.Token=response.data.accessToken;
+          //Una vez con el Token, realizamos llamada para obtener para cargar los contactos, buscar el contacto y obtener con el api do Odigo el listado de interacciones.
+          OdigoApisCtrl.StartSearchingContacts();
         })
         .catch(function (error) {
           console.log("Something went terribly wrong.");
           OdigoApisCtrl.OpStatus=error;
       });                
   };
+
+  //GET INTERACTIONS BY CUSTOMER ID
+  OdigoApisCtrl.OdigoGetInteractionsByCustId = function(pCustomerId){
+      OdigoApisCtrl.OpStatus='';
+      var promise= OdigoApisService.OdigoGetInteractionsByCustId(OdigoApisCtrl.Token,'DE01',pCustomerId);
+      console.log('Token:',OdigoApisCtrl.Token);
+      console.log('Id:',pCustomerId);
+      console.log('Service:DE01');
+      promise.then(function (response) {
+          console.log('Then:',response.data);
+          OdigoApisCtrl.OpStatus='200';
+          OdigoApisCtrl.CrmSelectedContact.Interactions=response.data;
+          OdigoApisCtrl.OrganizeInteractions(OdigoApisCtrl.CrmSelectedContact.Interactions);
+        })
+        .catch(function (error) {
+          console.log("Something went terribly wrong.");
+          OdigoApisCtrl.OpStatus=error;
+      });                
+  };
+
+  
   
 //********************************
 //ODIGO AGENT STATUS
@@ -193,7 +289,12 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
 //           REASONS OF CONVERSATIONS             ///
 /////////////////////////////////////////////////////    
   OdigoApisCtrl.SetReasonsOfConversation = function(){
-    console.log('--> SetReasonsOfConversation()');            
+
+        var EmptyObject={};
+        OdigoApisCtrl.CrmSelectedContact=EmptyObject;
+        $state.go('cleared');
+
+    console.log('--> SetReasonsOfConversation()');    
     OdigoApisCtrl.ReasonsOfConversation={};
     OdigoApisCtrl.ReasonsOfConversation.freeReasonsOfConversation={};
     OdigoApisCtrl.ReasonsOfConversation.freeReasonsOfConversation=[
@@ -244,13 +345,15 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
         OdigoApisCtrl.OpStatus='200';
         console.log('Then:',response.data);          
         console.log('<-- SetReasonsOfConversation()');
-        console.log('>>>> limpiando pantalla');          
-        $state.go('profile');
+        console.log('>>>> limpiando pantalla'); 
+        var EmptyObject={};
+        OdigoApisCtrl.CrmSelectedContact=EmptyObject;
+        $state.go('cleared');
         console.log('<<<< limpiando pantalla');
       })
       .catch(function (error) {
         console.log("Error:",error.status);        
-        OdigoApisCtrl.OpStatus=error.status;
+        OdigoApisCtrl.OpStatus=error.status;        
         $state.go('profile');        
         console.log('<-- SetReasonsOfConversation()');
     });                
@@ -261,8 +364,13 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
     OdigoApisCtrl.OpStatus='';
   };
 
+//###########################################################
+//#################       RUN ACTIONS      ##################
+//###########################################################
 
 OdigoApisCtrl.getTokenFromApi();
+
+
 
 
 }//FIN CONTROLER

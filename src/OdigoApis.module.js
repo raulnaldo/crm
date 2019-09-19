@@ -46,7 +46,22 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
       url: '/codificar',
       templateUrl: 'src/templates/codificar.html'
     })
-    ;
+    
+    .state('statistics', {
+      url: '/statistics',
+      templateUrl: 'src/templates/statistics.html'
+    })
+
+    .state('cleared', {
+      url: '/cleared',
+      templateUrl: 'src/templates/cleared.html'
+    })
+    .state('notfound', {
+      url: '/notfound',
+      templateUrl: 'src/templates/notfound.html'
+    })    
+    
+    ;    
 }
 
 
