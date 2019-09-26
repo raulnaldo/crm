@@ -59,8 +59,15 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     .state('notfound', {
       url: '/notfound',
       templateUrl: 'src/templates/notfound.html'
-    })    
-    
+    })
+    .state('video', {
+      url: '/video',
+      templateUrl: 'src/templates/video.html'
+    })        
+    .state('video_test', {
+      url: '/video_test',
+      templateUrl: 'src/templates/video_test.html'
+    })      
     ;    
 }
 

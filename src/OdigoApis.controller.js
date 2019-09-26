@@ -368,7 +368,7 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
 //#################       RUN ACTIONS      ##################
 //###########################################################
 
-OdigoApisCtrl.getTokenFromApi();
+//OdigoApisCtrl.getTokenFromApi();
 
 
 
