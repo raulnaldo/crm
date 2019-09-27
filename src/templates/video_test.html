@@ -32,29 +32,7 @@
         <!-- right column -->
         <div class="col-md-1">
             <div id="otEmbedContainer" style="width:800px; height:640px"></div> 
-            <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=186e5027-2696-4bc6-8c58-408af376e96d&room=DEFAULT_ROOM"></script>
-            <script src="https://static.opentok.com/v2/js/opentok.js" charset="utf-8"></script>
-            <script charset="utf-8">
-                var apiKey = '45828062';
-                var sessionId = '2_MX40NTgyODA2Mn5-MTU2OTQ4ODIyMDYxNn5SSlZhUWliVEVnOXZ4WndQaTdUZFVjMHJ-UH4';
-                var token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9MmJhZjU5MDJlYmM5MjM1MDI2NDgyNTdkOGM1N2MwNjMyMzViZWJkNDpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UVTJPVFE0T0RJeU1EWXhObjVTU2xaaFVXbGlWRVZuT1haNFduZFFhVGRVWkZWak1ISi1VSDQmY3JlYXRlX3RpbWU9MTU2OTQ4ODI2MiZub25jZT0wLjQ2MjA2ODM1OTgyOTgyMzg2JnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE1Njk1NzQ2NjI=';
-              
-              // connect to session
-              var session = OT.initSession(apiKey, sessionId);
-              
-              // create publisher
-              var publisher = OT.initPublisher();
-              session.connect(token, function(err) {
-              // publish publisher
-              session.publish(publisher); 
-              })
-              
-              
-              // create subscriber
-              session.on('streamCreated', function(event) {
-              session.subscribe(event.stream);
-              });
-              </script>              
+             
         </div>
       </div>
       <!-- /.row -->
@@ -62,3 +40,46 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=186e5027-2696-4bc6-8c58-408af376e96d&room=DEFAULT_ROOM"></script>
+  <script src="https://static.opentok.com/v2/js/opentok.js" charset="utf-8"></script>
+  <script charset="utf-8">
+    console.log("--> Script Init()")
+    var apiKey = '45828062';
+    var sessionId = '2_MX40NTgyODA2Mn5-MTU2OTQ4ODIyMDYxNn5SSlZhUWliVEVnOXZ4WndQaTdUZFVjMHJ-UH4';
+    var token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9MmJhZjU5MDJlYmM5MjM1MDI2NDgyNTdkOGM1N2MwNjMyMzViZWJkNDpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UVTJPVFE0T0RJeU1EWXhObjVTU2xaaFVXbGlWRVZuT1haNFduZFFhVGRVWkZWak1ISi1VSDQmY3JlYXRlX3RpbWU9MTU2OTQ4ODI2MiZub25jZT0wLjQ2MjA2ODM1OTgyOTgyMzg2JnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE1Njk1NzQ2NjI=';
+    console.log("  --> Data:");
+    console.log("    --> apiKey:",apiKey);
+    console.log("    --> sessionId:",sessionId);
+    console.log("    --> token:",token);
+    console.log("  <-- Data:");
+    // connect to session
+    console.log("  --> OT.initSession():");
+    var session = OT.initSession(apiKey, sessionId);
+    console.log("  <-- OT.initSession():");
+    
+    // create publisher
+    console.log("  --> OT.initPublisher():");
+    var publisher = OT.initPublisher();
+    console.log("  <-- OT.initPublisher():");
+
+    console.log("  --> session.connect():");
+    session.connect(token, function(err) {
+    // publish publisher
+      console.log("  --> session.publish():");
+      session.publish(publisher); 
+      console.log("  <-- session.publish():");
+    })
+    console.log("  <-- session.connect():");
+    
+    
+    // create subscriber
+    console.log("  --> Event:session.on():");
+    session.on('streamCreated', function(event) {
+      console.log("    --> session.subscribe():");
+      session.subscribe(event.stream);
+      console.log("    <-- session.subscribe():");      
+    });
+    console.log("  <-- Event:session.on():");
+    console.log("<-- Script Init()")
+  </script> 
