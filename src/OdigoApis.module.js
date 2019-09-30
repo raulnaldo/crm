@@ -73,7 +73,12 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
       url: '/video_mobile',
       templateUrl: 'src/templates/video_mobile.html'
     })       
-           
+
+    .state('video_ivp', {
+      url: '/video_ivp',
+      templateUrl: 'src/templates/video_ivp.html'
+    })       
+    
     ;    
 }
 
