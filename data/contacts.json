@@ -42,6 +42,46 @@
         ]     
     },
     {
+      "Id":"9999",
+      "Name":"José",
+      "LastName":"Maforo en Rojo",      
+      "JobPosition":"Jubilado",
+      "Address":"Calle del Pez 23",
+      "CP":"28860",
+      "City":"Paracuellos de Jarama",
+      "Province":"Madrid",      
+      "Phone":"00349998877",
+      "email":"jose.maforo@senior.com",
+      "Image" : "./images/SeniorContact.png",
+      "Comments" : "Cliente dado de alta en Noviembre de 2000.",
+      "ContractMonthlyAmmount" :"68€",
+      "ContractStartDate" :"25 Agosto 2016",
+      "ContractDuration" :"Sin permanencia",
+      "ContractRisk" :"Riesgo Bajo",
+      "ContractDetails" :"Contrato residencial de largo plazo",            
+      "Products" : [
+        {"Product":"Linea Fibra 100Mb","Serial":"LF100MB","Description":"Linea de fibra residencial calidad de servicio","Price":15},
+        {"Product":"Linea movil 699479615","Serial":"LM","Description":"Linea de telefono movil","Price":10},
+        {"Product":"Paquete datos 20 Gb","Serial":"DATA20GB","Description":"Paquete de datos mensuales de 20GB","Price":39},
+        {"Product":"Series HBO","Serial":"HB01","Description":"Paquete de series HBO","Price":8}
+      ],
+      "Facturas" : [
+        {"Factura":"Julio 68€"},
+        {"Factura":"Agosto 68€"},
+        {"Factura":"Septiembre 105€"},
+        {"Factura":"Octubre 95€"}
+      ],
+      "Promos" : [
+        {"Promo":"HBO 1 año gratis"},
+        {"Promo":"Descuento 25% nueva linea"}
+      ],
+        "Dispositivos" : [
+        {"Dispositivo":"Televisión"},
+        {"Dispositivo":"Móvil"},
+        {"Dispositivo":"Tablet"}
+        ]     
+    },    
+    {
       "Id":"1617",
       "Name":"Tatiana",
       "LastName":"Lloret",

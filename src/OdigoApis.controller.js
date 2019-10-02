@@ -369,8 +369,7 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
 //###########################################################
 
 //OdigoApisCtrl.getTokenFromApi();
-
-
+OdigoApisCtrl.StartSearchingContacts();
 
 
 }//FIN CONTROLER
