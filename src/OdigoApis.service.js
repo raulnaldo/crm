@@ -5,8 +5,8 @@ angular.module('OdigoApisModule')
 .service('OdigoApisService', OdigoApisService);
 
 
-OdigoApisService.$inject = ['$http', 'ApiPath','ApiAuthPath','CI360ApiPath','userUid','appUid','DataPath'];
-function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid,DataPath) {
+OdigoApisService.$inject = ['$http', 'ApiPath','ApiAuthPath','CI360ApiPath','userUid','appUid','DataPath','HerokuBackEnd'];
+function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid,DataPath,HerokuBackEnd) {
   var service = this;
 
 
@@ -86,88 +86,14 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
   service.getToken = function () {
     var MyToken={};
     var response = $http({
-      method: "POST",
-      headers: {
-         'Content-Type': 'application/json',
-         'Authorization': 'Basic Y29uc29sZV9kZTAxQHByb3NvZGllLmNvbTpBWkVSVFk='
-       },
-       data: {"userUid": userUid,"appUid": appUid},
-      url: (ApiAuthPath)
-    });
-
-    return response;
-  };  
-
-//REASONS OF CONVERSATIONS
-//*****************************
-  service.ReasonsOfConversation = function (Token,Agent,Service,CallId,ReasonsOfConversation) {
-    console.log('--> ReasonsOfConversation()',Service,ReasonsOfConversation);
-    var response = $http({
-      method: "POST",
-      headers: {
-         'Content-Type': 'application/json',
-         'Authorization': 'Basic Y29uc29sZV9kZTAxQHByb3NvZGllLmNvbTpBWkVSVFk=',
-         'X-API-TOKEN' : Token,
-         'X-WS-INSTANCE' : 'DE01'
-       },       
-      url: (CI360ApiPath + '/ci360/v3/'+Service+'/voice-interactions/'+CallId+'/reasonsOfConversation'),
-      data: ReasonsOfConversation
-    });
-    console.log('<-- ReasonsOfConversation()');
-    return response;
-  };  
-
-//HANG UP
-//*****************************
-  service.OdigoHangUp = function (Token,Agent) {
-    console.log('--> OdigoHangUp()');
-    var response = $http({
-      method: "POST",
-      headers: {
-         'Content-Type': 'application/json',
-         'X-API-TOKEN' : Token,
-         'X-WS-INSTANCE' : 'de01'
-       },       
-      url: (ApiPath + Agent.replace('@', '%40') + '/commands/hangUpCall')
-    });
-    console.log('<-- OdigoHangUp()');
-    return response;
-  };
-//END WRAPUP
-//*****************************
-  service.OdigoEndWrapUp = function (Token,Agent,CallReasonCreate) {
-    console.log('--> OdigoEndWrapUp()');
-    var response = $http({
-      method: "POST",
-      headers: {
-         'Content-Type': 'application/json',
-         'Authorization': 'Basic Y29uc29sZV9kZTAxQHByb3NvZGllLmNvbTpBWkVSVFk=',
-         'X-API-TOKEN' : Token,
-         'X-WS-INSTANCE' : 'de01'
-       },       
-      url: (ApiPath + Agent.replace('@', '%40') + '/commands/callFreeReason'),
-      data: CallReasonCreate
-    });
-    console.log('<-- OdigoEndWrapUp()');
-    return response;
-  };
-
-//END WRAPUP
-//*****************************
-  service.OdigoGetInteractionsByCustId = function (Token,Service,CustomerId) {
-    console.log('--> OdigoGetInteractionsByCustId()');
-    var response = $http({
       method: "GET",
       headers: {
-         'Content-Type': 'application/json',         
-         'X-API-TOKEN' : Token,
-         'X-WS-INSTANCE' : 'DE01'
-       },       
-      url: (CI360ApiPath + '/ci360/v3/'+Service+'/profiles/'+CustomerId)
+       },      
+      url: (HerokuBackEnd + 'session')
     });
-    console.log('<-- OdigoGetInteractionsByCustId()');
     return response;
-  };
+  };  
+
 
 //FIN DE FUNCIONES DE SERVICIO  
 }//FIN SERVICIO

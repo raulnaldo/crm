@@ -10,6 +10,7 @@ angular.module('OdigoApisModule', ['ui.router'])
 .constant('DataPath', 'https://raulnaldo.github.io/crm/data//')
 .constant('DataPathLocal', 'https://localhost:3000/data/')
 .constant('DataPathGit', 'https://raulnaldo.github.io/crm/data/')
+.constant('HerokuBackEnd', 'https://tokboxbackend.herokuapp.com/')
 
 
 
@@ -25,7 +26,7 @@ RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 function RoutesConfig($stateProvider, $urlRouterProvider) {
 
   // Redirect to tab 1 if no other URL matches
-  $urlRouterProvider.otherwise('/profile');
+  $urlRouterProvider.otherwise('/video_mobile');
 
   // Set up UI states
   $stateProvider

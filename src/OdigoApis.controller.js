@@ -10,6 +10,8 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
 
   var OdigoApisCtrl = this;
 
+  var TokBoxCredentials = {};
+
 //###########################################################
 //#################       UTILS            ##################
 //###########################################################
@@ -97,7 +99,9 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
         console.log("  --> SelectContactById:",OdigoApisCtrl.OdigoCallInfo.CustomerCode);
         OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactById(OdigoApisCtrl.OdigoCallInfo.CustomerCode,OdigoApisCtrl.CrmContacts);
         console.log("  <-- SelectContactById:",OdigoApisCtrl.CrmSelectedContact); 
-        OdigoApisCtrl.OdigoGetInteractionsByCustId(OdigoApisCtrl.CrmSelectedContact.Id);
+        if (OdigoApisCtrl.CrmSelectedContact.Id.IsValidObject){
+          OdigoApisCtrl.OdigoGetInteractionsByCustId(OdigoApisCtrl.CrmSelectedContact.Id);
+        }
       })
       .catch(
         function (error) {
@@ -145,231 +149,89 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
   }; 
 
 //********************************
-//ODIGO APIS METHODS
+//APIS METHODS
 //********************************
 
   //GET THE TOKEN KEY
   OdigoApisCtrl.getTokenFromApi = function(){
-      OdigoApisCtrl.OpStatus='';
       var promise= OdigoApisService.getToken();
       promise.then(function (response) {
           console.log('Then:',response.data);
-          OdigoApisCtrl.OpStatus='200';
-          OdigoApisCtrl.Token=response.data.accessToken;
-          //Una vez con el Token, realizamos llamada para obtener para cargar los contactos, buscar el contacto y obtener con el api do Odigo el listado de interacciones.
-          OdigoApisCtrl.StartSearchingContacts();
+          TokBoxCredentials.apiKey=response.data.apiKey;
+          TokBoxCredentials.sessionId=response.data.sessionId;
+          TokBoxCredentials.token=response.data.token;
+          initializeSession();
         })
         .catch(function (error) {
-          console.log("Something went terribly wrong.");
-          OdigoApisCtrl.OpStatus=error;
+          console.log("Error:",error);          
       });                
   };
 
-  //GET INTERACTIONS BY CUSTOMER ID
-  OdigoApisCtrl.OdigoGetInteractionsByCustId = function(pCustomerId){
-      OdigoApisCtrl.OpStatus='';
-      var promise= OdigoApisService.OdigoGetInteractionsByCustId(OdigoApisCtrl.Token,'DE01',pCustomerId);
-      console.log('Token:',OdigoApisCtrl.Token);
-      console.log('Id:',pCustomerId);
-      console.log('Service:DE01');
-      promise.then(function (response) {
-          console.log('Then:',response.data);
-          OdigoApisCtrl.OpStatus='200';
-          OdigoApisCtrl.CrmSelectedContact.Interactions=response.data;
-          OdigoApisCtrl.OrganizeInteractions(OdigoApisCtrl.CrmSelectedContact.Interactions);
-        })
-        .catch(function (error) {
-          console.log("Something went terribly wrong.");
-          OdigoApisCtrl.OpStatus=error;
-      });                
-  };
 
-  
-  
-//********************************
-//ODIGO AGENT STATUS
-//********************************
-  OdigoApisCtrl.OdigoGetAgent = function(Token,Agent){
-    console.log("--OdigoApisCtrl.OdigoGetAgent():",Token,Agent);
-    OdigoApisCtrl.OpStatus='';
-      var promise= OdigoApisService.OdigoGetAgent(Token,Agent);
-      promise.then(function (response) {
-          OdigoApisCtrl.OpStatus='200';
-          OdigoApisCtrl.userActiveSettings={};
-          OdigoApisCtrl.userInfo=response.data;          
-        })
-        .catch(function (error) {
-          console.log("Error:",error.status);
-          OdigoApisCtrl.OpStatus=error.status;
-      });                
-  }; 
-
-  OdigoApisCtrl.OdigoGetAgentActiveSettings = function(Token,Agent){
-    console.log("--OdigoApisCtrl.OdigoGetAgentActiveSettings():",Token,Agent);
-    OdigoApisCtrl.OpStatus='';
-      var promise= OdigoApisService.OdigoGetAgentActiveSettings(Token,Agent);
-      promise.then(function (response) {
-          OdigoApisCtrl.OpStatus='200';
-          OdigoApisCtrl.userActiveSettings=response.data[0];
-          console.log('OdigoApisCtrl.userActiveSettings:',OdigoApisCtrl.userActiveSettings);                              
-        })
-        .catch(function (error) {
-          console.log("Error:",error.status);
-          OdigoApisCtrl.OpStatus=error.status;
-      });                
-  }; 
-
-
-
-//ODIGO API COMANDS
-
-  //HANGUP  
-  OdigoApisCtrl.OdigoHangUp = function(){
-    console.log('>>>OdigoHangUp()')
-    OdigoApisCtrl.OpStatus='';
-      var promise= OdigoApisService.OdigoHangUp(OdigoApisCtrl.Token,OdigoApisCtrl.OdigoCallInfo.UserLogin);
-      promise.then(function (response) {
-          OdigoApisCtrl.OpStatus='200';
-          console.log('Then:',response.data);
-          console.log('>>>OdigoHangUp()')          
-        })
-        .catch(function (error) {
-          console.log("Error:",error.status);
-          OdigoApisCtrl.OpStatus=error.status;
-          console.log('>>>OdigoHangUp()')
-      });                
-  };    
-
-  //OdigoStartRecord  
-  OdigoApisCtrl.OdigoStartRecord = function(Token,Agent){
-    OdigoApisCtrl.OpStatus='';
-      var promise= OdigoApisService.OdigoStartRecord(Token,Agent);
-      promise.then(function (response) {
-          OdigoApisCtrl.OpStatus='200';
-          console.log('Then:',response.data);          
-        })
-        .catch(function (error) {
-          console.log("Error:",error.status);
-          OdigoApisCtrl.OpStatus=error.status;
-      });                
-  };    
-  
-
-  //END WRAPUP
-  OdigoApisCtrl.OdigoEndWrapUp = function(){
-    OdigoApisCtrl.OpStatus='';
-    OdigoApisCtrl.CallReasonCreate={};
-    OdigoApisCtrl.CallReasonCreate.agentId=OdigoApisCtrl.OdigoCallInfo.UserLogin;
-    OdigoApisCtrl.CallReasonCreate.callId=OdigoApisCtrl.OdigoCallInfo.CallRef;
-    OdigoApisCtrl.CallReasonCreate.gateId=OdigoApisCtrl.OdigoCallInfo.GateId;
-    OdigoApisCtrl.CallReasonCreate.keyboardDuration=0;
-    var reason={};
-    reason.key='';
-    reason.value='';
-    OdigoApisCtrl.CallReasonCreate.reasons=[reason];
-    OdigoApisCtrl.CallReasonCreate.storing=true;
-    OdigoApisCtrl.CallReasonCreate.wrapUpEnd=true;
-    
-
-      var promise= OdigoApisService.OdigoEndWrapUp(OdigoApisCtrl.Token,OdigoApisCtrl.OdigoCallInfo.UserLogin,OdigoApisCtrl.CallReasonCreate);
-      promise.then(function (response) {
-          OdigoApisCtrl.OpStatus='200';
-          console.log('Then:',response.data);          
-        })
-        .catch(function (error) {
-          console.log("Error:",error.status);
-          OdigoApisCtrl.OpStatus=error.status;
-      });                
-  };
-
-/////////////////////////////////////////////////////
-//           END SESSION OF CALL SETTING DATA     ///
-/////////////////////////////////////////////////////    
-/////////////////////////////////////////////////////
-//           REASONS OF CONVERSATIONS             ///
-/////////////////////////////////////////////////////    
-  OdigoApisCtrl.SetReasonsOfConversation = function(){
-
-        var EmptyObject={};
-        OdigoApisCtrl.CrmSelectedContact=EmptyObject;
-        $state.go('cleared');
-
-    console.log('--> SetReasonsOfConversation()');    
-    OdigoApisCtrl.ReasonsOfConversation={};
-    OdigoApisCtrl.ReasonsOfConversation.freeReasonsOfConversation={};
-    OdigoApisCtrl.ReasonsOfConversation.freeReasonsOfConversation=[
-        {
-          "label" : "Motivo Interaccion",
-          "value" : OdigoApisCtrl.CrmSelectedContact.Outcome.Motivo,
-          "order":1
-        },
-        {
-          "label" : "Ofrecido Television",
-          "value" : OdigoApisCtrl.CrmSelectedContact.Outcome.OfreTv,
-          "order":2
-        },
-        {
-          "label" : "Ofrecido factura electronica",
-          "value" : OdigoApisCtrl.CrmSelectedContact.Outcome.OfreFacElec,
-          "order":3
-        },        
-        {
-          "label" : "Ofrecido promociones",
-          "value" : OdigoApisCtrl.CrmSelectedContact.Outcome.OfrePromo,
-          "order":4
-        },                    
-        {
-          "label" : "Ofrecido segunda linea 50%",
-          "value" : OdigoApisCtrl.CrmSelectedContact.Outcome.OfreSecLine,
-          "order":5
-        },        
-        {
-          "label" : "Persona Contactada",
-          "value" : OdigoApisCtrl.CrmSelectedContact.Outcome.PerContacto,
-          "order":6
-        },                
-        {
-          "label" : "Informamos GDPR",
-          "value" : OdigoApisCtrl.CrmSelectedContact.Outcome.Gdpr,
-          "order":7
-        }
-      ];
-
-  OdigoApisCtrl.ReasonsOfConversation.reasonsOfConversation=[OdigoApisCtrl.CrmSelectedContact.Outcome.Comments];
-   
-    OdigoApisCtrl.ReasonsOfConversation.conversationNumber=OdigoApisCtrl.OdigoCallInfo.CallRef.substring(23, 24);
-    OdigoApisCtrl.ReasonsOfConversation.sessionReference=OdigoApisCtrl.OdigoCallInfo.CallRef.substring(20, 22);    
-    console.log(OdigoApisCtrl.ReasonsOfConversation);
-    var promise= OdigoApisService.ReasonsOfConversation(OdigoApisCtrl.Token,OdigoApisCtrl.OdigoCallInfo.UserLogin,'DE01',OdigoApisCtrl.OdigoCallInfo.CallRef.substring(0, 20),OdigoApisCtrl.ReasonsOfConversation);
-    promise.then(function (response) {          
-        OdigoApisCtrl.OpStatus='200';
-        console.log('Then:',response.data);          
-        console.log('<-- SetReasonsOfConversation()');
-        console.log('>>>> limpiando pantalla'); 
-        var EmptyObject={};
-        OdigoApisCtrl.CrmSelectedContact=EmptyObject;
-        $state.go('cleared');
-        console.log('<<<< limpiando pantalla');
-      })
-      .catch(function (error) {
-        console.log("Error:",error.status);        
-        OdigoApisCtrl.OpStatus=error.status;        
-        $state.go('profile');        
-        console.log('<-- SetReasonsOfConversation()');
-    });                
-  };
-
-  //ANSWER
-  OdigoApisCtrl.OdigoAnswer = function(Token){    
-    OdigoApisCtrl.OpStatus='';
-  };
 
 //###########################################################
 //#################       RUN ACTIONS      ##################
 //###########################################################
 
-//OdigoApisCtrl.getTokenFromApi();
 OdigoApisCtrl.StartSearchingContacts();
+
+OdigoApisCtrl.getTokenFromApi();
+
+//###########################################################
+//#################  TOKBOX INITIALICE  #####################
+//###########################################################
+
+function handleError(error) {
+  if (error) {
+    alert(error.message);
+  }
+}
+
+// (optional) add server code here
+
+  
+function initializeSession() {
+  var session = OT.initSession(TokBoxCredentials.apiKey, TokBoxCredentials.sessionId);
+
+  var myPublisherStyle={};
+  myPublisherStyle.audioLevelDisplayMode="off";
+
+
+  // Subscribe to a newly created stream
+  session.on('streamCreated', function(event) {
+    session.subscribe(event.stream, 'subscriber', {
+      insertMode: 'append',
+      width: '100%',
+      height: '100%',        
+      insertDefaultUI: true, 
+      showControls: false,
+      style: myPublisherStyle              
+    }, handleError);
+  });
+
+  // Create a publisher o camara espejo
+
+
+  var publisher = OT.initPublisher('publisher', {
+    insertMode: 'append',
+    width: '100%',
+    height: '100%',      
+    insertDefaultUI: true, 
+    showControls: true,
+    style: myPublisherStyle      
+  }, handleError);
+
+  // Connect to the session
+  session.connect(TokBoxCredentials.token, function(error) {
+    // If the connection is successful, initialize a publisher and publish to the session
+    if (error) {
+      handleError(error);
+    } else {
+      session.publish(publisher, handleError);
+    }
+  });
+}
+
 
 
 }//FIN CONTROLER
