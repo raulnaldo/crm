@@ -10,7 +10,7 @@ angular.module('OdigoApisModule', ['ui.router'])
 .constant('DataPath', 'https://raulnaldo.github.io/crm/data//')
 .constant('DataPathLocal', 'https://localhost:3000/data/')
 .constant('DataPathGit', 'https://raulnaldo.github.io/crm/data/')
-.constant('HerokuBackEnd', 'https://tokboxbackend.herokuapp.com/')
+.constant('HerokuBackEnd', 'https://seniorbackend.herokuapp.com/')
 
 
 
