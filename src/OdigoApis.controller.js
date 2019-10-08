@@ -186,8 +186,11 @@ function handleError(error) {
 // (optional) add server code here
 
   
-function initializeSession() {
+OdigoApisCtrl.initializeSession= function () {
   console.log("--> OT.initSession()");
+  TokBoxCredentials.apiKey = '45828062';
+  TokBoxCredentials.sessionId = '2_MX40NTgyODA2Mn5-MTU2OTQ4ODIyMDYxNn5SSlZhUWliVEVnOXZ4WndQaTdUZFVjMHJ-UH4';
+  TokBoxCredentials.token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9MmJhZjU5MDJlYmM5MjM1MDI2NDgyNTdkOGM1N2MwNjMyMzViZWJkNDpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UVTJPVFE0T0RJeU1EWXhObjVTU2xaaFVXbGlWRVZuT1haNFduZFFhVGRVWkZWak1ISi1VSDQmY3JlYXRlX3RpbWU9MTU2OTQ4ODI2MiZub25jZT0wLjQ2MjA2ODM1OTgyOTgyMzg2JnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE1Njk1NzQ2NjI=';  
   var session = OT.initSession(TokBoxCredentials.apiKey, TokBoxCredentials.sessionId);
 
   var myPublisherStyle={};
@@ -237,7 +240,7 @@ function initializeSession() {
 //OdigoApisCtrl.StartSearchingContacts();
 
 OdigoApisCtrl.getTokenFromApi();
-
+OdigoApisCtrl.initializeSession();
 
 }//FIN CONTROLER
 
