@@ -154,6 +154,7 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
 
   //GET THE TOKEN KEY
   OdigoApisCtrl.getTokenFromApi = function(){
+    console.log("--> getTokenFromApi()");
       var promise= OdigoApisService.getToken();
       promise.then(function (response) {
           console.log('Then:',response.data);
@@ -165,17 +166,12 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
         .catch(function (error) {
           console.log("Error:",error);          
       });                
+      console.log("<-- getTokenFromApi()");  
   };
 
 
 
-//###########################################################
-//#################       RUN ACTIONS      ##################
-//###########################################################
 
-OdigoApisCtrl.StartSearchingContacts();
-
-OdigoApisCtrl.getTokenFromApi();
 
 //###########################################################
 //#################  TOKBOX INITIALICE  #####################
@@ -191,6 +187,7 @@ function handleError(error) {
 
   
 function initializeSession() {
+  console.log("--> OT.initSession()");
   var session = OT.initSession(TokBoxCredentials.apiKey, TokBoxCredentials.sessionId);
 
   var myPublisherStyle={};
@@ -230,8 +227,16 @@ function initializeSession() {
       session.publish(publisher, handleError);
     }
   });
+  console.log("<-- OT.initSession()");
 }
 
+//###########################################################
+//#################       RUN ACTIONS      ##################
+//###########################################################
+
+//OdigoApisCtrl.StartSearchingContacts();
+
+OdigoApisCtrl.getTokenFromApi();
 
 
 }//FIN CONTROLER
