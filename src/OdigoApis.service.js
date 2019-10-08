@@ -84,6 +84,7 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
 //GET THE TOKEN KEY
 //*****************************
   service.getToken = function () {
+    console.log(">>> service.getToken()")
     var MyToken={};
     var response = $http({
       method: "GET",
@@ -91,6 +92,7 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
        },      
       url: (HerokuBackEnd + 'session')
     });
+    console.log("<<< service.getToken()")
     return response;
   };  
 

@@ -164,9 +164,9 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
           initializeSession();
         })
         .catch(function (error) {
-          console.log("Error:",error);          
+          console.error("Error:",error.message);
       });                
-      console.log("<-- getTokenFromApi()");  
+    console.log("<-- getTokenFromApi()");  
   };
 
 
