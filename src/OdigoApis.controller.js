@@ -161,7 +161,7 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
           TokBoxCredentials.apiKey=response.data.apiKey;
           TokBoxCredentials.sessionId=response.data.sessionId;
           TokBoxCredentials.token=response.data.token;
-          initializeSession();
+          OdigoApisCtrl.initializeSession();
         })
         .catch(function (error) {
           console.error("Error:",error.message);
@@ -240,7 +240,7 @@ OdigoApisCtrl.initializeSession= function () {
 //OdigoApisCtrl.StartSearchingContacts();
 
 OdigoApisCtrl.getTokenFromApi();
-OdigoApisCtrl.initializeSession();
+
 
 }//FIN CONTROLER
 
