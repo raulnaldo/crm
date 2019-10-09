@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html  ng-app='OdigoApisModule' style="height: auto; min-height: 100%;">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="./style/senior.css" rel="stylesheet" type="text/css">
+  <title>Senior Telecom</title>  
+</head>
+<body>
+<div ng-controller="OdigoApisController as Odigo" style="height: 100%; width: 100%;">
+  <div id="subscriber"></div>
+  <div id="publisher"></div>  
+</div>
+    <!-- Libs -->    
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="lib/angular.min.js"></script>    
+    <script src="lib/angular-ui-router.min.js"></script>
+    <!--OdigoApis Module -->
+    <script src="src/OdigoApis.module.js"></script>
+    <script src="src/loading/loading.component.js"></script>
+    <script src="src/loading/loading.interceptor.js"></script>    
+    <!--OdigoApis Controller -->
+    <script src="src/OdigoApis.controller.js"></script>
+    <!--OdigoApis Service -->
+    <script src="src/OdigoApis.service.js"></script>
+    <!--OPENTOK -->
+    <script src="https://static.opentok.com/v2/js/opentok.js" charset="utf-8"></script>    
+</body>
+</html>
