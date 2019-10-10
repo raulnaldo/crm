@@ -216,6 +216,7 @@ OdigoApisCtrl.initializeSession= function () {
 
   session.on('connectionDestroyed', function(event) {    
     console.log("<***> connectionDestroyed()");
+    OdigoApisCtrl.loadingImage=true;
     session.unsubscribe(activeStream);
     session.unpublish(activePublish,handleError);
   });
