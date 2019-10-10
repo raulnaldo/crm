@@ -229,7 +229,7 @@ OdigoApisCtrl.initializeSession= function () {
   session.on('streamCreated', function(event) {    
     activeStream = event.stream;
     console.log("--> session.subscribe()");
-    OdigoApisCtrl.loadingImage=false;
+    //OdigoApisCtrl.loadingImage=false;
     
     session.subscribe(event.stream, 'subscriber', {
       insertMode: 'append',
