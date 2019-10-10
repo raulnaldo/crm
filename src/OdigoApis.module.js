@@ -16,10 +16,10 @@ angular.module('OdigoApisModule', ['ui.router'])
 
 .config(config)
 .config(RoutesConfig);
-
+//
 config.$inject = ['$httpProvider'];
 function config($httpProvider) {
-  $httpProvider.interceptors.push('loadingHttpInterceptor');
+//  $httpProvider.interceptors.push('loadingHttpInterceptor');
 }
 
 RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];

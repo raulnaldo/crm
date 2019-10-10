@@ -12,7 +12,10 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
 
   var TokBoxCredentials = {};
 
-  OdigoApisCtrl.showLoading=true;
+  var activeStream = {};
+  var activePublish = {};
+  OdigoApisCtrl.loadingImage=true;
+
 
 //###########################################################
 //#################       UTILS            ##################
@@ -193,14 +196,39 @@ OdigoApisCtrl.initializeSession= function () {
   //TokBoxCredentials.apiKey = '45828062';
   //TokBoxCredentials.sessionId = '2_MX40NTgyODA2Mn5-MTU2OTQ4ODIyMDYxNn5SSlZhUWliVEVnOXZ4WndQaTdUZFVjMHJ-UH4';
   //TokBoxCredentials.token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9MmJhZjU5MDJlYmM5MjM1MDI2NDgyNTdkOGM1N2MwNjMyMzViZWJkNDpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UVTJPVFE0T0RJeU1EWXhObjVTU2xaaFVXbGlWRVZuT1haNFduZFFhVGRVWkZWak1ISi1VSDQmY3JlYXRlX3RpbWU9MTU2OTQ4ODI2MiZub25jZT0wLjQ2MjA2ODM1OTgyOTgyMzg2JnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE1Njk1NzQ2NjI=';  
+  
+  
   var session = OT.initSession(TokBoxCredentials.apiKey, TokBoxCredentials.sessionId);
 
+  console.log("  >> capabilities:"+ session.capabilities);
+  
   var myPublisherStyle={};
   myPublisherStyle.audioLevelDisplayMode="on";
-
-  OdigoApisCtrl.showLoading=false;
+  
+  
   // Subscribe to a newly created stream
-  session.on('streamCreated', function(event) {
+  console.log("--> session.on('streamCreated')");
+
+
+  session.on('streamDestroyed', function(event) {    
+    console.log("<***> streamDestroyed()");
+  });
+
+  session.on('connectionDestroyed', function(event) {    
+    console.log("<***> connectionDestroyed()");
+    session.unsubscribe(activeStream);
+    session.unpublish(activePublish,handleError);
+  });
+
+  session.on('sessionDisconnected', function(event) {    
+    console.log("<***> sessionDisconnected()");
+  });
+  
+
+  session.on('streamCreated', function(event) {    
+    activeStream = event.stream;
+    console.log("--> session.subscribe()");
+    OdigoApisCtrl.loadingImage=false;
     
     session.subscribe(event.stream, 'subscriber', {
       insertMode: 'append',
@@ -210,12 +238,17 @@ OdigoApisCtrl.initializeSession= function () {
       showControls: false,
       style: myPublisherStyle              
     }, handleError);
+
+    console.log("<-- session.subscribe()");
   });
+  console.log("<-- session.on('streamCreated')");
+
+  
 
   // Create a publisher o camara espejo
 
-
-  var publisher = OT.initPublisher('publisher', {
+  console.log("--> OT.initPublisher()");
+  activePublish = OT.initPublisher('publisher', {
     insertMode: 'append',
     width: '100%',
     height: '100%',      
@@ -224,14 +257,19 @@ OdigoApisCtrl.initializeSession= function () {
     style: myPublisherStyle      
   }, handleError);
 
+  console.log("<-- OT.initPublisher()");
+
   // Connect to the session
-  session.connect(TokBoxCredentials.token, function(error) {
+  session.connect(TokBoxCredentials.token, function(error) {    
     // If the connection is successful, initialize a publisher and publish to the session
+    console.log("--> session.connect:",session.connection);    
     if (error) {
       handleError(error);
     } else {
-      session.publish(publisher, handleError);
+      session.publish(publisher, handleError);  
+      
     }
+    console.log("<-- session.connect");
   });
   console.log("<-- OT.initSession()");
 }
