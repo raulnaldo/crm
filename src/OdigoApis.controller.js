@@ -12,6 +12,8 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
 
   var TokBoxCredentials = {};
 
+  OdigoApisCtrl.showLoading=true;
+
 //###########################################################
 //#################       UTILS            ##################
 //###########################################################
@@ -194,11 +196,12 @@ OdigoApisCtrl.initializeSession= function () {
   var session = OT.initSession(TokBoxCredentials.apiKey, TokBoxCredentials.sessionId);
 
   var myPublisherStyle={};
-  myPublisherStyle.audioLevelDisplayMode="off";
+  myPublisherStyle.audioLevelDisplayMode="on";
 
-
+  OdigoApisCtrl.showLoading=false;
   // Subscribe to a newly created stream
   session.on('streamCreated', function(event) {
+    
     session.subscribe(event.stream, 'subscriber', {
       insertMode: 'append',
       width: '100%',

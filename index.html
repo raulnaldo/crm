@@ -7,8 +7,10 @@
   <title>Senior Telecom</title>  
 </head>
 <body> 
-<div class="videos" ng-controller="OdigoApisController as Odigo" style="height: 100%; width: 100%;">
-  <div id="subscriber"></div>
+<div class="videos" ng-controller="OdigoApisController as Odigo" style="height: 100%; width: 100%;">    
+  <div id="subscriber">
+      <img ng-model="loadingImage" src="./images/Loading.gif" ng-show="Odigo.showLoading">
+  </div>
   <div id="publisher"></div>  
 </div>
     <!-- Libs -->    
