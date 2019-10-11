@@ -272,7 +272,7 @@ OdigoApisCtrl.initializeSession= function () {
     width: '100%',
     height: '100%',      
     resolution: '1280x720',
-    //frameRate: 15, A partir de 30 no accede al control de chromacam
+    frameRate: 20,
     insertDefaultUI: true,
     fitMode: "contain",
     style: myPublisherStyle      
