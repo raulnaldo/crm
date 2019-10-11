@@ -271,8 +271,9 @@ OdigoApisCtrl.initializeSession= function () {
     insertMode: 'append',
     width: '100%',
     height: '100%',      
-    resolution: '1280x720',
-    frameRate: 29,
+    //resolution: '1280x720',
+    resolution: '320x240',
+    //frameRate: 15,
     insertDefaultUI: true,
     fitMode: "contain",
     style: myPublisherStyle      
