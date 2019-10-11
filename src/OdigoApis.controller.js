@@ -206,7 +206,22 @@ OdigoApisCtrl.initializeSession= function () {
   console.log("  >> capabilities:"+ session.capabilities);
   
   var myPublisherStyle={};
+  var mySubscriberStyle={};
+  myPublisherStyle.audioBlockedDisplayMode= "off";
   myPublisherStyle.audioLevelDisplayMode="on";
+  myPublisherStyle.buttonDisplayMode="auto";    
+  //myPublisherStyle.videoDisabledDisplayMode= "on";
+  myPublisherStyle.nameDisplayMode= "auto";
+  
+
+  mySubscriberStyle.audioBlockedDisplayMode= "off";
+  mySubscriberStyle.audioLevelDisplayMode="on";
+  mySubscriberStyle.buttonDisplayMode="auto";  
+  mySubscriberStyle.videoDisabledDisplayMode= "auto";  
+  mySubscriberStyle.nameDisplayMode= "auto";
+  
+  
+  
   
   
   // Subscribe to a newly created stream
@@ -240,7 +255,9 @@ OdigoApisCtrl.initializeSession= function () {
       height: '100%',        
       insertDefaultUI: true, 
       showControls: false,
-      style: myPublisherStyle              
+      fitMode: "contain",
+      testNetwork: true,
+      style: mySubscriberStyle              
     }, handleError);
 
     console.log("<-- session.subscribe()");
@@ -260,6 +277,7 @@ OdigoApisCtrl.initializeSession= function () {
     frameRate: 30,
     insertDefaultUI: true, 
     showControls: true,
+    fitMode: "contain",
     style: myPublisherStyle      
   }, handleError);
 
