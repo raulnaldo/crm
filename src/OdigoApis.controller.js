@@ -251,10 +251,10 @@ OdigoApisCtrl.initializeSession= function () {
     
     session.subscribe(event.stream, 'subscriber', {
       insertMode: 'append',
-      width: '100%',
-      height: '100%',        
+      //width: '100%',
+      //height: '100%',        
       insertDefaultUI: true, 
-      showControls: true, 
+      showControls: false, 
       fitMode: "contain",
       testNetwork: true,
       style: mySubscriberStyle              
@@ -276,7 +276,7 @@ OdigoApisCtrl.initializeSession= function () {
     resolution: '1280x720',
     frameRate: 30,
     insertDefaultUI: true, 
-    showControls: true,
+    showControls: false,
     fitMode: "contain",
     style: myPublisherStyle      
   }, handleError);
