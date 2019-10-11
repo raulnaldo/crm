@@ -254,7 +254,7 @@ OdigoApisCtrl.initializeSession= function () {
       //width: '100%',
       //height: '100%',        
       insertDefaultUI: true, 
-      showControls: false, 
+      showControls: true, 
       fitMode: "contain",
       testNetwork: true,
       style: mySubscriberStyle              
@@ -270,13 +270,13 @@ OdigoApisCtrl.initializeSession= function () {
 
   console.log("--> OT.initPublisher()");
   activePublish = OT.initPublisher('publisher', {
+    showControls: true,
     insertMode: 'append',
-    width: '100%',
-    height: '100%',      
+    //width: '100%',
+    //height: '100%',      
     resolution: '1280x720',
     frameRate: 30,
-    insertDefaultUI: true, 
-    showControls: false,
+    insertDefaultUI: true,
     fitMode: "contain",
     style: myPublisherStyle      
   }, handleError);
