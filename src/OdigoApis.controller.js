@@ -272,7 +272,7 @@ OdigoApisCtrl.initializeSession= function () {
     width: '100%',
     height: '100%',      
     //resolution: '1280x720',
-    resolution: '320x240',
+    resolution: '1920x1080',
     //frameRate: 15,
     insertDefaultUI: true,
     fitMode: "contain",
