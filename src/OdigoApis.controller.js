@@ -186,6 +186,9 @@ function handleError(error) {
   if (error) {
     alert(error.message);
   }
+  else{
+    console.log("<<<<< Hadled Received >>>>>")
+  }
 }
 
 // (optional) add server code here
@@ -229,7 +232,7 @@ OdigoApisCtrl.initializeSession= function () {
   session.on('streamCreated', function(event) {    
     activeStream = event.stream;
     console.log("--> session.subscribe()");
-    //OdigoApisCtrl.loadingImage=false;
+    OdigoApisCtrl.loadingImage=false;
     
     session.subscribe(event.stream, 'subscriber', {
       insertMode: 'append',
@@ -253,6 +256,8 @@ OdigoApisCtrl.initializeSession= function () {
     insertMode: 'append',
     width: '100%',
     height: '100%',      
+    resolution: '1280x720',
+    frameRate: 30,
     insertDefaultUI: true, 
     showControls: true,
     style: myPublisherStyle      
