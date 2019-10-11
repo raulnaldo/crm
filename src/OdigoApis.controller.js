@@ -254,7 +254,7 @@ OdigoApisCtrl.initializeSession= function () {
       width: '100%',
       height: '100%',        
       insertDefaultUI: true, 
-      showControls: false,
+      showControls: true, 
       fitMode: "contain",
       testNetwork: true,
       style: mySubscriberStyle              
