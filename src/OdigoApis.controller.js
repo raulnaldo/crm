@@ -272,8 +272,8 @@ OdigoApisCtrl.initializeSession= function () {
   activePublish = OT.initPublisher('publisher', {
     showControls: true,
     insertMode: 'append',
-    //width: '100%',
-    //height: '100%',      
+    width: '100%',
+    height: '100%',      
     resolution: '1280x720',
     frameRate: 30,
     insertDefaultUI: true,
@@ -290,7 +290,7 @@ OdigoApisCtrl.initializeSession= function () {
     if (error) {
       handleError(error);
     } else {
-      session.publish(publisher, handleError);  
+      session.publish(activePublish, handleError);  
       
     }
     console.log("<-- session.connect");
