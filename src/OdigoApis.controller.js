@@ -218,10 +218,7 @@ OdigoApisCtrl.initializeSession= function () {
   mySubscriberStyle.audioLevelDisplayMode="on";
   mySubscriberStyle.buttonDisplayMode="auto";  
   mySubscriberStyle.videoDisabledDisplayMode= "auto";  
-  mySubscriberStyle.nameDisplayMode= "auto";
-  
-  
-  
+  mySubscriberStyle.nameDisplayMode= "auto";  
   
   
   // Subscribe to a newly created stream
@@ -275,7 +272,7 @@ OdigoApisCtrl.initializeSession= function () {
     width: '100%',
     height: '100%',      
     resolution: '1280x720',
-    frameRate: 30,
+    //frameRate: 15, A partir de 30 no accede al control de chromacam
     insertDefaultUI: true,
     fitMode: "contain",
     style: myPublisherStyle      
@@ -290,8 +287,7 @@ OdigoApisCtrl.initializeSession= function () {
     if (error) {
       handleError(error);
     } else {
-      session.publish(activePublish, handleError);  
-      
+      session.publish(activePublish, handleError);      
     }
     console.log("<-- session.connect");
   });
