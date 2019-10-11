@@ -251,8 +251,8 @@ OdigoApisCtrl.initializeSession= function () {
     
     session.subscribe(event.stream, 'subscriber', {
       insertMode: 'append',
-      //width: '100%',
-      //height: '100%',        
+      width: '100%',
+      height: '100%',
       insertDefaultUI: true, 
       showControls: true, 
       fitMode: "contain",
