@@ -187,7 +187,7 @@ function handleError(error) {
     alert(error.message);
   }
   else{
-    console.log("<<<<< Hadled Received >>>>>")
+    console.log("<<<<< handleError Received >>>>>",error)
   }
 }
 
@@ -222,7 +222,7 @@ OdigoApisCtrl.initializeSession= function () {
   
   
   // Subscribe to a newly created stream
-  console.log("--> session.on('streamCreated')");
+  
 
 
   session.on('streamDestroyed', function(event) {    
@@ -232,8 +232,8 @@ OdigoApisCtrl.initializeSession= function () {
   session.on('connectionDestroyed', function(event) {    
     console.log("<***> connectionDestroyed()");
     OdigoApisCtrl.loadingImage=true;
-    session.unsubscribe(activeStream);
-    session.unpublish(activePublish,handleError);
+    //session.unsubscribe(activeStream);
+    //session.unpublish(activePublish,handleError);
   });
 
   session.on('sessionDisconnected', function(event) {    
@@ -243,9 +243,9 @@ OdigoApisCtrl.initializeSession= function () {
 
   session.on('streamCreated', function(event) {    
     activeStream = event.stream;
-    console.log("--> session.subscribe()");
+    console.log("--> session.on(streamCreated)");
     OdigoApisCtrl.loadingImage=false;
-    
+    console.log("--> session.subscribe()");
     session.subscribe(event.stream, 'subscriber', {
       insertMode: 'append',
       width: '100%',
@@ -272,7 +272,7 @@ OdigoApisCtrl.initializeSession= function () {
     width: '100%',
     height: '100%',      
     resolution: '1280x720',    
-    frameRate: 20,
+    frameRate: 15,
     insertDefaultUI: true,
     fitMode: "contain",
     style: myPublisherStyle      
