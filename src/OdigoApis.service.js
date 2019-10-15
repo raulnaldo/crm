@@ -11,7 +11,7 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
 
 
 
-  service.SelectContactById = function(pId,pContacts){
+  service.____SelectContactById = function(pId,pContacts){
     console.log(">>>> service.SelectContactById()");
     console.log("---->>>> pId:",pId);
     console.log("---->>>> pContacts:",pContacts);  
@@ -21,6 +21,22 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
     console.log("  -->>>> Contact Index:",IndexPosition);  
     console.log("<<<< service.SelectContactById()");  
     return pContacts[IndexPosition];
+  }
+
+  
+  service.SelectContactById = function(pId,pContacts){
+    console.log(">>>> service.SelectContactById()");
+    console.log("---->>>> pId:",pId);
+    console.log(">>>> service.getContactsByJson()");        
+    var response = $http({
+      method: "GET",
+      headers: {
+         'Content-Type': 'application/json'
+       },
+      url: (HerokuBackEnd +'customerinfobyphone/'+pId)
+    });
+    console.log("<<<< service.getContactsByJson()");            
+    return response;
   }
 
   service.SelectContactLastName = function(pLastName,pContacts){

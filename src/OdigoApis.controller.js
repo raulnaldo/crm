@@ -126,21 +126,24 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
   OdigoApisCtrl.SearchContact = function(){
     var EmptyObject={};
     OdigoApisCtrl.CrmSelectedContact=EmptyObject;
-    OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactById(OdigoApisCtrl.SearchId,OdigoApisCtrl.CrmContacts);    
-    if (OdigoApisCtrl.CrmSelectedContact==undefined){
-      OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactLastName(OdigoApisCtrl.SearchId,OdigoApisCtrl.CrmContacts);    
-      if (OdigoApisCtrl.CrmSelectedContact==undefined){
-        OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactName(OdigoApisCtrl.SearchId,OdigoApisCtrl.CrmContacts);
-      }
-    }     
-    if (OdigoApisCtrl.IsValidObject(OdigoApisCtrl.CrmSelectedContact)){
-      OdigoApisCtrl.LastSearchSearchId=null;
-      $state.go('profile');
-    }
-    else{
-      OdigoApisCtrl.LastSearchSearchId=OdigoApisCtrl.SearchId;
-      $state.go('notfound'); 
-    }
+    
+    var promise= OdigoApisService.SelectContactById(OdigoApisCtrl.SearchId,OdigoApisCtrl.CrmContacts);
+    promise.then(function (response) {
+        console.log('Contact Found:',response.data);
+        OdigoApisCtrl.CrmSelectedContact=response.data;
+        if (OdigoApisCtrl.IsValidObject(OdigoApisCtrl.CrmSelectedContact)){
+          OdigoApisCtrl.LastSearchSearchId=null;
+          $state.go('profile');
+        }
+        else{
+          OdigoApisCtrl.LastSearchSearchId=OdigoApisCtrl.SearchId;
+          $state.go('notfound'); 
+        }        
+      })
+      .catch(function (error) {
+        console.error("Error:",error.message);
+        $state.go('notfound'); 
+    });    
   }; 
  
 
@@ -193,7 +196,12 @@ function handleError(error) {
 
 // (optional) add server code here
 
+
+OdigoApisCtrl.ChangeCamera= function () {
+  activePublish.cycleVideo().then(console.log);
   
+};
+
 OdigoApisCtrl.initializeSession= function () {
   console.log("--> OT.initSession()");
   //TokBoxCredentials.apiKey = '45828062';
