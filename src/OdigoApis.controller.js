@@ -73,12 +73,13 @@ function SeniorApisController($location,OdigoApisService,userUid,appUid,$scope, 
 
   //Para pruebas, asignamos por defecto un Id y un nombre de agente.
   if (!SeniorApisCtrl.IsValidObject(SeniorApisCtrl.OdigoCallInfo.CustomerCode)){
-    //SeniorApisCtrl.OdigoCallInfo.CustomerCode="1262";
+    SeniorApisCtrl.OdigoCallInfo.CustomerCode="699479614";    
     $state.go('notfound'); 
   }
   if (SeniorApisCtrl.OdigoCallInfo.UserLogin==undefined){
     SeniorApisCtrl.OdigoCallInfo.UserLogin="agent176ddi@demo.com";
   }
+  SeniorApisCtrl.SearchId=SeniorApisCtrl.OdigoCallInfo.CustomerCode;
 
   //Obtenemos a través de Ajax  el array de agentes que tenemos definidos.
   console.log('  --> OdigoApisService.getAgentProperties()');
@@ -218,8 +219,12 @@ SeniorApisCtrl.initializeSession= function () {
   //TokBoxCredentials.sessionId = '2_MX40NTgyODA2Mn5-MTU2OTQ4ODIyMDYxNn5SSlZhUWliVEVnOXZ4WndQaTdUZFVjMHJ-UH4';
   //TokBoxCredentials.token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9MmJhZjU5MDJlYmM5MjM1MDI2NDgyNTdkOGM1N2MwNjMyMzViZWJkNDpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UVTJPVFE0T0RJeU1EWXhObjVTU2xaaFVXbGlWRVZuT1haNFduZFFhVGRVWkZWak1ISi1VSDQmY3JlYXRlX3RpbWU9MTU2OTQ4ODI2MiZub25jZT0wLjQ2MjA2ODM1OTgyOTgyMzg2JnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE1Njk1NzQ2NjI=';  
   
-  
-  var session = OT.initSession(TokBoxCredentials.apiKey, TokBoxCredentials.sessionId);
+  if (SeniorApisCtrl.IsValidObject(OT)){
+    var session = OT.initSession(TokBoxCredentials.apiKey, TokBoxCredentials.sessionId);
+  }
+  else{
+      console.log("OT is not valid Object");
+  }
 
   console.log("  >> capabilities:"+ session.capabilities);
   
@@ -319,7 +324,7 @@ SeniorApisCtrl.initializeSession= function () {
 //SeniorApisCtrl.StartSearchingContacts();
 
 SeniorApisCtrl.getTokenFromApi();
-
+SeniorApisCtrl.SearchContact();
 
 }//FIN CONTROLER
 
