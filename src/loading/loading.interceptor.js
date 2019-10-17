@@ -1,7 +1,7 @@
 (function() {
 "use strict";
 
-angular.module('OdigoApisModule')
+angular.module('SeniorApisModule')
 .factory('loadingHttpInterceptor', LoadingHttpInterceptor);
 
 LoadingHttpInterceptor.$inject = ['$rootScope', '$q'];
