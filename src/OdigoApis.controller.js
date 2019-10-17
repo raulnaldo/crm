@@ -2,26 +2,26 @@
 (function () {
 "use strict";
 
-angular.module('OdigoApisModule')
-.controller('OdigoApisController', OdigoApisController);
+angular.module('SeniorApisModule')
+.controller('SeniorApisController', SeniorApisController);
 
-OdigoApisController.$inject = ['$location','OdigoApisService','userUid','appUid','$scope','$sce','$window','$state'];
-function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $sce,$window,$state) {  
+SeniorApisController.$inject = ['$location','OdigoApisService','userUid','appUid','$scope','$sce','$window','$state'];
+function SeniorApisController($location,OdigoApisService,userUid,appUid,$scope, $sce,$window,$state) {  
 
-  var OdigoApisCtrl = this;
+  var SeniorApisCtrl = this;
 
   var TokBoxCredentials = {};
 
   var activeStream = {};
   var activePublish = {};
-  OdigoApisCtrl.loadingImage=true;
+  SeniorApisCtrl.loadingImage=true;
 
-
+  
 //###########################################################
 //#################       UTILS            ##################
 //###########################################################
 
-  OdigoApisCtrl.OdigoFormatDate = function formatDate(pDate){
+  SeniorApisCtrl.OdigoFormatDate = function formatDate(pDate){
     var date = new Date(pDate);
     var monthNames = [
       "Enero", "Febrero", "Marzo",
@@ -37,7 +37,7 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
     return day + ' ' + monthNames[monthIndex] + ' ' + year;
   }
 
-  OdigoApisCtrl.OdigoFormatDateHour = function OdigoFormatDateHour(pDate){
+  SeniorApisCtrl.OdigoFormatDateHour = function OdigoFormatDateHour(pDate){
     var date = new Date(pDate);
         
     var currentHours = date.getHours();
@@ -52,7 +52,7 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
     return currentHours + ':' + currentMins + ':' + currentSecs;
   }
 
-  OdigoApisCtrl.IsValidObject = function IsValidObject(pObject){
+  SeniorApisCtrl.IsValidObject = function IsValidObject(pObject){
     if(typeof pObject !== "undefined") {
       return true;
     }
@@ -65,19 +65,19 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
 //###########################################################
 
   //Obtenemos la informacion proporcionada en la URL queryString
-  OdigoApisCtrl.OdigoCallInfo=$location.search();  
-  console.log('--> OdigoApisController Init()'); 
+  SeniorApisCtrl.OdigoCallInfo=$location.search();  
+  console.log('--> SeniorApisController Init()'); 
   console.log('  --> Location SearchData();',$location.search());
-  console.log('      OdigoApisCtrl.OdigoCallInfo();',OdigoApisCtrl.OdigoCallInfo);
+  console.log('      SeniorApisCtrl.OdigoCallInfo();',SeniorApisCtrl.OdigoCallInfo);
   console.log('  <-- Location SearchData()');
 
   //Para pruebas, asignamos por defecto un Id y un nombre de agente.
-  if (!OdigoApisCtrl.IsValidObject(OdigoApisCtrl.OdigoCallInfo.CustomerCode)){
-    //OdigoApisCtrl.OdigoCallInfo.CustomerCode="1262";
+  if (!SeniorApisCtrl.IsValidObject(SeniorApisCtrl.OdigoCallInfo.CustomerCode)){
+    //SeniorApisCtrl.OdigoCallInfo.CustomerCode="1262";
     $state.go('notfound'); 
   }
-  if (OdigoApisCtrl.OdigoCallInfo.UserLogin==undefined){
-    OdigoApisCtrl.OdigoCallInfo.UserLogin="agent176ddi@demo.com";
+  if (SeniorApisCtrl.OdigoCallInfo.UserLogin==undefined){
+    SeniorApisCtrl.OdigoCallInfo.UserLogin="agent176ddi@demo.com";
   }
 
   //Obtenemos a través de Ajax  el array de agentes que tenemos definidos.
@@ -85,36 +85,36 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
   var promiseAgents= OdigoApisService.getAgentsByJson();
   promiseAgents.then(function (response) {
       console.log('<<<< Retorno de Agents:',response.data.agents);
-      OdigoApisCtrl.Agent= response.data.agents[response.data.agents.findIndex(x => x.Login === OdigoApisCtrl.OdigoCallInfo.UserLogin)];
-      console.log('  <-- OdigoApisService.getAgentProperties:',OdigoApisCtrl.Agent);      
+      SeniorApisCtrl.Agent= response.data.agents[response.data.agents.findIndex(x => x.Login === SeniorApisCtrl.OdigoCallInfo.UserLogin)];
+      console.log('  <-- OdigoApisService.getAgentProperties:',SeniorApisCtrl.Agent);      
     })
     .catch(function (error) {
       console.log("Error:",error);      
   });
   
  //Obtenemos a través de Ajax  el array de contactos que tenemos definidos.
- OdigoApisCtrl.StartSearchingContacts = function(){
+ SeniorApisCtrl.StartSearchingContacts = function(){
     console.log("  --> Filling Contacts");
     var promise= OdigoApisService.getContactsByJson();
     promise
     .then(
       function (response) {
         console.log('Then:',response.data);      
-        OdigoApisCtrl.CrmContacts=response.data.contacts;
-        console.log("  --> SelectContactById:",OdigoApisCtrl.OdigoCallInfo.CustomerCode);
-        OdigoApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactById(OdigoApisCtrl.OdigoCallInfo.CustomerCode,OdigoApisCtrl.CrmContacts);
-        console.log("  <-- SelectContactById:",OdigoApisCtrl.CrmSelectedContact); 
-        if (OdigoApisCtrl.CrmSelectedContact.Id.IsValidObject){
-          OdigoApisCtrl.OdigoGetInteractionsByCustId(OdigoApisCtrl.CrmSelectedContact.Id);
+        SeniorApisCtrl.CrmContacts=response.data.contacts;
+        console.log("  --> SelectContactById:",SeniorApisCtrl.OdigoCallInfo.CustomerCode);
+        SeniorApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactById(SeniorApisCtrl.OdigoCallInfo.CustomerCode,SeniorApisCtrl.CrmContacts);
+        console.log("  <-- SelectContactById:",SeniorApisCtrl.CrmSelectedContact); 
+        if (SeniorApisCtrl.CrmSelectedContact.Id.IsValidObject){
+          SeniorApisCtrl.OdigoGetInteractionsByCustId(SeniorApisCtrl.CrmSelectedContact.Id);
         }
       })
       .catch(
         function (error) {
         console.log("Error:",error);      
     });
-    console.log("  <-- Filling Contacts",OdigoApisCtrl.CrmContacts);   
+    console.log("  <-- Filling Contacts",SeniorApisCtrl.CrmContacts);   
   }
-  OdigoApisCtrl.OrganizeInteractions = function(pInteractions){
+  SeniorApisCtrl.OrganizeInteractions = function(pInteractions){
       console.log("  --> OrganizeInteractions:",pInteractions);
       
       console.log("  <-- OrganizeInteractions");   
@@ -122,21 +122,31 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
   
 //********************************
 //FUNCIONES DE CRM
-//********************************    
-  OdigoApisCtrl.SearchContact = function(){
+//******************************** 
+  SeniorApisCtrl.trustSrc = function(src) {
+    return $sce.trustAsResourceUrl(src);
+  }  
+  SeniorApisCtrl.SetCrmDynamicsURL = function(){
+    SeniorApisCtrl.CurrentDynamicsUrl=SeniorApisCtrl.CrmSelectedContact.DynamicsURL;
+  }   
+  SeniorApisCtrl.SearchContact = function(){
     var EmptyObject={};
-    OdigoApisCtrl.CrmSelectedContact=EmptyObject;
+    SeniorApisCtrl.CrmSelectedContact=EmptyObject;
     
-    var promise= OdigoApisService.SelectContactById(OdigoApisCtrl.SearchId,OdigoApisCtrl.CrmContacts);
+    var promise= OdigoApisService.SelectContactById(SeniorApisCtrl.SearchId,SeniorApisCtrl.CrmContacts);
     promise.then(function (response) {
         console.log('Contact Found:',response.data);
-        OdigoApisCtrl.CrmSelectedContact=response.data;
-        if (OdigoApisCtrl.IsValidObject(OdigoApisCtrl.CrmSelectedContact)){
-          OdigoApisCtrl.LastSearchSearchId=null;
+        SeniorApisCtrl.CrmSelectedContact=response.data;
+        if (SeniorApisCtrl.IsValidObject(SeniorApisCtrl.CrmSelectedContact)){
+          SeniorApisCtrl.LastSearchSearchId=null;
+          SeniorApisCtrl.CrmSelectedContact.DynamicsURL='https://raultests.crm4.dynamics.com/main.aspx?appid=aef19262-6ded-e911-a819-000d3a4a16f3&pagetype=entityrecord&etn=contact&id='+ SeniorApisCtrl.CrmSelectedContact.DynamicsId;
+          //SeniorApisCtrl.CrmSelectedContact.DynamicsURL='https://raultests.crm4.dynamics.com/main.aspx?appid=aef19262-6ded-e911-a819-000d3a4a16f3&pagetype=entityrecord&etn=contact&id=0c85e618-4fef-e911-a812-000d3a24c29d'
+          //alert(SeniorApisCtrl.CrmSelectedContact.DynamicsURL);
+          SeniorApisCtrl.SetCrmDynamicsURL();
           $state.go('profile');
         }
         else{
-          OdigoApisCtrl.LastSearchSearchId=OdigoApisCtrl.SearchId;
+          SeniorApisCtrl.LastSearchSearchId=SeniorApisCtrl.SearchId;
           $state.go('notfound'); 
         }        
       })
@@ -147,10 +157,10 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
   }; 
  
 
-  OdigoApisCtrl.GetTotalPrice = function(){
+  SeniorApisCtrl.GetTotalPrice = function(){
     var total = 0;
-    for(var i = 0; i < OdigoApisCtrl.CrmSelectedContact.Products.length; i++){
-        var product = OdigoApisCtrl.CrmSelectedContact.Products[i];
+    for(var i = 0; i < SeniorApisCtrl.CrmSelectedContact.Products.length; i++){
+        var product = SeniorApisCtrl.CrmSelectedContact.Products[i];
         total += (product.Price);
     }
     return total;
@@ -161,7 +171,7 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
 //********************************
 
   //GET THE TOKEN KEY
-  OdigoApisCtrl.getTokenFromApi = function(){
+  SeniorApisCtrl.getTokenFromApi = function(){
     console.log("--> getTokenFromApi()");
       var promise= OdigoApisService.getToken();
       promise.then(function (response) {
@@ -169,7 +179,7 @@ function OdigoApisController($location,OdigoApisService,userUid,appUid,$scope, $
           TokBoxCredentials.apiKey=response.data.apiKey;
           TokBoxCredentials.sessionId=response.data.sessionId;
           TokBoxCredentials.token=response.data.token;
-          OdigoApisCtrl.initializeSession();
+          SeniorApisCtrl.initializeSession();
         })
         .catch(function (error) {
           console.error("Error:",error.message);
@@ -197,12 +207,12 @@ function handleError(error) {
 // (optional) add server code here
 
 
-OdigoApisCtrl.ChangeCamera= function () {
+SeniorApisCtrl.ChangeCamera= function () {
   activePublish.cycleVideo().then(console.log);
   
 };
 
-OdigoApisCtrl.initializeSession= function () {
+SeniorApisCtrl.initializeSession= function () {
   console.log("--> OT.initSession()");
   //TokBoxCredentials.apiKey = '45828062';
   //TokBoxCredentials.sessionId = '2_MX40NTgyODA2Mn5-MTU2OTQ4ODIyMDYxNn5SSlZhUWliVEVnOXZ4WndQaTdUZFVjMHJ-UH4';
@@ -239,7 +249,7 @@ OdigoApisCtrl.initializeSession= function () {
 
   session.on('connectionDestroyed', function(event) {    
     console.log("<***> connectionDestroyed()");
-    OdigoApisCtrl.loadingImage=true;
+    SeniorApisCtrl.loadingImage=true;
     //session.unsubscribe(activeStream);
     //session.unpublish(activePublish,handleError);
   });
@@ -252,7 +262,7 @@ OdigoApisCtrl.initializeSession= function () {
   session.on('streamCreated', function(event) {    
     activeStream = event.stream;
     console.log("--> session.on(streamCreated)");
-    OdigoApisCtrl.loadingImage=false;
+    SeniorApisCtrl.loadingImage=false;
     console.log("--> session.subscribe()");
     session.subscribe(event.stream, 'subscriber', {
       insertMode: 'append',
@@ -306,9 +316,9 @@ OdigoApisCtrl.initializeSession= function () {
 //#################       RUN ACTIONS      ##################
 //###########################################################
 
-//OdigoApisCtrl.StartSearchingContacts();
+//SeniorApisCtrl.StartSearchingContacts();
 
-OdigoApisCtrl.getTokenFromApi();
+SeniorApisCtrl.getTokenFromApi();
 
 
 }//FIN CONTROLER

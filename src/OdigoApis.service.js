@@ -1,7 +1,7 @@
 (function () {
 "use strict";
 
-angular.module('OdigoApisModule')
+angular.module('SeniorApisModule')
 .service('OdigoApisService', OdigoApisService);
 
 
@@ -111,7 +111,6 @@ function OdigoApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUid
     console.log("<<< service.getToken()")
     return response;
   };  
-
 
 //FIN DE FUNCIONES DE SERVICIO  
 }//FIN SERVICIO

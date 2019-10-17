@@ -1,7 +1,7 @@
 (function() {
 "use strict";
 
-angular.module('OdigoApisModule', ['ui.router'])
+angular.module('SeniorApisModule', ['ui.router'])
 .constant('ApiPath', 'https://paas-de01.prosodie.com:443/agent/v1/agents/')
 .constant('ApiAuthPath', 'https://paas-de01.prosodie.com:443/auth/v2/routing_de01/direct-access-claim-sets')
 .constant('CI360ApiPath', 'https://paas-de01.prosodie.com:443')
@@ -13,7 +13,7 @@ angular.module('OdigoApisModule', ['ui.router'])
 .constant('HerokuBackEnd', 'https://seniorbackend.herokuapp.com/')
 
 
-
+ 
 .config(config)
 .config(RoutesConfig);
 //
