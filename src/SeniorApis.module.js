@@ -26,10 +26,14 @@ RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 function RoutesConfig($stateProvider, $urlRouterProvider) {
 
   // Redirect to tab 1 if no other URL matches
-  $urlRouterProvider.otherwise('/video_mobile');
+  $urlRouterProvider.otherwise('/profileVideo');
 
   // Set up UI states
   $stateProvider
+    .state('profileVideo', {
+      url: '/profileVideo',
+      templateUrl: 'src/templates/profileVideo.html'
+    })
     .state('profile', {
       url: '/profile',
       templateUrl: 'src/templates/profile.html'
@@ -62,26 +66,11 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     .state('notfound', {
       url: '/notfound',
       templateUrl: 'src/templates/notfound.html'
-    })
-    .state('video', {
-      url: '/video',
-      templateUrl: 'src/templates/video.html'
-    })        
-    .state('video_test', {
-      url: '/video_test',
-      templateUrl: 'src/templates/video_test.html'
     })   
-
-    .state('video_mobile', {
-      url: '/video_mobile',
-      templateUrl: 'src/templates/video_mobile.html'
-    })       
-
     .state('video_ivp', {
       url: '/video_ivp',
       templateUrl: 'src/templates/video_ivp.html'
-    })       
-    
+    })    
     ;    
 }
 
