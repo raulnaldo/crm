@@ -147,8 +147,11 @@ function SeniorApisController($location,SeniorApisService,userUid,appUid,$scope,
           SeniorApisCtrl.LastSearchSearchId=null;
           SeniorApisCtrl.CrmSelectedContact.DynamicsURL='https://raultests.crm4.dynamics.com/main.aspx?appid=aef19262-6ded-e911-a819-000d3a4a16f3&pagetype=entityrecord&etn=contact&id='+ SeniorApisCtrl.CrmSelectedContact.DynamicsId;
           //SeniorApisCtrl.CrmSelectedContact.DynamicsURL='https://raultests.crm4.dynamics.com/main.aspx?appid=aef19262-6ded-e911-a819-000d3a4a16f3&pagetype=entityrecord&etn=contact&id=0c85e618-4fef-e911-a812-000d3a24c29d'
-          //alert(SeniorApisCtrl.CrmSelectedContact.DynamicsURL);
-          //SeniorApisCtrl.SetCrmDynamicsURL();
+          //alert(SeniorApisCtrl.CrmSelectedContact.DynamicsURL);          
+          if (SeniorApisCtrl.IsValidObject(SeniorApisCtrl.CurrentDynamicsUrl)){
+            SeniorApisCtrl.SetCrmDynamicsURL();
+          }
+          
           $state.go('profile');
         }
         else{
