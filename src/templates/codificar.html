@@ -1,10 +1,10 @@
   <div class="content-wrapper" style="min-height: 956px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>        
+      <h1>
         <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown">
-          <img src={{Odigo.CrmSelectedContact.Image}} class="profile-user-img img-circle" alt="User Image">
-          <span class="hidden-xs">{{Odigo.CrmSelectedContact.Name}} {{Odigo.CrmSelectedContact.LastName}}</span>
+          <img src={{Senior.CrmSelectedContact.Image}} class="profile-user-img img-circle" alt="User Image">
+          <span class="hidden-xs">{{Senior.CrmSelectedContact.Name}} {{Senior.CrmSelectedContact.LastName}}</span>
         </a>
       </h1>
       <ol class="breadcrumb">
@@ -28,101 +28,101 @@
             <!-- form start -->
             <form role="form">
               <div class="box-body">
-                
+
                 <div class="form-group">
                   <label>Selecciona motivo de la interacción</label>
-                  <select class="form-control" ng-model="Odigo.CrmSelectedContact.Outcome.Motivo">
+                  <select class="form-control" ng-model="Senior.CrmSelectedContact.Outcome.Motivo">
                     <option>Información de producto</option>
                     <option>Información de facturación</option>
                     <option>Reporte de incidencia</option>
                     <option>Solicitud de baja de servicio</option>
                     <option>Otros</option>
                   </select>
-                </div>                
+                </div>
                 <!-- checkbox -->
                 <div class="form-group">
                   <label>Selecciona los productos ofrecidos durante la llamada</label>
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" ng-model="Odigo.CrmSelectedContact.Outcome.OfreTv">
+                      <input type="checkbox" ng-model="Senior.CrmSelectedContact.Outcome.OfreTv">
                       Informamos sobre nuevos nuevo paquete de televisión
                     </label>
                   </div>
 
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" ng-model="Odigo.CrmSelectedContact.Outcome.OfreFacElec">
+                      <input type="checkbox" ng-model="Senior.CrmSelectedContact.Outcome.OfreFacElec">
                       Ofrecemos la factura electronica
                     </label>
                   </div>
 
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" ng-model="Odigo.CrmSelectedContact.Outcome.OfrePromo">
+                      <input type="checkbox" ng-model="Senior.CrmSelectedContact.Outcome.OfrePromo">
                       Ofrecemos las nuevas promociones que tiene disponible el cliente
                     </label>
                   </div>
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" ng-model="Odigo.CrmSelectedContact.Outcome.OfreSecLine">
+                      <input type="checkbox" ng-model="Senior.CrmSelectedContact.Outcome.OfreSecLine">
                       Ofrecemos la segunda linea al 50% de descuento
                     </label>
-                  </div>                  
+                  </div>
                 </div>
 
                 <div class="form-group">
                   <label>Selecciona la persona de contacto</label>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="Titular" checked="" ng-model="Odigo.CrmSelectedContact.Outcome.PerContacto">
+                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="Titular" checked="" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
                       Con el titular del contrato
                     </label>
                   </div>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="Conyuge" ng-model="Odigo.CrmSelectedContact.Outcome.PerContacto">
+                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="Conyuge" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
                       Con el conyuge del contrato
                     </label>
                   </div>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="Otro familiar" ng-model="Odigo.CrmSelectedContact.Outcome.PerContacto">
+                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="Otro familiar" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
                       Con otro tipo de familiar
                     </label>
                   </div>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="No presenta" ng-model="Odigo.CrmSelectedContact.Outcome.PerContacto">
+                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="No presenta" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
                       No estaba presente
                     </label>
-                  </div>                  
+                  </div>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="Otros" ng-model="Odigo.CrmSelectedContact.Outcome.PerContacto">
+                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="Otros" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
                       Otros
                     </label>
-                  </div>                                    
+                  </div>
                 </div>
 
                 <!-- textarea -->
                 <div class="form-group">
                   <label>Observaciones sobre la interacción</label>
                   <textarea class="form-control" rows="3" placeholder="Introducre las observaciones de la interacción..."
-                   ng-model="Odigo.CrmSelectedContact.Outcome.Comments"   
+                   ng-model="Senior.CrmSelectedContact.Outcome.Comments"
                   ></textarea>
                 </div>
 
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" ng-model="Odigo.CrmSelectedContact.Outcome.Gdpr"> Informamos sobre GDPR (Ley de protección de datos)
+                    <input type="checkbox" ng-model="Senior.CrmSelectedContact.Outcome.Gdpr"> Informamos sobre GDPR (Ley de protección de datos)
                   </label>
-                </div>                
+                </div>
               </div>              <!-- /.box-body -->
                 <!-- select -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary pull-right" 
-                ng-click="Odigo.SetReasonsOfConversation();">Guardar</button>
+                <button type="submit" class="btn btn-primary pull-right"
+                ng-click="Senior.SetReasonsOfConversation();">Guardar</button>
               </div>
             </form>
           </div>

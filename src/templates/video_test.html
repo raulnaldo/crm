@@ -1,10 +1,10 @@
 <div class="content-wrapper" style="min-height: 800px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>        
+      <h1>
         <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown">
-          <img src={{Odigo.CrmSelectedContact.Image}} class="profile-user-img img-circle" alt="User Image">
-          <span class="hidden-xs">{{Odigo.CrmSelectedContact.Name}} {{Odigo.CrmSelectedContact.LastName}}</span>
+          <img src={{Senior.CrmSelectedContact.Image}} class="profile-user-img img-circle" alt="User Image">
+          <span class="hidden-xs">{{Senior.CrmSelectedContact.Name}} {{Senior.CrmSelectedContact.LastName}}</span>
         </a>
       </h1>
       <ol class="breadcrumb">
@@ -19,12 +19,12 @@
         <div class="col-md-1">
         </div>
         <div class="col-md-8">
-            <div id="otEmbedContainer" style="width:320px; height:280px"></div>              
+            <div id="otEmbedContainer" style="width:320px; height:280px"></div>
         </div>
         <!--/.col (left) -->
         <!-- right column -->
         <div class="col-md-1">
-            
+
         </div>
       </div>
       <!-- /.row -->
@@ -33,7 +33,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-  
+
   <script charset="utf-8">
     console.log("--> Script Init()")
     var apiKey = '45828062';
@@ -48,7 +48,7 @@
     console.log("  --> OT.initSession():");
     var session = OT.initSession(apiKey, sessionId);
     console.log("  <-- OT.initSession():");
-    
+
     // create publisher
     console.log("  --> OT.initPublisher():");
     var publisher = OT.initPublisher();
@@ -58,19 +58,19 @@
     session.connect(token, function(err) {
     // publish publisher
       console.log("  --> session.publish():");
-      session.publish(publisher); 
+      session.publish(publisher);
       console.log("  <-- session.publish():");
     })
     console.log("  <-- session.connect():");
-    
-    
+
+
     // create subscriber
     console.log("  --> Event:session.on():");
     session.on('streamCreated', function(event) {
       console.log("    --> session.subscribe():");
       session.subscribe(event.stream);
-      console.log("    <-- session.subscribe():");      
+      console.log("    <-- session.subscribe():");
     });
     console.log("  <-- Event:session.on():");
     console.log("<-- Script Init()")
-  </script> 
+  </script>

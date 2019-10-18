@@ -3,9 +3,9 @@
     <section class="content-header">
       <h1>
         <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown">
-          <img src={{Odigo.CrmSelectedContact.Image}} class="profile-user-img img-circle" alt="User Image">
-          <span class="hidden-xs">{{Odigo.CrmSelectedContact.Name}} {{Odigo.CrmSelectedContact.LastName}}</span>
-        </a>        
+          <img src={{Senior.CrmSelectedContact.Image}} class="profile-user-img img-circle" alt="User Image">
+          <span class="hidden-xs">{{Senior.CrmSelectedContact.Name}} {{Senior.CrmSelectedContact.LastName}}</span>
+        </a>
       </h1>
       <ol class="breadcrumb">
         <li><a ui-sref="profile"><i class="fa fa-user"></i>Ficha Cliente</a></li>
@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <i class="fa fa-globe"></i> Odigo
+            <i class="fa fa-globe"></i> Senior
             <small class="pull-right">Date: 2/10/2014</small>
           </h2>
         </div>
@@ -44,17 +44,17 @@
         <div class="col-sm-4 invoice-col">
           To
           <address>
-            <strong>{{Odigo.CrmSelectedContact.Name}} {{Odigo.CrmSelectedContact.LastName}}</strong>
+            <strong>{{Senior.CrmSelectedContact.Name}} {{Senior.CrmSelectedContact.LastName}}</strong>
             <br>
-              {{Odigo.CrmSelectedContact.Address}}
+              {{Senior.CrmSelectedContact.Address}}
             <br>
-              {{Odigo.CrmSelectedContact.City}} {{Odigo.CrmSelectedContact.CP}}
+              {{Senior.CrmSelectedContact.City}} {{Senior.CrmSelectedContact.CP}}
             <br>
-              {{Odigo.CrmSelectedContact.Province}} 
+              {{Senior.CrmSelectedContact.Province}}
             <br>
-              Phone: {{Odigo.CrmSelectedContact.Phone}}
+              Phone: {{Senior.CrmSelectedContact.Phone}}
             <br>
-              Email: {{Odigo.CrmSelectedContact.email}}
+              Email: {{Senior.CrmSelectedContact.email}}
           </address>
         </div>
         <!-- /.col -->
@@ -62,11 +62,11 @@
           <address>
             <b>Factura #007612</b>
             <br>
-            <b>Order ID:</b> 4F3S8J              
+            <b>Order ID:</b> 4F3S8J
             <br>
             <b>Fecha de Pago:</b> 2/22/2014
             <br>
-            <b>Cuenta:</b> {{Odigo.CrmSelectedContact.Id}}
+            <b>Cuenta:</b> {{Senior.CrmSelectedContact.Id}}
           </address>
         </div>
         <!-- /.col -->
@@ -87,7 +87,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="Item in Odigo.CrmSelectedContact.Products">
+            <tr ng-repeat="Item in Senior.CrmSelectedContact.Products">
               <td>1</td>
               <td>{{Item.Product}}</td>
               <td>{{Item.Serial}}</td>
@@ -122,15 +122,15 @@
             <table class="table">
               <tbody><tr>
                 <th style="width:50%">Subtotal:</th>
-                <td>{{Odigo.GetTotalPrice()}} €</td>
+                <td>{{Senior.GetTotalPrice()}} €</td>
               </tr>
               <tr>
                 <th>IVA (21%)</th>
-                <td>{{Odigo.GetTotalPrice()*0.21}} €</td>
+                <td>{{Senior.GetTotalPrice()*0.21}} €</td>
               </tr>
               <tr>
                 <th>Total:</th>
-                <td>{{Odigo.GetTotalPrice()*0.21+Odigo.GetTotalPrice()}} €</td>
+                <td>{{Senior.GetTotalPrice()*0.21+Senior.GetTotalPrice()}} €</td>
               </tr>
             </tbody></table>
           </div>

@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Codigo de Contacto: {{Odigo.CrmSelectedContact.Id}}
+        Codigo de Contacto: {{Senior.CrmSelectedContact.Id}}
       </h1>
       <ol class="breadcrumb">
         <li><a ui-sref="profile"><i class="fa fa-user"></i>Ficha Cliente</a></li>
@@ -18,26 +18,26 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src={{Odigo.CrmSelectedContact.Image}} alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src={{Senior.CrmSelectedContact.Image}} alt="User profile picture">
 
-              <h3 class="profile-username text-center">{{Odigo.CrmSelectedContact.Name}} {{Odigo.CrmSelectedContact.LastName}}</h3>
+              <h3 class="profile-username text-center">{{Senior.CrmSelectedContact.Name}} {{Senior.CrmSelectedContact.LastName}}</h3>
 
-              <p class="text-muted text-center">{{Odigo.CrmSelectedContact.JobPosition}}</p>
+              <p class="text-muted text-center">{{Senior.CrmSelectedContact.JobPosition}}</p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>Consumo medio mensual</b> <a class="pull-right">{{Odigo.CrmSelectedContact.ContractMonthlyAmmount}}</a>
+                  <b>Consumo medio mensual</b> <a class="pull-right">{{Senior.CrmSelectedContact.ContractMonthlyAmmount}}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Fecha de Alta</b> <a class="pull-right">{{Odigo.CrmSelectedContact.ContractStartDate}}</a>
+                  <b>Fecha de Alta</b> <a class="pull-right">{{Senior.CrmSelectedContact.ContractStartDate}}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Permanencia</b> <a class="pull-right">{{Odigo.CrmSelectedContact.ContractDuration}}</a>
+                  <b>Permanencia</b> <a class="pull-right">{{Senior.CrmSelectedContact.ContractDuration}}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Riesgo</b> <a class="pull-right">{{Odigo.CrmSelectedContact.ContractRisk}}</a>
-                </li>                
-              </ul>              
+                  <b>Riesgo</b> <a class="pull-right">{{Senior.CrmSelectedContact.ContractRisk}}</a>
+                </li>
+              </ul>
             </div>
             <!-- /.box-body -->
           </div>
@@ -53,21 +53,21 @@
               <strong><i class="fa fa-file-pdf-o margin-r-5"></i>Contrato</strong>
 
               <p class="text-muted">
-                {{Odigo.CrmSelectedContact.ContractDetails}}
+                {{Senior.CrmSelectedContact.ContractDetails}}
               </p>
 
               <hr>
 
               <strong><i class="fa fa-map-marker margin-r-5"></i>Punto de instalación</strong>
 
-              <p class="text-muted">{{Odigo.CrmSelectedContact.Address}} {{Odigo.CrmSelectedContact.City}} {{Odigo.CrmSelectedContact.CP}} {{Odigo.CrmSelectedContact.Province}} </p>
+              <p class="text-muted">{{Senior.CrmSelectedContact.Address}} {{Senior.CrmSelectedContact.City}} {{Senior.CrmSelectedContact.CP}} {{Senior.CrmSelectedContact.Province}} </p>
 
               <hr>
 
               <strong><i class="fa fa-shopping-cart margin-r-5"></i>Productos Contratados</strong>
 
               <p>
-                 <span ng-repeat="Item in Odigo.CrmSelectedContact.Products">
+                 <span ng-repeat="Item in Senior.CrmSelectedContact.Products">
                     <span class="label label-primary">{{Item.Product}}</span>
                  </span>
               </p>
@@ -76,7 +76,7 @@
 
               <strong><i class="fa fa-file-text-o margin-r-5"></i>Notas sobre Contrato</strong>
 
-              <p>{{Odigo.CrmSelectedContact.ContractDetails}}</p>
+              <p>{{Senior.CrmSelectedContact.ContractDetails}}</p>
             </div>
             <!-- /.box-body -->
           </div>
@@ -86,30 +86,30 @@
         <div class="col-md-10">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="" ng-click="Odigo.SetCrmDynamicsURL()" ng-if="Odigo.CrmSelectedContact.DynamicsURL"><a href="profile.html#dynamics" data-toggle="tab" aria-expanded="false">Dynamics</a></li>
-              <li class=""><a href="profile.html#masmovil" data-toggle="tab" aria-expanded="false">MasMovil</a></li>
+              <li class="" ng-click="Senior.SetCrmDynamicsURL()" ng-if="Senior.CrmSelectedContact.DynamicsURL"><a href="profile.html#dynamics" data-toggle="tab" aria-expanded="false">Dynamics</a></li>
+              <li class="" ng-click="Senior.ShowMasMovil()"> <a href="profile.html#masmovil" data-toggle="tab" aria-expanded="false">MasMovil</a></li>
               <li class=""><a href="profile.html#Email" data-toggle="tab" aria-expanded="false">Email</a></li>
               <li class=""><a href="profile.html#activity" data-toggle="tab" aria-expanded="false">Feed</a></li>
               <li class=""><a href="profile.html#timeline" data-toggle="tab" aria-expanded="false">Eventos</a></li>
-              <li class="active"><a href="profile.html#settings" data-toggle="tab" aria-expanded="true">Datos personales</a></li>              
+              <li class="active"><a href="profile.html#settings" data-toggle="tab" aria-expanded="true">Datos personales</a></li>
             </ul>
-            <div class="tab-content">                
+            <div class="tab-content">
               <div class="tab-pane" id="Email">
                 <iframe width="100%" height="800px" src="" frameborder="0"></iframe>
-              </div>                              
+              </div>
               <div class="tab-pane" id="masmovil">
-                <iframe width="100%" height="800px" src="https://yosoymas.masmovil.es/validate/" frameborder="0"></iframe>
+                <iframe width="100%" height="800px" src="{{Senior.trustSrc(Senior.CurrentMasMovilUrl)}}" frameborder="0"></iframe>
               </div>
               <div class="tab-pane" id="dynamics">
-                  <iframe width="100%" height="800px" ng-src="{{Odigo.trustSrc(Odigo.CurrentDynamicsUrl)}}" frameborder="0" ng-if="Odigo.CrmSelectedContact.DynamicsURL"></iframe>
+                  <iframe width="100%" height="800px" ng-src="{{Senior.trustSrc(Senior.CurrentDynamicsUrl)}}" frameborder="0" ng-if="Senior.CrmSelectedContact.DynamicsURL"></iframe>
               </div>
               <div class="tab-pane" id="activity">
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src={{Odigo.CrmSelectedContact.Image}} alt="user image">
+                    <img class="img-circle img-bordered-sm" src={{Senior.CrmSelectedContact.Image}} alt="user image">
                         <span class="username">
-                          <a ui-sref="profile">{{Odigo.CrmSelectedContact.Name}}</a>
+                          <a ui-sref="profile">{{Senior.CrmSelectedContact.Name}}</a>
                           <a ui-sref="profile" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description">Shared publicly - 7:30 PM today</span>
@@ -136,16 +136,16 @@
                 <!-- Post -->
                 <div class="post clearfix">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src='{{Odigo.Agent.Image}}' alt="User Image">
+                    <img class="img-circle img-bordered-sm" src='{{Senior.Agent.Image}}' alt="User Image">
                         <span class="username">
-                          <a ui-sref="profile">{{Odigo.Agent.Name}} {{Odigo.Agent.LastName}}</a>
+                          <a ui-sref="profile">{{Senior.Agent.Name}} {{Senior.Agent.LastName}}</a>
                           <a ui-sref="profile" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description">Sent you a message - 3 days ago</span>
                   </div>
                   <!-- /.user-block -->
                   <p>
-                    Buenos días {{Odigo.CrmSelectedContact.Name}}.
+                    Buenos días {{Senior.CrmSelectedContact.Name}}.
                     En respuesta a su solicitud, le informamos que a través de nuestro servicio de asistencia téncia podremos ponernos en contacto con usted tran pronto sea posible.
                   </p>
 
@@ -162,14 +162,14 @@
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src={{Odigo.CrmSelectedContact.Image}} alt="User Image">
+                    <img class="img-circle img-bordered-sm" src={{Senior.CrmSelectedContact.Image}} alt="User Image">
                         <span class="username">
-                          <a ui-sref="profile">{{Odigo.CrmSelectedContact.Name}}</a>
+                          <a ui-sref="profile">{{Senior.CrmSelectedContact.Name}}</a>
                           <a ui-sref="profile" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description">Shared publicly - 5 days ago</span>
                   </div>
-                  <p>                    
+                  <p>
                     Quisiera contactar con vuestro equipo de soporte técnico para resolver una incidencia de mi dispositivo actual.
                     Muchas gracias.
                   </p>
@@ -193,15 +193,15 @@
                 <!-- The timeline -->
                 <ul class="timeline timeline-inverse">
                   <!-- timeline time label -->
-                  <li class="time-label" ng-repeat="Item in Odigo.CrmSelectedContact.Interactions.interactions">
+                  <li class="time-label" ng-repeat="Item in Senior.CrmSelectedContact.Interactions.interactions">
                     <span class="bg-red">
-                            {{Odigo.OdigoFormatDate(Item.startDate)}}
+                            {{Senior.FormatDate(Item.startDate)}}
                     </span>
                     <!-- /.timeline-label -->
                     <!-- timeline item -->
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i>{{Odigo.OdigoFormatDateHour(Item.startDate)}}</span>
+                      <span class="time"><i class="fa fa-clock-o"></i>{{Senior.FormatDateHour(Item.startDate)}}</span>
 
                       <h3 class="timeline-header"><a ui-sref="profile">Canal:{{Item.label}} </a> sent you an email</h3>
 
@@ -214,7 +214,7 @@
                         <br>
                         Sentido: {{Item.direction}}
                       </div>
-                    </div>                              
+                    </div>
                   </li>
 
                   <!-- END timeline item -->
@@ -288,21 +288,21 @@
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                     <div class="col-sm-10">
-                      <input ng-model="Odigo.CrmSelectedContact.Name" type="text" class="form-control" id="inputName" placeholder="Name">
+                      <input ng-model="Senior.CrmSelectedContact.Name" type="text" class="form-control" id="inputName" placeholder="Name">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Last Name</label>
 
                     <div class="col-sm-10">
-                      <input ng-model="Odigo.CrmSelectedContact.LastName" type="text" class="form-control" id="inputName" placeholder="Name">
+                      <input ng-model="Senior.CrmSelectedContact.LastName" type="text" class="form-control" id="inputName" placeholder="Name">
                     </div>
-                  </div>                  
+                  </div>
 
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
-                      <input ng-model="Odigo.CrmSelectedContact.email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+                      <input ng-model="Senior.CrmSelectedContact.email" type="email" class="form-control" id="inputEmail" placeholder="Email">
                     </div>
                   </div>
 
@@ -310,44 +310,44 @@
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Direccion</label>
                     <div class="col-sm-10">
-                      <input ng-model="Odigo.CrmSelectedContact.Address" type="text" class="form-control" id="inputEmail" placeholder="Email">
+                      <input ng-model="Senior.CrmSelectedContact.Address" type="text" class="form-control" id="inputEmail" placeholder="Email">
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Poblacion</label>
                     <div class="col-sm-10">
-                      <input ng-model="Odigo.CrmSelectedContact.City" type="text" class="form-control" id="inputEmail" placeholder="Email">
+                      <input ng-model="Senior.CrmSelectedContact.City" type="text" class="form-control" id="inputEmail" placeholder="Email">
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Provincia</label>
                     <div class="col-sm-10">
-                      <input ng-model="Odigo.CrmSelectedContact.Province" type="text" class="form-control" id="inputEmail" placeholder="Email">
+                      <input ng-model="Senior.CrmSelectedContact.Province" type="text" class="form-control" id="inputEmail" placeholder="Email">
                     </div>
-                  </div>                  
+                  </div>
 
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Codigo Postal</label>
                     <div class="col-sm-10">
-                      <input ng-model="Odigo.CrmSelectedContact.CP" type="text" class="form-control" id="inputEmail" placeholder="Email">
+                      <input ng-model="Senior.CrmSelectedContact.CP" type="text" class="form-control" id="inputEmail" placeholder="Email">
                     </div>
-                  </div>  
+                  </div>
 
                   <div class="form-group">
                     <label for="inputExperience" class="col-sm-2 control-label">Observaciones</label>
 
                     <div class="col-sm-10">
-                      <textarea ng-model="Odigo.CrmSelectedContact.Comments"  class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                      <textarea ng-model="Senior.CrmSelectedContact.Comments"  class="form-control" id="inputExperience" placeholder="Experience"></textarea>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">Productos Contratados</label>
 
-                    <div class="col-sm-10">                      
+                    <div class="col-sm-10">
                       <p>
-                       <span ng-repeat="Item in Odigo.CrmSelectedContact.Products">
+                       <span ng-repeat="Item in Senior.CrmSelectedContact.Products">
                           <span class="label label-primary">{{Item.Product}}</span>
                        </span>
                       </p>
@@ -355,9 +355,9 @@
                   </div>
                   <div class="form-group">
                     <label for="inputPromos" class="col-sm-2 control-label">Promociones Disponibles</label>
-                    <div class="col-sm-10">                      
+                    <div class="col-sm-10">
                       <p>
-                       <span ng-repeat="Item in Odigo.CrmSelectedContact.Promos">
+                       <span ng-repeat="Item in Senior.CrmSelectedContact.Promos">
                           <span class="label label-success">{{Item.Promo}}</span>
                        </span>
                       </p>
@@ -371,7 +371,7 @@
           </div>
           <!-- /.nav-tabs-custom -->
         </div>
-        <!-- /.col -->
+        <!-- /.col -->      
       </div>
       <!-- /.row -->
 

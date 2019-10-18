@@ -5,8 +5,8 @@
 angular.module('SeniorApisModule')
 .controller('SeniorApisController', SeniorApisController);
 
-SeniorApisController.$inject = ['$location','OdigoApisService','userUid','appUid','$scope','$sce','$window','$state'];
-function SeniorApisController($location,OdigoApisService,userUid,appUid,$scope, $sce,$window,$state) {  
+SeniorApisController.$inject = ['$location','SeniorApisService','userUid','appUid','$scope','$sce','$window','$state'];
+function SeniorApisController($location,SeniorApisService,userUid,appUid,$scope, $sce,$window,$state) {
 
   var SeniorApisCtrl = this;
 
@@ -16,12 +16,12 @@ function SeniorApisController($location,OdigoApisService,userUid,appUid,$scope, 
   var activePublish = {};
   SeniorApisCtrl.loadingImage=true;
 
-  
+
 //###########################################################
 //#################       UTILS            ##################
 //###########################################################
 
-  SeniorApisCtrl.OdigoFormatDate = function formatDate(pDate){
+  SeniorApisCtrl.FormatDate = function formatDate(pDate){
     var date = new Date(pDate);
     var monthNames = [
       "Enero", "Febrero", "Marzo",
@@ -37,9 +37,9 @@ function SeniorApisController($location,OdigoApisService,userUid,appUid,$scope, 
     return day + ' ' + monthNames[monthIndex] + ' ' + year;
   }
 
-  SeniorApisCtrl.OdigoFormatDateHour = function OdigoFormatDateHour(pDate){
+  SeniorApisCtrl.FormatDateHour = function FormatDateHour(pDate){
     var date = new Date(pDate);
-        
+
     var currentHours = date.getHours();
     currentHours = ("0" + currentHours).slice(-2);
 
@@ -57,84 +57,89 @@ function SeniorApisController($location,OdigoApisService,userUid,appUid,$scope, 
       return true;
     }
     else{
-      return false; 
-    }    
+      return false;
+    }
   }
 //###########################################################
 //#################       INIT            ##################
 //###########################################################
 
   //Obtenemos la informacion proporcionada en la URL queryString
-  SeniorApisCtrl.OdigoCallInfo=$location.search();  
-  console.log('--> SeniorApisController Init()'); 
+  SeniorApisCtrl.CallInfo=$location.search();
+  console.log('--> SeniorApisController Init()');
   console.log('  --> Location SearchData();',$location.search());
-  console.log('      SeniorApisCtrl.OdigoCallInfo();',SeniorApisCtrl.OdigoCallInfo);
+  console.log('      SeniorApisCtrl.CallInfo();',SeniorApisCtrl.CallInfo);
   console.log('  <-- Location SearchData()');
 
   //Para pruebas, asignamos por defecto un Id y un nombre de agente.
-  if (!SeniorApisCtrl.IsValidObject(SeniorApisCtrl.OdigoCallInfo.CustomerCode)){
-    SeniorApisCtrl.OdigoCallInfo.CustomerCode="699479614";    
-    $state.go('notfound'); 
+  if (!SeniorApisCtrl.IsValidObject(SeniorApisCtrl.CallInfo.CustomerCode)){
+    SeniorApisCtrl.CallInfo.CustomerCode="699479614";
+    $state.go('notfound');
   }
-  if (SeniorApisCtrl.OdigoCallInfo.UserLogin==undefined){
-    SeniorApisCtrl.OdigoCallInfo.UserLogin="agent176ddi@demo.com";
+  if (SeniorApisCtrl.CallInfo.UserLogin==undefined){
+    SeniorApisCtrl.CallInfo.UserLogin="agent176ddi@demo.com";
   }
-  SeniorApisCtrl.SearchId=SeniorApisCtrl.OdigoCallInfo.CustomerCode;
+  SeniorApisCtrl.SearchId=SeniorApisCtrl.CallInfo.CustomerCode;
 
   //Obtenemos a través de Ajax  el array de agentes que tenemos definidos.
-  console.log('  --> OdigoApisService.getAgentProperties()');
-  var promiseAgents= OdigoApisService.getAgentsByJson();
+  console.log('  --> ApisService.getAgentProperties()');
+  var promiseAgents= SeniorApisService.getAgentsByJson();
   promiseAgents.then(function (response) {
       console.log('<<<< Retorno de Agents:',response.data.agents);
-      SeniorApisCtrl.Agent= response.data.agents[response.data.agents.findIndex(x => x.Login === SeniorApisCtrl.OdigoCallInfo.UserLogin)];
-      console.log('  <-- OdigoApisService.getAgentProperties:',SeniorApisCtrl.Agent);      
+      SeniorApisCtrl.Agent= response.data.agents[response.data.agents.findIndex(x => x.Login === SeniorApisCtrl.CallInfo.UserLogin)];
+      console.log('  <-- SeniorApisService.getAgentProperties:',SeniorApisCtrl.Agent);
     })
     .catch(function (error) {
-      console.log("Error:",error);      
+      console.log("Error:",error);
   });
-  
+
  //Obtenemos a través de Ajax  el array de contactos que tenemos definidos.
  SeniorApisCtrl.StartSearchingContacts = function(){
     console.log("  --> Filling Contacts");
-    var promise= OdigoApisService.getContactsByJson();
+    var promise= SeniorApisService.getContactsByJson();
     promise
     .then(
       function (response) {
-        console.log('Then:',response.data);      
+        console.log('Then:',response.data);
         SeniorApisCtrl.CrmContacts=response.data.contacts;
-        console.log("  --> SelectContactById:",SeniorApisCtrl.OdigoCallInfo.CustomerCode);
-        SeniorApisCtrl.CrmSelectedContact=OdigoApisService.SelectContactById(SeniorApisCtrl.OdigoCallInfo.CustomerCode,SeniorApisCtrl.CrmContacts);
-        console.log("  <-- SelectContactById:",SeniorApisCtrl.CrmSelectedContact); 
+        console.log("  --> SelectContactById:",SeniorApisCtrl.CallInfo.CustomerCode);
+        SeniorApisCtrl.CrmSelectedContact=SeniorApisService.SelectContactById(SeniorApisCtrl.CallInfo.CustomerCode,SeniorApisCtrl.CrmContacts);
+        console.log("  <-- SelectContactById:",SeniorApisCtrl.CrmSelectedContact);
         if (SeniorApisCtrl.CrmSelectedContact.Id.IsValidObject){
-          SeniorApisCtrl.OdigoGetInteractionsByCustId(SeniorApisCtrl.CrmSelectedContact.Id);
+          SeniorApisCtrl.GetInteractionsByCustId(SeniorApisCtrl.CrmSelectedContact.Id);
         }
       })
       .catch(
         function (error) {
-        console.log("Error:",error);      
+        console.log("Error:",error);
     });
-    console.log("  <-- Filling Contacts",SeniorApisCtrl.CrmContacts);   
+    console.log("  <-- Filling Contacts",SeniorApisCtrl.CrmContacts);
   }
   SeniorApisCtrl.OrganizeInteractions = function(pInteractions){
       console.log("  --> OrganizeInteractions:",pInteractions);
-      
-      console.log("  <-- OrganizeInteractions");   
-  }  
-  
+
+      console.log("  <-- OrganizeInteractions");
+  }
+
 //********************************
 //FUNCIONES DE CRM
-//******************************** 
+//********************************
   SeniorApisCtrl.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
-  }  
+  }
+  SeniorApisCtrl.ShowMasMovil = function() {
+    SeniorApisCtrl.CurrentMasMovilUrl="https://yosoymas.masmovil.es/validate/"; 
+  }
+  
+
   SeniorApisCtrl.SetCrmDynamicsURL = function(){
     SeniorApisCtrl.CurrentDynamicsUrl=SeniorApisCtrl.CrmSelectedContact.DynamicsURL;
-  }   
+  }
   SeniorApisCtrl.SearchContact = function(){
     var EmptyObject={};
     SeniorApisCtrl.CrmSelectedContact=EmptyObject;
-    
-    var promise= OdigoApisService.SelectContactById(SeniorApisCtrl.SearchId,SeniorApisCtrl.CrmContacts);
+
+    var promise= SeniorApisService.SelectContactById(SeniorApisCtrl.SearchId,SeniorApisCtrl.CrmContacts);
     promise.then(function (response) {
         console.log('Contact Found:',response.data);
         SeniorApisCtrl.CrmSelectedContact=response.data;
@@ -143,20 +148,20 @@ function SeniorApisController($location,OdigoApisService,userUid,appUid,$scope, 
           SeniorApisCtrl.CrmSelectedContact.DynamicsURL='https://raultests.crm4.dynamics.com/main.aspx?appid=aef19262-6ded-e911-a819-000d3a4a16f3&pagetype=entityrecord&etn=contact&id='+ SeniorApisCtrl.CrmSelectedContact.DynamicsId;
           //SeniorApisCtrl.CrmSelectedContact.DynamicsURL='https://raultests.crm4.dynamics.com/main.aspx?appid=aef19262-6ded-e911-a819-000d3a4a16f3&pagetype=entityrecord&etn=contact&id=0c85e618-4fef-e911-a812-000d3a24c29d'
           //alert(SeniorApisCtrl.CrmSelectedContact.DynamicsURL);
-          SeniorApisCtrl.SetCrmDynamicsURL();
+          //SeniorApisCtrl.SetCrmDynamicsURL();
           $state.go('profile');
         }
         else{
           SeniorApisCtrl.LastSearchSearchId=SeniorApisCtrl.SearchId;
-          $state.go('notfound'); 
-        }        
+          $state.go('notfound');
+        }
       })
       .catch(function (error) {
         console.error("Error:",error.message);
-        $state.go('notfound'); 
-    });    
-  }; 
- 
+        $state.go('notfound');
+    });
+  };
+
 
   SeniorApisCtrl.GetTotalPrice = function(){
     var total = 0;
@@ -165,7 +170,7 @@ function SeniorApisController($location,OdigoApisService,userUid,appUid,$scope, 
         total += (product.Price);
     }
     return total;
-  }; 
+  };
 
 //********************************
 //APIS METHODS
@@ -174,7 +179,7 @@ function SeniorApisController($location,OdigoApisService,userUid,appUid,$scope, 
   //GET THE TOKEN KEY
   SeniorApisCtrl.getTokenFromApi = function(){
     console.log("--> getTokenFromApi()");
-      var promise= OdigoApisService.getToken();
+      var promise= SeniorApisService.getToken();
       promise.then(function (response) {
           console.log('Then:',response.data);
           TokBoxCredentials.apiKey=response.data.apiKey;
@@ -184,8 +189,8 @@ function SeniorApisController($location,OdigoApisService,userUid,appUid,$scope, 
         })
         .catch(function (error) {
           console.error("Error:",error.message);
-      });                
-    console.log("<-- getTokenFromApi()");  
+      });
+    console.log("<-- getTokenFromApi()");
   };
 
 
@@ -210,15 +215,15 @@ function handleError(error) {
 
 SeniorApisCtrl.ChangeCamera= function () {
   activePublish.cycleVideo().then(console.log);
-  
+
 };
 
 SeniorApisCtrl.initializeSession= function () {
   console.log("--> OT.initSession()");
   //TokBoxCredentials.apiKey = '45828062';
   //TokBoxCredentials.sessionId = '2_MX40NTgyODA2Mn5-MTU2OTQ4ODIyMDYxNn5SSlZhUWliVEVnOXZ4WndQaTdUZFVjMHJ-UH4';
-  //TokBoxCredentials.token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9MmJhZjU5MDJlYmM5MjM1MDI2NDgyNTdkOGM1N2MwNjMyMzViZWJkNDpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UVTJPVFE0T0RJeU1EWXhObjVTU2xaaFVXbGlWRVZuT1haNFduZFFhVGRVWkZWak1ISi1VSDQmY3JlYXRlX3RpbWU9MTU2OTQ4ODI2MiZub25jZT0wLjQ2MjA2ODM1OTgyOTgyMzg2JnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE1Njk1NzQ2NjI=';  
-  
+  //TokBoxCredentials.token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9MmJhZjU5MDJlYmM5MjM1MDI2NDgyNTdkOGM1N2MwNjMyMzViZWJkNDpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UVTJPVFE0T0RJeU1EWXhObjVTU2xaaFVXbGlWRVZuT1haNFduZFFhVGRVWkZWak1ISi1VSDQmY3JlYXRlX3RpbWU9MTU2OTQ4ODI2MiZub25jZT0wLjQ2MjA2ODM1OTgyOTgyMzg2JnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE1Njk1NzQ2NjI=';
+
   if (SeniorApisCtrl.IsValidObject(OT)){
     var session = OT.initSession(TokBoxCredentials.apiKey, TokBoxCredentials.sessionId);
   }
@@ -227,44 +232,44 @@ SeniorApisCtrl.initializeSession= function () {
   }
 
   console.log("  >> capabilities:"+ session.capabilities);
-  
+
   var myPublisherStyle={};
   var mySubscriberStyle={};
   myPublisherStyle.audioBlockedDisplayMode= "off";
   myPublisherStyle.audioLevelDisplayMode="on";
-  myPublisherStyle.buttonDisplayMode="auto";    
+  myPublisherStyle.buttonDisplayMode="auto";
   //myPublisherStyle.videoDisabledDisplayMode= "on";
   myPublisherStyle.nameDisplayMode= "auto";
-  
+
 
   mySubscriberStyle.audioBlockedDisplayMode= "off";
   mySubscriberStyle.audioLevelDisplayMode="on";
-  mySubscriberStyle.buttonDisplayMode="auto";  
-  mySubscriberStyle.videoDisabledDisplayMode= "auto";  
-  mySubscriberStyle.nameDisplayMode= "auto";  
-  
-  
+  mySubscriberStyle.buttonDisplayMode="auto";
+  mySubscriberStyle.videoDisabledDisplayMode= "auto";
+  mySubscriberStyle.nameDisplayMode= "auto";
+
+
   // Subscribe to a newly created stream
-  
 
 
-  session.on('streamDestroyed', function(event) {    
+
+  session.on('streamDestroyed', function(event) {
     console.log("<***> streamDestroyed()");
   });
 
-  session.on('connectionDestroyed', function(event) {    
+  session.on('connectionDestroyed', function(event) {
     console.log("<***> connectionDestroyed()");
     SeniorApisCtrl.loadingImage=true;
     //session.unsubscribe(activeStream);
     //session.unpublish(activePublish,handleError);
   });
 
-  session.on('sessionDisconnected', function(event) {    
+  session.on('sessionDisconnected', function(event) {
     console.log("<***> sessionDisconnected()");
   });
-  
 
-  session.on('streamCreated', function(event) {    
+
+  session.on('streamCreated', function(event) {
     activeStream = event.stream;
     console.log("--> session.on(streamCreated)");
     SeniorApisCtrl.loadingImage=false;
@@ -273,18 +278,18 @@ SeniorApisCtrl.initializeSession= function () {
       insertMode: 'append',
       width: '100%',
       height: '100%',
-      insertDefaultUI: true, 
-      showControls: true, 
+      insertDefaultUI: true,
+      showControls: true,
       fitMode: "contain",
       testNetwork: true,
-      style: mySubscriberStyle              
+      style: mySubscriberStyle
     }, handleError);
 
     console.log("<-- session.subscribe()");
   });
   console.log("<-- session.on('streamCreated')");
 
-  
+
 
   // Create a publisher o camara espejo
 
@@ -293,25 +298,25 @@ SeniorApisCtrl.initializeSession= function () {
     showControls: true,
     insertMode: 'append',
     width: '100%',
-    height: '100%',      
-    //resolution: '1280x720',    
-    resolution: '640x480',    
+    height: '100%',
+    //resolution: '1280x720',
+    resolution: '640x480',
     //frameRate: 15,
     insertDefaultUI: true,
     fitMode: "contain",
-    style: myPublisherStyle      
+    style: myPublisherStyle
   }, handleError);
 
   console.log("<-- OT.initPublisher()");
 
   // Connect to the session
-  session.connect(TokBoxCredentials.token, function(error) {    
+  session.connect(TokBoxCredentials.token, function(error) {
     // If the connection is successful, initialize a publisher and publish to the session
-    console.log("--> session.connect:",session.connection);    
+    console.log("--> session.connect:",session.connection);
     if (error) {
       handleError(error);
     } else {
-      session.publish(activePublish, handleError);      
+      session.publish(activePublish, handleError);
     }
     console.log("<-- session.connect");
   });
@@ -329,7 +334,7 @@ SeniorApisCtrl.SearchContact();
 
 }//FIN CONTROLER
 
-  
+
 
 }//FIN FUNCION INICIAL
 )();

@@ -6,7 +6,7 @@
 <head>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Senior Telecom</title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="./style/fullcalendar.min.css">
   <link rel="stylesheet" href="./style/fullcalendar.print.min.css" media="print">
   <link rel="stylesheet" href="./style/css">
-  <link rel="stylesheet" href="./style/css">  
+  <link rel="stylesheet" href="./style/css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -38,18 +38,18 @@
   <link rel="stylesheet" href="./style/css">
 </head>
 <body class="skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
-<div class="wrapper" ng-controller="SeniorApisController as Odigo" style="height: 800; min-height: 100%;">
+<div class="wrapper" ng-controller="SeniorApisController as Senior" style="height: 800; min-height: 100%;">
 
   <header class="main-header">
     <!-- Logo -->
     <a ui-sref="profile" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>ODG</b></span>
-      <!-- logo for regular state and mobile devices 
-      <img src='.\images\odigo.png' class="user-image" alt="User Image">
+      <!-- logo for regular state and mobile devices
+      <img src='.\images\Senior.png' class="user-image" alt="User Image">
       -->
       <span class="logo-lg"><b>Sample Customer Service</b></span>
-      
+
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -65,41 +65,41 @@
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-phone"></i>              
+              <i class="fa fa-phone"></i>
             </a>
-          </li>                    
+          </li>
           <li class="dropdown messages-menu">
-            <a ng-click="Odigo.OdigoHangUp()" href="" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-tty"></i>              
+            <a ng-click="Senior.HangUp()" href="" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-tty"></i>
             </a>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
-            <a ng-click="Odigo.OdigoEndWrapUp()" href="" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-hourglass-end"></i>              
-            </a>            
+            <a ng-click="Senior.EndWrapUp()" href="" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-hourglass-end"></i>
+            </a>
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
             <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-microphone"></i>              
-            </a>            
+              <i class="fa fa-microphone"></i>
+            </a>
           </li>
           <li class="dropdown tasks-menu">
             <a ui-sref="codificar" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-floppy-o"></i>              
-            </a>            
-          </li>          
+              <i class="fa fa-floppy-o"></i>
+            </a>
+          </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown">
-              <img src={{Odigo.Agent.Image}} class="user-image" alt="User Image">
-              <span class="hidden-xs">{{Odigo.OdigoCallInfo.UserLogin}}</span>
+              <img src={{Senior.Agent.Image}} class="user-image" alt="User Image">
+              <span class="hidden-xs">{{Senior.CallInfo.UserLogin}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src={{Odigo.Agent.Image}} class="img-circle" alt="User Image">
+                <img src={{Senior.Agent.Image}} class="img-circle" alt="User Image">
                 <p>
                   Raúl Ortega Andres
                   <small>Member since Nov. 2012</small>
@@ -146,19 +146,19 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src={{Odigo.Agent.Image}} class="img-circle" alt="User Image">
+          <img src={{Senior.Agent.Image}} class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{{Odigo.Agent.Name}} {{Odigo.Agent.LastName}}</p>
+          <p>{{Senior.Agent.Name}} {{Senior.Agent.LastName}}</p>
           <a ui-sref="profile"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
       <!-- search form -->
       <form  class="sidebar-form">
         <div class="input-group">
-          <input ng-model="Odigo.SearchId" type="text" name="q" class="form-control" placeholder="Search...">
+          <input ng-model="Senior.SearchId" type="text" name="q" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
-                <button ng-click="Odigo.SearchContact();" type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                <button ng-click="Senior.SearchContact();" type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
               </span>
         </div>
@@ -167,68 +167,68 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu tree" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        
+
         <li class="treeview">
-          <a href="CrmDemoProfile.html#" ng-if="Odigo.CrmSelectedContact.Id">
+          <a href="CrmDemoProfile.html#" ng-if="Senior.CrmSelectedContact.Id">
             <i class="fa fa-files-o"></i>
             <span>Facturas pendientes</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-red">{{Odigo.CrmSelectedContact.Facturas.length}}</small>              
+              <small class="label pull-right bg-red">{{Senior.CrmSelectedContact.Facturas.length}}</small>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li ng-repeat="Item in Odigo.CrmSelectedContact.Facturas">
-              <a ui-sref="invoice"><i class="fa fa-circle-o"></i>{{Item.Factura}}</a>              
+            <li ng-repeat="Item in Senior.CrmSelectedContact.Facturas">
+              <a ui-sref="invoice"><i class="fa fa-circle-o"></i>{{Item.Factura}}</a>
             </li>
           </ul>
         </li>
 
         <li class="treeview">
-          <a href="CrmDemoProfile.html#" ng-if="Odigo.CrmSelectedContact.Id">
+          <a href="CrmDemoProfile.html#" ng-if="Senior.CrmSelectedContact.Id">
             <i class="fa fa-dashboard"></i> <span>Productos Contratados</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-blue">{{Odigo.CrmSelectedContact.Products.length}}</small>              
+              <small class="label pull-right bg-blue">{{Senior.CrmSelectedContact.Products.length}}</small>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li ng-repeat="Item in Odigo.CrmSelectedContact.Products">
+            <li ng-repeat="Item in Senior.CrmSelectedContact.Products">
               <a href=""><i class="fa fa-circle-o"></i>{{Item.Product}}</a>
             </li>
           </ul>
         </li>
 
         <li class="treeview">
-          <a href="CrmDemoProfile.html#" ng-if="Odigo.CrmSelectedContact.Id">
+          <a href="CrmDemoProfile.html#" ng-if="Senior.CrmSelectedContact.Id">
             <i class="fa fa-pie-chart"></i>
             <span>Promociones</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">{{Odigo.CrmSelectedContact.Promos.length}}</small>
+              <small class="label pull-right bg-green">{{Senior.CrmSelectedContact.Promos.length}}</small>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li ng-repeat="Item in Odigo.CrmSelectedContact.Promos">
+            <li ng-repeat="Item in Senior.CrmSelectedContact.Promos">
               <a ><i class="fa fa-circle-o"></i>{{Item.Promo}}</a>
             </li>
           </ul>
         </li>
 
         <li class="treeview">
-          <a href="CrmDemoProfile.html#" ng-if="Odigo.CrmSelectedContact.Id">
+          <a href="CrmDemoProfile.html#" ng-if="Senior.CrmSelectedContact.Id">
             <i class="fa fa-laptop"></i>
             <span>Dispositivos</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-blue">{{Odigo.CrmSelectedContact.Dispositivos.length}}</small>
+              <small class="label pull-right bg-blue">{{Senior.CrmSelectedContact.Dispositivos.length}}</small>
             </span>
           </a>
           <ul class="treeview-menu">
-               <li ng-repeat="Item in Odigo.CrmSelectedContact.Dispositivos">
+               <li ng-repeat="Item in Senior.CrmSelectedContact.Dispositivos">
               <a ><i class="fa fa-circle-o"></i>{{Item.Dispositivo}}</a>
             </li>
           </ul>
         </li>
 
         <li class="treeview">
-          <a href="CrmDemoProfile.html#" ng-if="Odigo.CrmSelectedContact.Id">
+          <a href="CrmDemoProfile.html#" ng-if="Senior.CrmSelectedContact.Id">
             <i class="fa fa-pie-chart"></i>
             <span>Registro de consumo</span>
             <span class="pull-right-container">
@@ -243,8 +243,8 @@
           </ul>
         </li>
         <li>
-          <a ui-sref="calendar" ng-if="Odigo.CrmSelectedContact.Id">
-            <i class="fa fa-calendar"></i><span>Agendar cita</span>            
+          <a ui-sref="calendar" ng-if="Senior.CrmSelectedContact.Id">
+            <i class="fa fa-calendar"></i><span>Agendar cita</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-red">2</small>
               <small class="label pull-right bg-blue">5</small>
@@ -252,7 +252,7 @@
           </a>
         </li>
         <li>
-          <a href="" ng-if="Odigo.CrmSelectedContact.Id">
+          <a href="" ng-if="Senior.CrmSelectedContact.Id">
             <i class="fa fa-envelope" ></i> <span>Emails</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-yellow">12</small>
@@ -262,25 +262,25 @@
           </a>
         </li>
         <li>
-          <a ui-sref="codificar" ng-if="Odigo.CrmSelectedContact.Id">
+          <a ui-sref="codificar" ng-if="Senior.CrmSelectedContact.Id">
             <i class="fa fa-floppy-o"></i> <span>Codificar Interacción</span>
           </a>
-        </li>   
+        </li>
         <li>
           <a ui-sref="video">
             <i class="fa fa-floppy-o"></i> <span>Video</span>
           </a>
-        </li>             
+        </li>
         <li>
           <a ui-sref="video_test">
             <i class="fa fa-floppy-o"></i> <span>Video_test</span>
           </a>
-        </li>         
+        </li>
         <li>
             <a ui-sref="video_mobile">
               <i class="fa fa-floppy-o"></i> <span>video_mobile</span>
             </a>
-        </li>                 
+        </li>
         <li>
           <a ui-sref="video_ivp">
             <i class="fa fa-floppy-o"></i> <span>video_ivp</span>
@@ -525,28 +525,28 @@
 
 
 <div id="rtcc-nm-installed">
-  
+
 </div>
     <!-- Libs -->
-    
+
     <script src="lib/jquery-2.1.4.min.js"></script>
-    <script src="lib/angular.min.js"></script>    
-    <script src="lib/bootstrap.min.js"></script>    
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
     <script src="lib/angular-ui-router.min.js"></script>
 
-    <!--OdigoApis Module -->
-    <script src="src/OdigoApis.module.js"></script>
+    <!--Apis Module -->
+    <script src="src/SeniorApis.module.js"></script>
     <script src="src/loading/loading.component.js"></script>
-    <!--<script src="src/loading/loading.interceptor.js"></script>    -->
+    <script src="src/loading/loading.interceptor.js"></script>
 
-    <!--OdigoApis Controller -->
-    <script src="src/OdigoApis.controller.js"></script>
+    <!--Apis Controller -->
+    <script src="src/SeniorApis.controller.js"></script>
 
-    <!--OdigoApis Service -->
-    <script src="src/OdigoApis.service.js"></script>
+    <!--Apis Service -->
+    <script src="src/SeniorApis.service.js"></script>
 
     <!--TOKBOX -->
     <!--<script src="https://static.opentok.com/v2/js/opentok.js" charset="utf-8"></script>-->
-    
+
 </body>
 </html>
