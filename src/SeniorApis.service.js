@@ -93,7 +93,7 @@ function SeniorApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUi
 
 //*****************************
 //*****************************
-//  -----ODIGO APIS-----
+//  -----TOKBOX APIS-----
 //*****************************
 //*****************************
 
@@ -112,6 +112,54 @@ function SeniorApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUi
     return response;
   };
 
+//START ARCHIVING
+//*****************************
+service.TokboxStartArchiving = function (pSessionId) {
+  console.log(">>> service.TokboxStartArchiving(",pSessionId,")")
+  var MyToken={};
+  var response = $http({
+    method: "POST",
+    headers: {
+      contentType: "application/json", // send as JSON
+     },
+    url: (HerokuBackEnd + 'archive/start'),
+    data: JSON.stringify({"sessionId": pSessionId})
+  });
+  console.log("<<< service.TokboxStartArchiving()")
+  return response;
+};
+
+//STOP ARCHIVING
+//*****************************
+service.TokBoxStopArchiving = function (pArchiveId) {
+  console.log(">>> service.TokBoxStopArchiving(",pArchiveId,")")
+  var MyToken={};
+  var response = $http({
+    method: "POST",
+    headers: {
+      contentType: "application/json", // send as JSON
+     },
+    url: (HerokuBackEnd + 'archive/'+pArchiveId+'/stop')
+  });
+  console.log("<<< service.TokBoxStopArchiving()")
+  return response;
+};
+
+//VIEW ARCHIVE
+//*****************************
+service.TokBoxViewArchiving = function (pArchiveId) {
+  console.log(">>> service.TokBoxViewArchiving(",pArchiveId,")")
+  var MyToken={};
+  var response = $http({
+    method: "GET",
+    headers: {
+      contentType: "application/json", // send as JSON
+     },
+    url: (HerokuBackEnd + 'archive/'+pArchiveId+'/view')
+  });
+  console.log("<<< service.TokBoxViewArchiving()")
+  return response;
+};
 //FIN DE FUNCIONES DE SERVICIO
 }//FIN SERVICIO
 

@@ -14,6 +14,7 @@ function SeniorApisController($location,SeniorApisService,userUid,appUid,$scope,
 
   var activeStream = {};
   var activePublish = {};
+  var activeArchiving = {};
   SeniorApisCtrl.loadingImage=true;
 
 
@@ -175,9 +176,13 @@ function SeniorApisController($location,SeniorApisService,userUid,appUid,$scope,
     return total;
   };
 
-//********************************
-//APIS METHODS
-//********************************
+//###########################################################
+//#################  TOKBOX SECTION  #####################
+//###########################################################
+
+//*********************************************************
+//                     GET TOKEN FROM BACKEND
+//---------------------------------------------------------
 
   //GET THE TOKEN KEY
   SeniorApisCtrl.getTokenFromApi = function(){
@@ -199,10 +204,9 @@ function SeniorApisController($location,SeniorApisService,userUid,appUid,$scope,
 
 
 
-
-//###########################################################
-//#################  TOKBOX INITIALICE  #####################
-//###########################################################
+//*********************************************************
+//                   TOKBOX INITIALICE
+//---------------------------------------------------------
 
 function handleError(error) {
   if (error) {
@@ -325,6 +329,65 @@ SeniorApisCtrl.initializeSession= function () {
   });
   console.log("<-- OT.initSession()");
 }
+
+//*********************************************************
+//                   TOKBOX START ARCHIVING
+//---------------------------------------------------------
+
+SeniorApisCtrl.TokBoxStartArchiving= function () {
+  try{
+
+    console.log("--> TokBoxStartArchiving(",TokBoxCredentials.sessionId,')');    
+    var promise= SeniorApisService.TokboxStartArchiving(TokBoxCredentials.sessionId);
+    promise.then(function (response) {
+        console.log('Then:',response.data);
+        activeArchiving=response.data.id;
+      })
+      .catch(function (error) {
+        console.error("Error:",error.message);
+    });    
+    console.log("<-- TokBoxStartArchiving");  
+  }
+  catch(error){
+    console.error(error);
+  }
+};
+
+SeniorApisCtrl.TokBoxStopArchiving= function () {
+  try{
+
+    console.log("--> TokBoxStopArchiving()",activeArchiving);    
+    var promise= SeniorApisService.TokBoxStopArchiving(activeArchiving);
+    promise.then(function (response) {
+        console.log('Then:',response.data);        
+      })
+      .catch(function (error) {
+        console.error("Error:",error);
+    });    
+    console.log("<-- TokBoxStopArchiving");  
+  }
+  catch(error){
+    console.error(error);
+  }
+};
+
+SeniorApisCtrl.TokBoxViewArchiving= function () {
+  try{
+
+    console.log("--> TokBoxViewArchiving()",activeArchiving);    
+    var promise= SeniorApisService.TokBoxViewArchiving(activeArchiving);
+    promise.then(function (response) {
+        console.log('Then:',response.data);        
+      })
+      .catch(function (error) {
+        console.error("Error:",error);
+    });    
+    console.log("<-- TokBoxViewArchiving");  
+  }
+  catch(error){
+    console.error(error);
+  }
+};
 
 //###########################################################
 //#################       RUN ACTIONS      ##################
