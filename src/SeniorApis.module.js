@@ -10,7 +10,7 @@ angular.module('SeniorApisModule', ['ui.router'])
 .constant('DataPath', 'https://raulnaldo.github.io/crm/data//')
 .constant('DataPathLocal', 'https://localhost:3000/data/')
 .constant('DataPathGit', 'https://raulnaldo.github.io/crm/data/')
-.constant('HerokuBackEnd', 'http://localhost:8080/')
+.constant('HerokuBackEnd', 'https://seniorbackend.herokuapp.com/')
 //http://localhost:8080/
 //https://seniorbackend.herokuapp.com/
 
