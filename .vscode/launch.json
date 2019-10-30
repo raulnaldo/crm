@@ -7,7 +7,15 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Angular Senior Project",
+            "name": "WebCrm",
+            "url": "https://localhost:3000/Crm_ui-route.html#/profile",
+            "webRoot": "${workspaceFolder}"
+        },
+
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "WebVideo",
             "url": "https://localhost:3000/index.html#/video_mobile",
             "webRoot": "${workspaceFolder}"
         }

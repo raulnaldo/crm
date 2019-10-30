@@ -160,6 +160,36 @@ service.TokBoxViewArchiving = function (pArchiveId) {
   console.log("<<< service.TokBoxViewArchiving()")
   return response;
 };
+
+
+//GET ALL ARCHIVES
+//*****************************
+service.TokBoxGetAllArchiving = function () {
+  console.log(">>> service.TokBoxGetAllArchiving()")
+  var MyToken={};
+  var response = $http({
+    method: "GET",
+    headers: {
+      contentType: "application/json", // send as JSON
+     },
+    url: (HerokuBackEnd + 'archive')
+  });
+  console.log("<<< service.TokBoxGetAllArchiving()")
+  return response;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 //FIN DE FUNCIONES DE SERVICIO
 }//FIN SERVICIO
 

@@ -14,7 +14,7 @@ function SeniorApisController($location,SeniorApisService,userUid,appUid,$scope,
 
   var activeStream = {};
   var activePublish = {};
-  var activeArchiving = {};
+  var activeArchiving = {};  
   SeniorApisCtrl.loadingImage=true;
 
 
@@ -61,6 +61,25 @@ function SeniorApisController($location,SeniorApisService,userUid,appUid,$scope,
       return false;
     }
   }
+
+SeniorApisCtrl.cleanDate = function cleanDate(d) {
+  var day = moment.unix(d);
+  return day.toString();  
+}
+
+SeniorApisCtrl.timeConverter = function timeConverter(UNIX_timestamp){
+    var a = new Date(UNIX_timestamp);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = date + ' ' + month + ' ' + year + ' ' + hour.substring(-2) + ':' + min + ':' + sec ;
+    return time;
+  }
+
 //###########################################################
 //#################       INIT            ##################
 //###########################################################
@@ -306,8 +325,8 @@ SeniorApisCtrl.initializeSession= function () {
     insertMode: 'append',
     width: '100%',
     height: '100%',
-    //resolution: '1280x720',
-    resolution: '640x480',
+    resolution: '1280x720',
+    //resolution: '640x480',
     //frameRate: 15,
     insertDefaultUI: true,
     fitMode: "contain",
@@ -383,6 +402,25 @@ SeniorApisCtrl.TokBoxViewArchiving= function () {
         console.error("Error:",error);
     });    
     console.log("<-- TokBoxViewArchiving");  
+  }
+  catch(error){
+    console.error(error);
+  }
+};
+
+SeniorApisCtrl.TokBoxGetAllArchiving= function () {
+  try{
+
+    console.log("--> TokBoxGetAllArchiving()");    
+    var promise= SeniorApisService.TokBoxGetAllArchiving();
+    promise.then(function (response) {
+        console.log('Then:',response.data);
+        SeniorApisCtrl.arrayArchiving=response.data;
+      })
+      .catch(function (error) {
+        console.error("Error:",error);
+    });    
+    console.log("<-- TokBoxGetAllArchiving");  
   }
   catch(error){
     console.error(error);

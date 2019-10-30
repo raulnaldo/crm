@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="./style/default/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="./style/default/AdminLTE.min.css">
+
+  <link rel="stylesheet" href="./style/default/dataTables.bootstrap.min.css">
+
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="./style/default/all-skins.min.css">
@@ -275,7 +278,13 @@
           <a ui-sref="video_ivp">
             <i class="fa fa-floppy-o"></i> <span>video_ivp</span>
           </a>
-      </li>
+        </li>
+        <li>
+          <a ui-sref="listaVideo" ng-click="Senior.TokBoxGetAllArchiving()">
+            <i class="fa fa-floppy-o"></i> <span>listaVideo</span>
+            <small class="label pull-right bg-blue">{{Senior.arrayArchiving.length}}</small>
+          </a>
+        </li>
       </ul>
     </section>
 
@@ -523,6 +532,8 @@
     <script src="lib/angular.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="lib/angular-ui-router.min.js"></script>
+    <script src="lib/moment.js"></script>
+    
 
     <!--Apis Module -->
     <script src="src/SeniorApis.module.js"></script>
