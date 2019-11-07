@@ -93,12 +93,14 @@
               <i class="fa fa-floppy-o"></i>
             </a>
           </li>
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
+          <li class="dropdown tasks-menu"></li>
             <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown">
               <img src={{Senior.Agent.Image}} class="user-image" alt="User Image">
               <span class="hidden-xs">AgentId:{{Senior.CallInfo.AgentId}} SessionId:{{Senior.CallInfo.SessionId}}</span>
-            </a>            
+            </a>                      
+          </li>  
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
             <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown">
               <img src={{Senior.Agent.Image}} class="user-image" alt="User Image">
               <span class="hidden-xs">{{Senior.CallInfo.UserLogin}}</span>
