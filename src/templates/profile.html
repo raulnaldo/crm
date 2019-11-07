@@ -89,14 +89,15 @@
             <ul class="nav nav-tabs">
               <li class="" ng-click="Senior.SetCrmDynamicsURL()" ng-if="Senior.CrmSelectedContact.DynamicsURL"><a href="profile.html#dynamics" data-toggle="tab" aria-expanded="false">Dynamics</a></li>
               <li class="" ng-click="Senior.ShowMasMovil()"> <a href="profile.html#masmovil" data-toggle="tab" aria-expanded="false">MasMovil</a></li>
-              <li class=""><a href="profile.html#Email" data-toggle="tab" aria-expanded="false">Email</a></li>
+              <li class=""><a href="profile.html#CDR" data-toggle="tab" aria-expanded="false">CDR</a></li>
               <li class=""><a href="profile.html#activity" data-toggle="tab" aria-expanded="false">Feed</a></li>
               <li class=""><a href="profile.html#timeline" data-toggle="tab" aria-expanded="false">Eventos</a></li>
               <li class="active"><a href="profile.html#settings" data-toggle="tab" aria-expanded="true">Datos personales</a></li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane" id="Email">
-                <iframe width="100%" height="800px" src="" frameborder="0"></iframe>
+              <div class="tab-pane" id="CDR">
+                <iframe width="100%" height="800px" src="https://prd-p-f42wtrccxd29.cloud.splunk.com/en-GB/app/search/salesevolutionbyagent?form.field1=MQG" frameborder="0"></iframe>
+                                                         
               </div>
               <div class="tab-pane" id="masmovil">
                 <iframe width="100%" height="800px" src="{{Senior.trustSrc(Senior.CurrentMasMovilUrl)}}" frameborder="0"></iframe>

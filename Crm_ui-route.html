@@ -97,6 +97,10 @@
           <li class="dropdown user user-menu">
             <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown">
               <img src={{Senior.Agent.Image}} class="user-image" alt="User Image">
+              <span class="hidden-xs">AgentId:{{Senior.CallInfo.AgentId}} SessionId:{{Senior.CallInfo.SessionId}}</span>
+            </a>            
+            <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown">
+              <img src={{Senior.Agent.Image}} class="user-image" alt="User Image">
               <span class="hidden-xs">{{Senior.CallInfo.UserLogin}}</span>
             </a>
             <ul class="dropdown-menu">
