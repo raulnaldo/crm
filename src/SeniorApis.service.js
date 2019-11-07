@@ -179,7 +179,45 @@ service.TokBoxGetAllArchiving = function () {
 };
 
 
+//ALTITUDE SCRIPT METHODS
+//*****************************
+service.PhoneAnswer = function (pEndPoint) {
+  console.log(">>> service.PhoneAnswer()");
+  console.log("---->>> pEndPoint:",pEndPoint);
+  var MyCommand={
+      "Name" : "AjaxEvent",
+      "Data" : "action:phone_answer"
+      };
+  var response = $http({
+    method: "POST",
+    headers: {
+      contentType: "application/json", // send as JSON
+     },
+    url: (pEndPoint),
+    data:MyCommand
+  });
+  console.log("<<< service.PhoneAnswer()")
+  return response;
+};
 
+service.PhoneHangUp = function (pEndPoint) {
+  console.log(">>> service.PhoneHangUp()");
+  console.log("---->>> pEndPoint:",pEndPoint);
+  var MyCommand={
+      "Name" : "AjaxEvent",
+      "Data" : "action:phone_hangup"
+      };
+  var response = $http({
+    method: "POST",
+    headers: {
+      contentType: "application/json", // send as JSON
+     },
+    url: (pEndPoint),
+    data:MyCommand
+  });
+  console.log("<<< service.PhoneHangUp()")
+  return response;
+};
 
 
 

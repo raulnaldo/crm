@@ -97,7 +97,7 @@ SeniorApisCtrl.timeConverter = function timeConverter(UNIX_timestamp){
     $state.go('notfound');
   }
   if (SeniorApisCtrl.CallInfo.UserLogin==undefined){
-    SeniorApisCtrl.CallInfo.UserLogin="agent176ddi@demo.com";
+    SeniorApisCtrl.CallInfo.UserLogin="easy";
   }
   SeniorApisCtrl.SearchId=SeniorApisCtrl.CallInfo.CustomerCode;
 
@@ -426,6 +426,45 @@ SeniorApisCtrl.TokBoxGetAllArchiving= function () {
     console.error(error);
   }
 };
+
+//###########################################################
+//#################       CTI ACTIONS      ##################
+//###########################################################
+
+SeniorApisCtrl.PhoneAnswer= function () {
+  try{
+  console.log("--> PhoneAnswer()");    
+  var promise= SeniorApisService.PhoneAnswer(SeniorApisCtrl.CallInfo.EndPoint);
+    promise.then(function (response) {
+      console.log('Then:',response.data);      
+    })
+    .catch(function (error) {
+      console.error("Error:",error);
+    });    
+    console.log("<-- PhoneAnswer");  
+  }
+  catch(error){
+    console.error(error);
+  }
+};
+
+SeniorApisCtrl.PhoneHangUp= function () {
+  try{
+  console.log("--> PhoneHangUp()");    
+  var promise= SeniorApisService.PhoneHangUp(SeniorApisCtrl.CallInfo.EndPoint);
+    promise.then(function (response) {
+      console.log('Then:',response.data);      
+    })
+    .catch(function (error) {
+      console.error("Error:",error);
+    });    
+    console.log("<-- PhoneHangUp");  
+  }
+  catch(error){
+    console.error(error);
+  }
+};
+
 
 //###########################################################
 //#################       RUN ACTIONS      ##################
