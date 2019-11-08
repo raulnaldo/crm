@@ -97,7 +97,7 @@ SeniorApisCtrl.timeConverter = function timeConverter(UNIX_timestamp){
     $state.go('notfound');
   }
   if (SeniorApisCtrl.CallInfo.UserLogin==undefined){
-    SeniorApisCtrl.CallInfo.UserLogin="easy";
+    SeniorApisCtrl.CallInfo.UserLogin="agent176ddi@demo.com";
   }
   SeniorApisCtrl.SearchId=SeniorApisCtrl.CallInfo.CustomerCode;
 
@@ -240,8 +240,8 @@ function handleError(error) {
 
 
 SeniorApisCtrl.ChangeCamera= function () {
-  activePublish.cycleVideo().then(console.log);
-
+  SeniorApisCtrl.getTokenFromApi();
+  //activePublish.cycleVideo().then(console.log);
 };
 
 SeniorApisCtrl.initializeSession= function () {
@@ -472,7 +472,7 @@ SeniorApisCtrl.PhoneHangUp= function () {
 
 //SeniorApisCtrl.StartSearchingContacts();
 
-SeniorApisCtrl.getTokenFromApi();
+//SeniorApisCtrl.getTokenFromApi();
 SeniorApisCtrl.SearchContact();
 
 }//FIN CONTROLER
