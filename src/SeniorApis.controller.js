@@ -106,7 +106,7 @@ SeniorApisCtrl.timeConverter = function timeConverter(UNIX_timestamp){
   var promiseAgents= SeniorApisService.getAgentsByJson();
   promiseAgents.then(function (response) {
       console.log('<<<< Retorno de Agents:',response.data.agents);
-      //SeniorApisCtrl.Agent= response.data.agents[response.data.agents.findIndex(x => x.Login === SeniorApisCtrl.CallInfo.UserLogin)];
+      SeniorApisCtrl.Agent= response.data.agents[response.data.agents.findIndex(x => x.Login === SeniorApisCtrl.CallInfo.UserLogin)];
       console.log('  <-- SeniorApisService.getAgentProperties:',SeniorApisCtrl.Agent);
     })
     .catch(function (error) {
