@@ -16,7 +16,7 @@ function SeniorApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUi
     console.log("---->>>> pId:",pId);
     console.log("---->>>> pContacts:",pContacts);
 
-    var IndexPosition=pContacts.findIndex(x => x.Id === pId);
+    //var IndexPosition=pContacts.findIndex(x => x.Id === pId);
 
     console.log("  -->>>> Contact Index:",IndexPosition);
     console.log("<<<< service.SelectContactById()");
@@ -44,7 +44,7 @@ function SeniorApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUi
     console.log("---->>>> LastName:",pLastName);
     console.log("---->>>> pContacts:",pContacts);
 
-    var IndexPosition=pContacts.findIndex(x => x.LastName.toLocaleLowerCase().includes(pLastName.toLocaleLowerCase()));
+    //var IndexPosition=pContacts.findIndex(x => x.LastName.toLocaleLowerCase().includes(pLastName.toLocaleLowerCase()));
 
     console.log("  -->>>> Contact Index:",IndexPosition);
     console.log("<<<< service.SelectContactLastName()");
@@ -56,7 +56,7 @@ function SeniorApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUi
     console.log("---->>>> Name:",pName);
     console.log("---->>>> pContacts:",pContacts);
 
-    var IndexPosition=pContacts.findIndex(x => x.Name.toLocaleLowerCase().includes(pName.toLocaleLowerCase()));
+    //var IndexPosition=pContacts.findIndex(x => x.Name.toLocaleLowerCase().includes(pName.toLocaleLowerCase()));
 
     console.log("  -->>>> Contact Index:",IndexPosition);
     console.log("<<<< service.SelectContactName()");
