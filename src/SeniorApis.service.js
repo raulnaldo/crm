@@ -185,7 +185,7 @@ service.PhoneAnswer = function (pEndPoint) {
   console.log(">>> service.PhoneAnswer()");
   console.log("---->>> pEndPoint:",pEndPoint);
   var MyCommand={
-      "Name" : "AjaxEvent",
+      "Name" : "EventPhoneCommands",
       "Data" : "action:phone_answer"
       };
   var response = $http({
@@ -204,7 +204,7 @@ service.PhoneHangUp = function (pEndPoint) {
   console.log(">>> service.PhoneHangUp()");
   console.log("---->>> pEndPoint:",pEndPoint);
   var MyCommand={
-      "Name" : "AjaxEvent",
+      "Name" : "EventPhoneCommands",
       "Data" : "action:phone_hangup"
       };
   var response = $http({
@@ -219,7 +219,24 @@ service.PhoneHangUp = function (pEndPoint) {
   return response;
 };
 
-
+service.EndSession = function (pEndPoint,pDataOutComes) {
+  console.log(">>> service.EndSession()");
+  console.log("---->>> pEndPoint:",pEndPoint);
+  var MyCommand={
+      "Name" : "EventEndSessionWithData",
+      "Data" : pDataOutComes
+      };
+  var response = $http({
+    method: "POST",
+    headers: {
+      contentType: "application/json", // send as JSON
+     },
+    url: (pEndPoint),
+    data:MyCommand
+  });
+  console.log("<<< service.EndSession()")
+  return response;
+};
 
 
 

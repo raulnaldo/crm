@@ -31,12 +31,12 @@
 
                 <div class="form-group">
                   <label>Selecciona motivo de la interacción</label>
-                  <select class="form-control" ng-model="Senior.CrmSelectedContact.Outcome.Motivo">
-                    <option>Información de producto</option>
-                    <option>Información de facturación</option>
-                    <option>Reporte de incidencia</option>
-                    <option>Solicitud de baja de servicio</option>
-                    <option>Otros</option>
+                  <select class="form-control" ng-model="Senior.CrmSelectedContact.Outcome.Motivo" ng-click="Senior.SelectedMotivo()">
+                    <option value='1'><span>Información de producto</span></option>                    
+                    <option value='2'><span>Información de facturación</span></option>                    
+                    <option value='3'><span>Reporte de incidencia</span></option>                    
+                    <option value='4'><span>Solicitud de baja de servicio</span></option>                    
+                    <option value='5'><span>Solicitud de baja de servicio</span></option>                    
                   </select>
                 </div>
                 <!-- checkbox -->
@@ -74,31 +74,31 @@
                   <label>Selecciona la persona de contacto</label>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="Titular" checked="" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
+                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="1" checked="" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
                       Con el titular del contrato
                     </label>
                   </div>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="Conyuge" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
+                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="2" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
                       Con el conyuge del contrato
                     </label>
                   </div>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="Otro familiar" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
+                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="3" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
                       Con otro tipo de familiar
                     </label>
                   </div>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="No presenta" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
+                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="4" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
                       No estaba presente
                     </label>
                   </div>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="Otros" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
+                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="5" ng-model="Senior.CrmSelectedContact.Outcome.PerContacto">
                       Otros
                     </label>
                   </div>
@@ -122,7 +122,7 @@
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary pull-right"
-                ng-click="Senior.SetReasonsOfConversation();">Guardar</button>
+                ng-click="Senior.EndSession();">Guardar</button>
               </div>
             </form>
           </div>

@@ -93,52 +93,12 @@
               <i class="fa fa-floppy-o"></i>
             </a>
           </li>
-          <li class="dropdown tasks-menu"></li>
-            <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown">
-              <img src={{Senior.Agent.Image}} class="user-image" alt="User Image">
-              <span class="hidden-xs">AgentId:{{Senior.CallInfo.AgentId}} SessionId:{{Senior.CallInfo.SessionId}}</span>
-            </a>                      
-          </li>  
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown">
               <img src={{Senior.Agent.Image}} class="user-image" alt="User Image">
               <span class="hidden-xs">{{Senior.CallInfo.UserLogin}}</span>
             </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src={{Senior.Agent.Image}} class="img-circle" alt="User Image">
-                <p>
-                  Raúl Ortega Andres
-                  <small>Member since Nov. 2012</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a ui-sref="profile">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a ui-sref="profile">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a ui-sref="profile">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a ui-sref="profile" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a ui-sref="profile" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>

@@ -465,6 +465,33 @@ SeniorApisCtrl.PhoneHangUp= function () {
   }
 };
 
+SeniorApisCtrl.EndSession= function () {
+  try{
+  console.log("--> EndSession()");
+  var StringDataToSend= 'motivo:'+ SeniorApisCtrl.CrmSelectedContact.Outcome.Motivo + '|contact:'+ SeniorApisCtrl.CrmSelectedContact.Outcome.PerContacto
+  var promise= SeniorApisService.EndSession(SeniorApisCtrl.CallInfo.EndPoint,StringDataToSend);
+    promise.then(function (response) {
+      console.log('Then:',response.data);      
+    })
+    .catch(function (error) {
+      console.error("Error:",error);
+    });    
+    console.log("<-- EndSession");  
+  }
+  catch(error){
+    console.error(error);
+  }
+};
+
+SeniorApisCtrl.SelectedMotivo= function () {
+  try{
+  console.log("--> CrmSelectedContact.Outcome.Motivo:",SeniorApisCtrl.CrmSelectedContact.Outcome.Motivo);
+  }
+  catch(error){
+    console.error(error);
+  }
+};
+
 
 //###########################################################
 //#################       RUN ACTIONS      ##################
