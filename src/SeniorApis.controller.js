@@ -471,7 +471,7 @@ SeniorApisCtrl.EndSession= function () {
   var StringDataToSend= 'motivo:'+ SeniorApisCtrl.CrmSelectedContact.Outcome.Motivo + 
                         '|contact:'+ SeniorApisCtrl.CrmSelectedContact.Outcome.PerContacto +
                         '|comments:'+ SeniorApisCtrl.CrmSelectedContact.Outcome.Comments +
-                        '|gdpr:'+ SeniorApisCtrl.CrmSelectedContact.Outcome.Gdpr; 
+                        '|gdpr:'+ (SeniorApisCtrl.CrmSelectedContact.Outcome.Gdpr ? 1 : 0) ; 
   var promise= SeniorApisService.EndSession(SeniorApisCtrl.CallInfo.EndPoint,StringDataToSend);
     promise.then(function (response) {
       console.log('Then:',response.data);      
