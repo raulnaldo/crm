@@ -5,8 +5,8 @@
 angular.module('SeniorApisModule')
 .controller('SeniorApisController', SeniorApisController);
 
-SeniorApisController.$inject = ['$location','SeniorApisService','userUid','appUid','$scope','$sce','$window','$state'];
-function SeniorApisController($location,SeniorApisService,userUid,appUid,$scope, $sce,$window,$state) {
+SeniorApisController.$inject = ['$location','SeniorApisService','userUid','appUid','$scope','$sce','$window','$state','SeniorApisDynamicsService'];
+function SeniorApisController($location,SeniorApisService,userUid,appUid,$scope, $sce,$window,$state,SeniorApisDynamicsService) {
 
   var SeniorApisCtrl = this;
 
@@ -159,7 +159,8 @@ SeniorApisCtrl.timeConverter = function timeConverter(UNIX_timestamp){
     var EmptyObject={};
     SeniorApisCtrl.CrmSelectedContact=EmptyObject;
 
-    var promise= SeniorApisService.SelectContactById(SeniorApisCtrl.SearchId,SeniorApisCtrl.CrmContacts);
+    //var promise= SeniorApisService.SelectContactById(SeniorApisCtrl.SearchId,SeniorApisCtrl.CrmContacts);
+    var promise= SeniorApisDynamicsService.GetContactByMobilePhone(SeniorApisCtrl.SearchId);
     promise.then(function (response) {
         console.log('Contact Found:',response.data);
         SeniorApisCtrl.CrmSelectedContact=response.data;
