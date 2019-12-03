@@ -503,7 +503,7 @@ SeniorApisCtrl.SelectedMotivo= function () {
 
 //SeniorApisCtrl.StartSearchingContacts();
 
-//SeniorApisCtrl.getTokenFromApi();
+SeniorApisCtrl.getTokenFromApi();
 SeniorApisCtrl.SearchContact();
 
 }//FIN CONTROLER
