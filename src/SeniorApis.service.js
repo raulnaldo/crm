@@ -112,6 +112,19 @@ function SeniorApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUi
     return response;
   };
 
+  service.getRoom = function () {
+    console.log(">>> service.getRoom()")
+    var MyToken={};
+    var response = $http({
+      method: "GET",
+      headers: {
+       },
+      url: (HerokuBackEnd + 'room/TestAmelia')
+    });
+    console.log("<<< service.getRoom()")
+    return response;
+  };
+
 //START ARCHIVING
 //*****************************
 service.TokboxStartArchiving = function (pSessionId) {
