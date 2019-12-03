@@ -106,7 +106,7 @@ SeniorApisCtrl.initializeSession= function () {
   myPublisherStyle.nameDisplayMode= "auto";
 
 
-  mySubscriberStyle.audioBlockedDisplayMode= "on";
+  mySubscriberStyle.audioBlockedDisplayMode= "of";
   mySubscriberStyle.audioLevelDisplayMode="on";
   mySubscriberStyle.buttonDisplayMode="auto"; //Boton para habilitar deshabilitar el audio a nivel de altavoces.
   mySubscriberStyle.videoDisabledDisplayMode= "auto";
@@ -165,9 +165,10 @@ SeniorApisCtrl.initializeSession= function () {
     insertMode: 'append',
     width: '100%',
     height: '100%',
-    resolution: '1280x720',
-    //resolution: '640x480',
-    frameRate: 30,
+    //resolution: '1280x720',
+    resolution: '640x480',
+    //frameRate: 30,
+    frameRate: 15,
     insertDefaultUI: true,
     fitMode: "contain",
     style: myPublisherStyle
