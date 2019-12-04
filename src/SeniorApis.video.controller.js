@@ -150,7 +150,7 @@ SeniorApisCtrl.initializeSession= function () {
     }, handleError);
     console.log("<-- session.subscribe()");
 
-    SeniorApisCtrl.TokBoxStartArchiving();
+    //SeniorApisCtrl.TokBoxStartArchiving();
 
   });
   console.log("<-- session.on('streamCreated')");
