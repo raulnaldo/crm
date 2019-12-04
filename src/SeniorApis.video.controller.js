@@ -10,11 +10,14 @@ function SeniorApisVideoController($location,SeniorApisService,userUid,appUid,$s
 
   var SeniorApisCtrl = this;
 
+  var Archiving=false;
+
   var TokBoxCredentials = {};
 
   var activeStream = {};
   var activePublish = {};
   var activeArchiving = {};  
+  activeArchiving.active=false;
   SeniorApisCtrl.loadingImage=true;
 
 
@@ -193,14 +196,26 @@ SeniorApisCtrl.initializeSession= function () {
 //                   TOKBOX START ARCHIVING
 //---------------------------------------------------------
 
+
+SeniorApisCtrl.DoStartStopArchive= function () {
+  console.log("--> DoStartStopArchive()");    
+  if (activeArchiving.active){
+    SeniorApisCtrl.TokBoxStopArchiving();
+  }
+  else{
+    SeniorApisCtrl.TokBoxStartArchiving();
+  }
+  console.log("<-- DoStartStopArchive()");      
+}
 SeniorApisCtrl.TokBoxStartArchiving= function () {
   try{
 
     console.log("--> TokBoxStartArchiving(",TokBoxCredentials.sessionId,')');    
+    activeArchiving.active=true;
     var promise= SeniorApisService.TokboxStartArchiving(TokBoxCredentials.sessionId);
     promise.then(function (response) {
         console.log('Then:',response.data);
-        activeArchiving=response.data.id;
+        activeArchiving.id=response.data.id;        
       })
       .catch(function (error) {
         console.error("Error:",error.message);
@@ -215,10 +230,12 @@ SeniorApisCtrl.TokBoxStartArchiving= function () {
 SeniorApisCtrl.TokBoxStopArchiving= function () {
   try{
 
-    console.log("--> TokBoxStopArchiving()",activeArchiving);    
-    var promise= SeniorApisService.TokBoxStopArchiving(activeArchiving);
+    console.log("--> TokBoxStopArchiving()",activeArchiving.id);    
+    activeArchiving.active=false;
+    var promise= SeniorApisService.TokBoxStopArchiving(activeArchiving.id);    
     promise.then(function (response) {
         console.log('Then:',response.data);        
+        
       })
       .catch(function (error) {
         console.error("Error:",error);
