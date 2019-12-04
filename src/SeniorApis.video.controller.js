@@ -8,6 +8,7 @@ angular.module('SeniorApisModule')
 SeniorApisVideoController.$inject = ['$location','SeniorApisService','userUid','appUid','$scope','$sce','$window','$state','SeniorApisDynamicsService'];
 function SeniorApisVideoController($location,SeniorApisService,userUid,appUid,$scope, $sce,$window,$state,SeniorApisDynamicsService) {
 
+  console.log("SeniorApisVideoController --> init();",SeniorApisCtrl);
   var SeniorApisCtrl = this;
 
   var Archiving=false;
