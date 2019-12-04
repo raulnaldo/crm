@@ -22,8 +22,8 @@ body, html {
 
 #publisher {
     position: absolute;
-    width: 9%;
-    height: 14%;
+    width: 10%;
+    height: 13%;
     top: 5px;
     left: 5px;    
     z-index: 100;
