@@ -144,7 +144,7 @@ SeniorApisCtrl.initializeSession= function () {
       height: '100%',
       insertDefaultUI: true,
       showControls: true,
-      fitMode: "contain",
+      fitMode: "cover",
       testNetwork: true,
       style: mySubscriberStyle
     }, handleError);
@@ -170,7 +170,7 @@ SeniorApisCtrl.initializeSession= function () {
     //frameRate: 30,
     frameRate: 15,
     insertDefaultUI: true,
-    fitMode: "contain",
+    fitMode: "cover", //cover-contain
     style: myPublisherStyle
   }, handleError);
 
