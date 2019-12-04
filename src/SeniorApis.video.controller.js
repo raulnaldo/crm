@@ -99,16 +99,17 @@ SeniorApisCtrl.initializeSession= function () {
 
   var myPublisherStyle={};
   var mySubscriberStyle={};
+  var subscriber={};
   myPublisherStyle.audioBlockedDisplayMode= "off";
   myPublisherStyle.audioLevelDisplayMode="on";
-  myPublisherStyle.buttonDisplayMode="auto";
+  myPublisherStyle.buttonDisplayMode="auto"; // off BOTON DE MUTE no mostrado / on Siempre visible / auto solo si te posicionas
   //myPublisherStyle.videoDisabledDisplayMode= "on";
   myPublisherStyle.nameDisplayMode= "auto";
 
 
-  mySubscriberStyle.audioBlockedDisplayMode= "of";
-  mySubscriberStyle.audioLevelDisplayMode="on";
-  mySubscriberStyle.buttonDisplayMode="auto"; //Boton para habilitar deshabilitar el audio a nivel de altavoces.
+  mySubscriberStyle.audioBlockedDisplayMode= "off";
+  mySubscriberStyle.audioLevelDisplayMode="off"; // Muestra los cascos indicando si se detecta audio con ondas verdes
+  mySubscriberStyle.buttonDisplayMode="auto"; //Boton para habilitar o habilitar el icono de altavoces
   mySubscriberStyle.videoDisabledDisplayMode= "auto";
   mySubscriberStyle.nameDisplayMode= "on";
 
@@ -138,7 +139,7 @@ SeniorApisCtrl.initializeSession= function () {
     console.log("--> session.on(streamCreated)");
     SeniorApisCtrl.loadingImage=false;
     console.log("--> session.subscribe()");
-    session.subscribe(event.stream, 'subscriber', {
+    subscriber = session.subscribe(event.stream, 'subscriber', {
       insertMode: 'append',
       width: '100%',
       height: '100%',
@@ -154,8 +155,6 @@ SeniorApisCtrl.initializeSession= function () {
 
   });
   console.log("<-- session.on('streamCreated')");
-
-
 
   // Create a publisher o camara espejo
 

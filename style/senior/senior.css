@@ -30,7 +30,16 @@ body, html {
     border: 2px solid white;
     border-radius: 3px;
 }
-
+#BotonStartRecord{
+    background: url("../../images/rec.png") no-repeat;    
+    position: absolute;    
+    width: 20px;
+    height: 20px;
+    bottom: 20px;
+    left: 5px;
+    border: 0px;
+    
+}
 .videobutons {
     position: relative;
     bottom: 0px;
