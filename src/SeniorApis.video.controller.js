@@ -171,7 +171,7 @@ SeniorApisCtrl.initializeSession= function () {
     //resolution: '1280x720',
     resolution: '640x480',
     //frameRate: 30,
-    frameRate: 15,
+    frameRate: 30,
     insertDefaultUI: true,
     fitMode: "cover", //cover-contain
     style: myPublisherStyle
