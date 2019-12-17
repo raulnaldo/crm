@@ -11,7 +11,7 @@
   <div id="subscriber">
       <div id="publisher">
       </div>
-      <img ng-model="loadingImage" src="./images/Loading.gif" ng-show="Senior.showLoading">
+      <img id="LoadingImage" ng-hide="Senior.hideLoading" src="./images/Loading.gif">
       <div id="ButonsActions">
         <button id="BotonStartRecord" ng-click="Senior.DoStartStopArchive()"></button>
       </div>

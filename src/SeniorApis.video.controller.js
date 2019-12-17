@@ -19,7 +19,7 @@ function SeniorApisVideoController($location,SeniorApisService,userUid,appUid,$s
   var activePublish = {};
   var activeArchiving = {};  
   activeArchiving.active=false;
-  SeniorApisCtrl.loadingImage=true;
+  SeniorApisCtrl.hideLoading=true;
 
 
 //###########################################################
@@ -128,7 +128,7 @@ SeniorApisCtrl.initializeSession= function () {
 
   session.on('connectionDestroyed', function(event) {
     console.log("<***> connectionDestroyed()");
-    SeniorApisCtrl.loadingImage=true;
+    SeniorApisCtrl.hideLoading=true;
     //session.unsubscribe(activeStream);
     //session.unpublish(activePublish,handleError);
   });
@@ -141,7 +141,9 @@ SeniorApisCtrl.initializeSession= function () {
   session.on('streamCreated', function(event) {
     activeStream = event.stream;
     console.log("--> session.on(streamCreated)");
-    SeniorApisCtrl.loadingImage=false;
+    console.log(" --> hideLoading()");
+    SeniorApisCtrl.hideLoading=true;
+    console.log(" <-- hideLoading()");
     console.log("--> session.subscribe()");
     subscriber = session.subscribe(event.stream, 'subscriber', {
       insertMode: 'append',
@@ -154,11 +156,11 @@ SeniorApisCtrl.initializeSession= function () {
       style: mySubscriberStyle
     }, handleError);
     console.log("<-- session.subscribe()");
-
+    console.log("<-- session.on('streamCreated')");
     //SeniorApisCtrl.TokBoxStartArchiving();
 
   });
-  console.log("<-- session.on('streamCreated')");
+  
 
   // Create a publisher o camara espejo
 
@@ -169,7 +171,7 @@ SeniorApisCtrl.initializeSession= function () {
     width: '100%',
     height: '100%',
     //resolution: '1280x720',
-    resolution: '640x480',
+    resolution: '1280x720',
     //frameRate: 30,
     frameRate: 30,
     insertDefaultUI: true,
@@ -291,7 +293,6 @@ SeniorApisCtrl.TokBoxGetAllArchiving= function () {
 //#################       RUN ACTIONS      ##################
 //###########################################################
 
-//SeniorApisCtrl.StartSearchingContacts();
 
 SeniorApisCtrl.getTokenFromApi();
 
