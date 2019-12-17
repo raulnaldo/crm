@@ -171,7 +171,7 @@ SeniorApisCtrl.initializeSession= function () {
     width: '100%',
     height: '100%',
     //resolution: '1280x720',
-    resolution: '640x480',
+    resolution: '1280x720',
     //frameRate: 30,
     frameRate: 30,
     insertDefaultUI: true,
