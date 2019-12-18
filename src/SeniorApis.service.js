@@ -119,7 +119,7 @@ function SeniorApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUi
       method: "GET",
       headers: {
        },
-      url: (HerokuBackEnd + 'room/TestAmelia')
+      url: ('http://localhost:8080/staticsession')
     });
     console.log("<<< service.getRoom()")
     return response;
