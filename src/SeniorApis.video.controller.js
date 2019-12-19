@@ -51,7 +51,7 @@ SeniorApisCtrl.IsValidObject = function IsValidObject(pObject){
   //GET THE TOKEN KEY
   SeniorApisCtrl.getTokenFromApi = function(){
     console.log("--> getTokenFromApi()");
-      var promise= SeniorApisService.getToken();
+      var promise= SeniorApisService.getRoom();
       promise.then(function (response) {
           console.log('Then:',response.data);
           TokBoxCredentials.apiKey=response.data.apiKey;
@@ -171,9 +171,10 @@ SeniorApisCtrl.initializeSession= function () {
     width: '100%',
     height: '100%',
     //resolution: '1280x720',
-    resolution: '640x480',
+    //resolution: '640x480',
+    resolution: '320x240',    
     //frameRate: 30,
-    frameRate: 30,
+    frameRate: 15,
     insertDefaultUI: true,
     fitMode: "cover", //cover-contain
     style: myPublisherStyle
