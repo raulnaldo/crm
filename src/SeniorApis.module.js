@@ -83,7 +83,19 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     .state('listaVideo', {
       url: '/listaVideo',
       templateUrl: 'src/templates/listaVideo.html'
-    })        
+    })
+    .state('script1', {
+      url: '/script1',
+      templateUrl: 'src/templates/script_1.html'
+    })            
+    .state('script2', {
+      url: '/script2',
+      templateUrl: 'src/templates/script_2.html'
+    })    
+    .state('script3', {
+      url: '/script3',
+      templateUrl: 'src/templates/script_3.html'
+    })    
     ;
 }
 

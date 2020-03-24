@@ -173,7 +173,8 @@ SeniorApisCtrl.timeConverter = function timeConverter(UNIX_timestamp){
             SeniorApisCtrl.SetCrmDynamicsURL();
           }
           
-          $state.go('profile');
+          //$state.go('profile');
+          $state.go('script1');
         }
         else{
           SeniorApisCtrl.LastSearchSearchId=SeniorApisCtrl.SearchId;
