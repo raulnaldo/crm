@@ -167,7 +167,7 @@ SeniorApisCtrl.timeConverter = function timeConverter(UNIX_timestamp){
         if (SeniorApisCtrl.IsValidObject(SeniorApisCtrl.CrmSelectedContact)){
           SeniorApisCtrl.LastSearchSearchId=null;
           //SeniorApisCtrl.CrmSelectedContact.DynamicsURL='https://crm838148.crm4.dynamics.com/main.aspx?appid=34476255-4b0a-ea11-a816-000d3ab85fc1&pagetype=entityrecord&etn=contact&id='+ SeniorApisCtrl.CrmSelectedContact.value[0].contactid;
-          SeniorApisCtrl.CrmSelectedContact.DynamicsURL='https://crm838148.crm4.dynamics.com/main.aspx?appid=34476255-4b0a-ea11-a816-000d3ab85fc1&pagetype=entityrecord&etn=contact&id='+SeniorApisCtrl.CrmSelectedContact.DynamicsId;
+          SeniorApisCtrl.CrmSelectedContact.DynamicsURL='https://samades.crm4.dynamics.com/main.aspx?appid=a5aff5d1-cf1c-ea11-a811-000d3ab9b980&forceUCI=1&pagetype=entityrecord&etn=contact&id='+SeniorApisCtrl.CrmSelectedContact.DynamicsId;
           //alert(SeniorApisCtrl.CrmSelectedContact.DynamicsURL);          
           if (SeniorApisCtrl.IsValidObject(SeniorApisCtrl.CurrentDynamicsUrl)){
             SeniorApisCtrl.SetCrmDynamicsURL();
