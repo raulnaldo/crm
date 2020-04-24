@@ -166,7 +166,7 @@ SeniorApisCtrl.initializeSession= function () {
 
   console.log("--> OT.initPublisher()");
   activePublish = OT.initPublisher('publisher', {
-    name : 'TRIAJE TOCKBOX',
+    name : 'MEDICO',
     showControls: true,
     insertMode: 'append',
     width: '100%',
