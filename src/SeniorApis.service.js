@@ -119,7 +119,7 @@ function SeniorApisService($http, ApiPath,ApiAuthPath,CI360ApiPath,userUid,appUi
       method: "GET",
       headers: {
        },
-      url: ('https://seniorbackend.herokuapp.com/session')
+      url: ('https://senior-video-test-b6547c3126ce.herokuapp.com/session')
     });
     console.log("<<< service.getRoom()")
     return response;
